@@ -71,7 +71,7 @@ const Hero = () => {
                 />
               </div>
 
-              <div className="flex flex justify-between gap-4 w-full">
+              <div className="flex justify-between gap-4 w-full">
                 <Image
                   src="/images/Frame 22.svg"
                   alt="Asset-hero"
