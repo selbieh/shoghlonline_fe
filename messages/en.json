@@ -1,4 +1,9 @@
 {
   "ar": "عربي",
-  "en": "English"
+  "en": "English",
+  "login": "Login",
+  "joinUs": "Join Us",
+  "heroTitle": "Connect with the best freelancers or easily find your next job.",
+  "heroText": "Hire talented freelancers or find freelance jobs quickly and easily.",
+  "heroBtn": "Start Now"
 }
