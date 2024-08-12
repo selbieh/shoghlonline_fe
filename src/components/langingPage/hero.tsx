@@ -1,5 +1,6 @@
 import { Button, Space } from "antd";
 import Image from "next/image";
+import LocaleSwitcherSelect from "../localization/LocaleSwitcherSelect";
 const Hero = () => {
   return (
     <section className="h-[100vh] bg-[url('/images/hero-bg.png')] bg-[#F4F7FA] bg-blend-color-dodge bg-no-repeat ">
@@ -21,6 +22,7 @@ const Hero = () => {
               <Button type="primary" className="h-[38px] rounded-md">
                 Log In
               </Button>
+              <LocaleSwitcherSelect />
             </Space>
           </div>
         </div>
