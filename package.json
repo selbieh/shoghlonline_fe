@@ -21,6 +21,7 @@
     "react-international-phone": "^4.3.0"
   },
   "devDependencies": {
+    "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

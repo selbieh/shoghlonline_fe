@@ -5,5 +5,16 @@
   "joinUs": "Join Us",
   "heroTitle": "Connect with the best freelancers or easily find your next job.",
   "heroText": "Hire talented freelancers or find freelance jobs quickly and easily.",
-  "heroBtn": "Start Now"
+  "heroBtn": "Start Now",
+  "dontHaveAccount": "Don't have an account?",
+  "register": "Register",
+  "loginWithGoogle": "Login With Google",
+  "orByMobile": "Or By Mobile",
+  "mobile": "Mobile",
+  "password": "Password",
+  "Please Enter A New Password": "Please Enter A New Password",
+  "passwordValidation": "Password is required",
+  "MobileValidationRequired": "Please Enter The Mobile",
+  "createAccount": "Create New Account",
+  "forgotPassword": "Forgot Password?"
 }

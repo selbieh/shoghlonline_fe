@@ -5,5 +5,16 @@
   "joinUs": "انضم إلينا",
   "heroTitle": "تواصل مع أفضل المستقلين أو ابحث عن عملك التالي بسهولة",
   "heroText": "وظف المستقلين الموهوبين أو ابحث عن وظائف حرة بسرعة وسهولة.",
-  "heroBtn": "إبدأ الآن"
+  "heroBtn": "إبدأ الآن",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "register": "إنشاء حساب جديد",
+  "loginWithGoogle": "التسجيل عن طريق جوجل",
+  "orByMobile": "أو عن طريق رقم الموبايل",
+  "mobile": "رقم الموبايل",
+  "password": "إدخل كلمة السر",
+  "Please Enter A New Password": "كلمة السر",
+  "passwordValidation": "كلمة السر مطلوبة",
+  "MobileValidationRequired": "الرجاء إدخال رقم الموبايل",
+  "createAccount": "إنشاء حساب جديد",
+  "forgotPassword": "نسيت كلمة السر؟"
 }
