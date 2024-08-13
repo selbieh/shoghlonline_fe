@@ -1,11 +1,12 @@
 "use client";
 
-import { Button, ConfigProvider, Divider, Form, Input } from "antd";
+import { Button, Divider, Form, Input } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { PhoneNumberUtil } from "google-libphonenumber";
 import { PhoneInput } from "react-international-phone";
 import { useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const Login = () => {
   const t = useTranslations();
@@ -13,8 +14,27 @@ const Login = () => {
   const phoneUtil = PhoneNumberUtil.getInstance();
   const [phone, setPhone] = useState("");
 
+  const { data: session } = useSession();
+
+  async function credentialsLogin(values: any) {
+    console.log(values);
+    const res = await signIn("credentials", {
+      password: values.password,
+      mobile: values.mobile,
+    });
+  }
+
   return (
     <div>
+      <Button
+        type="primary"
+        onClick={() => {
+          signOut();
+        }}
+        className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
+      >
+        TEST LOG OUT
+      </Button>
       <div className="flex justify-between items-center">
         <h1 className="font-[Tajawal] text-[24px] font-bold leading-[52px] text-[#000000]">
           {t("login")}
@@ -66,6 +86,7 @@ const Login = () => {
           form={form}
           autoComplete="off"
           layout="vertical"
+          onFinish={credentialsLogin}
         >
           <Form.Item
             name="mobile"
@@ -148,10 +169,10 @@ const Login = () => {
               id="password"
               placeholder={t("Please Enter A New Password")}
             />
-            <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
-              {t("forgotPassword")}
-            </a>
           </Form.Item>
+          <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
+            {t("forgotPassword")}
+          </a>
           <Form.Item className="mt-8">
             <Button
               type="primary"
