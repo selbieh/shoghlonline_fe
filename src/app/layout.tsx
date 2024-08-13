@@ -6,7 +6,8 @@ import "react-international-phone/style.css";
 import { ConfigProvider } from "antd";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-
+import { SessionProvider } from "next-auth/react";
+import AuthProvider from "./providers/authProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,15 +28,17 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
-        <NextIntlClientProvider messages={messages}>
-          <ConfigProvider
-            theme={{
-              token: { colorPrimary: "#7179CE", fontFamily: "Tajawal" },
-            }}
-          >
-            {children}
-          </ConfigProvider>
-        </NextIntlClientProvider>
+        <AuthProvider>
+          <NextIntlClientProvider messages={messages}>
+            <ConfigProvider
+              theme={{
+                token: { colorPrimary: "#7179CE", fontFamily: "Tajawal" },
+              }}
+            >
+              {children}
+            </ConfigProvider>
+          </NextIntlClientProvider>
+        </AuthProvider>
       </body>
     </html>
   );
