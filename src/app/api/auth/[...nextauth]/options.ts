@@ -58,7 +58,7 @@ export const options: NextAuthOptions = {
       return { ...params?.session, ...params?.token, language: "ar" };
     },
     async signIn(params: {
-      user: User | AdapterUser;
+      user: any;
       account: Account | null;
       profile?: Profile | undefined;
       email?: {
