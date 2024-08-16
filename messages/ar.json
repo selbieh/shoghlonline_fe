@@ -16,5 +16,9 @@
   "passwordValidation": "كلمة السر مطلوبة",
   "MobileValidationRequired": "الرجاء إدخال رقم الموبايل",
   "createAccount": "إنشاء حساب جديد",
-  "forgotPassword": "نسيت كلمة السر؟"
+  "forgotPassword": "نسيت كلمة السر؟",
+  "email": "البريد الالكتروني",
+  "Please Enter Your Email": "برجاء ادخال البريد الالكتروني",
+  "orByEmail": "او عن طريق البريد الالكتروني",
+  "EmailValidationRequired": "الرجاء ادخال البريد الاكتروني"
 }

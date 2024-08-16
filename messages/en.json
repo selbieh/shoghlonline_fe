@@ -16,5 +16,9 @@
   "passwordValidation": "Password is required",
   "MobileValidationRequired": "Please Enter The Mobile",
   "createAccount": "Create New Account",
-  "forgotPassword": "Forgot Password?"
+  "forgotPassword": "Forgot Password?",
+  "email": "Email",
+  "Please Enter Your Email": "Please Enter Your Email",
+  "orByEmail": "Or By Email",
+  "EmailValidationRequired": "Please Enter The Email"
 }
