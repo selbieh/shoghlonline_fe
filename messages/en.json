@@ -44,5 +44,13 @@
   "contactUs": "Contact Us",
   "email": "Email",
   "phone": "Phone",
-  "address": "Address"
+  "address": "Address",
+  "next": "Next",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "haveAccount": "Have Account?",
+  "enterOTP": "Enter OTP",
+  "otpSentToEmail": "An OTP was sent to your Email. Please enter OTP below.",
+  "resendOTP": "Resend OTP",
+  "finish": "Complete Registration"
 }
