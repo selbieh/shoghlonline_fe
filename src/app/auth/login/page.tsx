@@ -7,13 +7,14 @@ import { PhoneNumberUtil } from "google-libphonenumber";
 import { PhoneInput } from "react-international-phone";
 import { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const t = useTranslations();
   const [form] = Form.useForm();
   const phoneUtil = PhoneNumberUtil.getInstance();
   const [phone, setPhone] = useState("");
-
+  const router = useRouter();
   const { data: session } = useSession();
 
   async function credentialsLogin(values: any) {
@@ -161,7 +162,12 @@ const Login = () => {
             </Button>
           </Form.Item>
         </Form>
-        <Button className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]">
+        <Button
+          onClick={() => {
+            router.push("./register");
+          }}
+          className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
+        >
           {t("createAccount")}
         </Button>
       </div>
