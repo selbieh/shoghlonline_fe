@@ -52,5 +52,11 @@
   "enterOTP": "Enter OTP",
   "otpSentToEmail": "An OTP was sent to your Email. Please enter OTP below.",
   "resendOTP": "Resend OTP",
-  "finish": "Complete Registration"
+  "finish": "Complete Registration",
+  "helloChooseClientOrFreelancer": "Hello, choose how you want to use ShoghlOnline today",
+  "youCanChangeBetweenClientAndFreelance": "You can change between client and freelance any time",
+  "client": "Client",
+  "wanttohire": "Want to hire Someone",
+  "freelancer": "Freelancer",
+  "makeMoney": "Want to make money"
 }

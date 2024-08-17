@@ -52,5 +52,11 @@
   "enterOTP": "ادخل رمز التحقق OTP",
   "otpSentToEmail": "لقد ارسلنا رمز التحقق الى البريد الالكتروني الخص بك. يرجى ادخال الرمز أدناه",
   "resendOTP": "اعادة ارسال الرمز",
-  "finish": "اتمام التسجيل"
+  "finish": "اتمام التسجيل",
+  "helloChooseClientOrFreelancer": "مرحباً بك، اختر كيف تريد استخدام شغل أونلاين اليوم.",
+  "youCanChangeBetweenClientAndFreelance": "يمكنك التحويل من مستقل الي عميل او العكس اي وقت.",
+  "client": "عميل",
+  "wanttohire": "أريد شخصا لإنجاز أعمالي",
+  "freelancer": "مستقل",
+  "makeMoney": "أريد جني الأرباح من عملي"
 }
