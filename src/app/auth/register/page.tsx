@@ -1,55 +1,18 @@
 "use client";
-
 import { Button, Divider, Form, Input } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { PhoneNumberUtil } from "google-libphonenumber";
-import { PhoneInput } from "react-international-phone";
-import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import React from "react";
 
-const Login = () => {
+export default function Register() {
   const t = useTranslations();
-  const [form] = Form.useForm();
-  const phoneUtil = PhoneNumberUtil.getInstance();
-  const [phone, setPhone] = useState("");
-
-  const { data: session } = useSession();
-
-  async function credentialsLogin(values: any) {
-    console.log(values);
-    const res = await signIn("credentials", {
-      password: values.password,
-      mobile: values.mobile,
-    });
-  }
 
   return (
     <div>
-      <Button
-        type="primary"
-        onClick={() => {
-          signOut();
-        }}
-        className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
-      >
-        TEST LOG OUT
-      </Button>
       <div className="flex justify-between items-center">
         <h1 className="font-[Tajawal] text-[24px] font-bold leading-[52px] text-[#000000]">
-          {t("login")}
+          {t("createAccount")}
         </h1>
-        <div>
-          <p className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#8D8D8D] ">
-            {t("dontHaveAccount")}
-          </p>
-          <a
-            className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#0089ED]"
-            href="./register"
-          >
-            {t("register")}
-          </a>
-        </div>
       </div>
       <div className="flex gap-4 w-full justify-between items-center py-8">
         <div className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer">
@@ -77,26 +40,27 @@ const Login = () => {
 
       <Divider>
         <span className="font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px]">
-          {t("orByMobile")}
+          {t("orByEmail")}
         </span>
       </Divider>
       <div>
         <Form
           name="validateOnly"
-          form={form}
+          //   form={form}
           autoComplete="off"
           layout="vertical"
-          onFinish={credentialsLogin}
+          //   onFinish={credentialsLogin}
         >
           <Form.Item
-            name="mobile"
-            label={t("mobile")}
+            name="email"
+            label={t("email")}
             // validateTrigger="onBlur"
             rules={[
               {
-                required: false,
-                message: t("MobileValidationRequired"),
+                required: true,
+                message: t("EmailValidationRequired"),
               },
+              { type: "email" },
               // {
               //   validator(_, value) {
               //     const parsedPhoneNumber =
@@ -110,34 +74,11 @@ const Login = () => {
               // },
             ]}
           >
-            <PhoneInput
-              style={{ direction: "ltr", width: "100%" }}
-              defaultCountry="eg"
-              placeholder="Mobile"
+            <Input
+              type="text"
               className="h-[56px]"
-              value={phone}
-              onChange={(phone) => {
-                setPhone(phone);
-              }}
-              forceDialCode={true}
-              inputStyle={{
-                height: "56px",
-                fontSize: "14px",
-                borderRadius: "12px",
-                padding: "10px",
-                border: "1px solid #E7E8EC",
-                width: "100%",
-              }}
-              countrySelectorStyleProps={{
-                style: {
-                  height: "56px",
-                  padding: "10px",
-                  borderRadius: "12px",
-                  border: "1px solid #E7E8EC",
-                  marginRight: "5px",
-                },
-                buttonStyle: { height: "40px", border: "none" },
-              }}
+              id="email"
+              placeholder={t("Please Enter Your Email")}
             />
           </Form.Item>
           <Form.Item
@@ -189,6 +130,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}
