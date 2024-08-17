@@ -20,7 +20,7 @@ const Login = () => {
     console.log(values);
     const res = await signIn("credentials", {
       password: values.password,
-      mobile: values.mobile,
+      email: values.email,
     });
   }
 
@@ -77,7 +77,7 @@ const Login = () => {
 
       <Divider>
         <span className="font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px]">
-          {t("orByMobile")}
+          {t("orByEmail")}
         </span>
       </Divider>
       <div>
@@ -89,14 +89,15 @@ const Login = () => {
           onFinish={credentialsLogin}
         >
           <Form.Item
-            name="mobile"
-            label={t("mobile")}
+            name="email"
+            label={t("email")}
             // validateTrigger="onBlur"
             rules={[
               {
-                required: false,
-                message: t("MobileValidationRequired"),
+                required: true,
+                message: t("EmailValidationRequired"),
               },
+              { type: "email" },
               // {
               //   validator(_, value) {
               //     const parsedPhoneNumber =
@@ -110,34 +111,11 @@ const Login = () => {
               // },
             ]}
           >
-            <PhoneInput
-              style={{ direction: "ltr", width: "100%" }}
-              defaultCountry="eg"
-              placeholder="Mobile"
+            <Input
+              type="text"
               className="h-[56px]"
-              value={phone}
-              onChange={(phone) => {
-                setPhone(phone);
-              }}
-              forceDialCode={true}
-              inputStyle={{
-                height: "56px",
-                fontSize: "14px",
-                borderRadius: "12px",
-                padding: "10px",
-                border: "1px solid #E7E8EC",
-                width: "100%",
-              }}
-              countrySelectorStyleProps={{
-                style: {
-                  height: "56px",
-                  padding: "10px",
-                  borderRadius: "12px",
-                  border: "1px solid #E7E8EC",
-                  marginRight: "5px",
-                },
-                buttonStyle: { height: "40px", border: "none" },
-              }}
+              id="email"
+              placeholder={t("Please Enter Your Email")}
             />
           </Form.Item>
           <Form.Item
