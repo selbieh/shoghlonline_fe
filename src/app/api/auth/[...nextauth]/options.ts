@@ -21,7 +21,7 @@ export const options: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const res: any = await axios
-          .post(`${process.env.NEXT_PUBLIC_BASE_URL}auth/login/`, credentials)
+          .post(`${process.env.BASE_URL}auth/login/`, credentials)
           .catch((err) => console.log(err));
 
         const user = await res?.data;
