@@ -32,19 +32,21 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
-        <AntdRegistry>
-          <AuthProvider>
-            <NextIntlClientProvider messages={messages}>
-              <ConfigProvider
-                theme={{
-                  token: { colorPrimary: "#7179CE", fontFamily: "Tajawal" },
-                }}
-              >
-                {children}
-              </ConfigProvider>
-            </NextIntlClientProvider>
-          </AuthProvider>
-        </AntdRegistry>
+        <AuthProvider>
+          <NextIntlClientProvider messages={messages}>
+            <ConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: "#7179CE",
+                  fontFamily: "Tajawal",
+                  controlHeight: 56,
+                },
+              }}
+            >
+              <AntdRegistry>{children}</AntdRegistry>
+            </ConfigProvider>
+          </NextIntlClientProvider>
+        </AuthProvider>
       </body>
     </html>
   );
