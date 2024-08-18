@@ -1,3 +1,4 @@
 export interface AuthenticationInitialState {
-  email: string | null;
+  loginEmail: string | null;
+  registerEmail: string | null;
 }
