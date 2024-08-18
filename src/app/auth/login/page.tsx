@@ -20,7 +20,7 @@ const Login = () => {
     postRequest("auth/request-otp/", values).then((res) => {
       if (StatusSuccessCodes.includes(res?.status)) {
         message.success(`${res?.data?.detail}`);
-        dispatch(authActions.setEmail(values?.email));
+        dispatch(authActions.setLoginEmail(values?.email));
         router.push("./login/otp");
       } else {
         message.error(`${res.detail}`);
