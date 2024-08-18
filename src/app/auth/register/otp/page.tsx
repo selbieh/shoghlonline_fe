@@ -1,21 +1,47 @@
 "use client";
-import { Button, Divider, Form, Input } from "antd";
+import { postAuthRequest, postRequest } from "@/app/api/api";
+import { authActions } from "@/store/reducers/authentcationSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import { Button, Divider, Form, Input, message } from "antd";
 import OTP from "antd/es/input/OTP";
 import { PhoneNumberUtil } from "google-libphonenumber";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { PhoneInput } from "react-international-phone";
+import { useSelector } from "react-redux";
 
 export default function RegisterOTP() {
   const t = useTranslations();
-  const phoneUtil = PhoneNumberUtil.getInstance();
-  const [phone, setPhone] = useState("");
-  const [registerForm] = Form.useForm();
+  const [otpForm] = Form.useForm();
+  const { registerEmail }: any = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   function registerFormFinish(values: any) {
-    console.log(values);
+    postAuthRequest("api/v1/client/verify-otp/", {
+      email: registerEmail,
+      otp: values?.otp,
+    }).then((res: any) => {
+      if (StatusSuccessCodes.includes(res.status)) {
+        console.log(res);
+        message.success(`${res?.data?.detail}`);
+        router.push("../../auth/login");
+      } else {
+        console.log(res);
+        message.error(`${res.detail}`);
+      }
+    });
   }
+
+  useEffect(() => {
+    if (!registerEmail) {
+      message.error("RequestOTPFirst");
+      router.push("../register");
+    }
+  }, []);
 
   return (
     <div>
@@ -33,7 +59,7 @@ export default function RegisterOTP() {
       <div>
         <Form
           name="validateOnly"
-          form={registerForm}
+          form={otpForm}
           autoComplete="off"
           layout="vertical"
           onFinish={registerFormFinish}
