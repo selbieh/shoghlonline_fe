@@ -1,8 +1,13 @@
 "use client";
-import { Button, Divider, Form, Input } from "antd";
+import { postRequest } from "@/app/api/api";
+import { authActions } from "@/store/reducers/authentcationSlice";
+import { useAppDispatch } from "@/store/rootReducer";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import { Button, Divider, Form, Input, message } from "antd";
 import { PhoneNumberUtil } from "google-libphonenumber";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { PhoneInput } from "react-international-phone";
 
@@ -11,9 +16,21 @@ export default function Register() {
   const phoneUtil = PhoneNumberUtil.getInstance();
   const [phone, setPhone] = useState("");
   const [registerForm] = Form.useForm();
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  function registerFormFinish(values: any) {
-    console.log(values);
+  async function registerFormFinish(values: any) {
+    postRequest("api/v1/client/register/", values).then((res: any) => {
+      if (StatusSuccessCodes.includes(res.status)) {
+        message.success(`${res?.data[0]}`);
+        dispatch(authActions.setRegisterEmail(values?.email));
+        router.push("./register/otp");
+      } else {
+        res?.errors?.map((err: any) => {
+          message.error(`${err.attr} : ${err.detail}`);
+        });
+      }
+    });
   }
 
   return (
@@ -74,22 +91,23 @@ export default function Register() {
           <Form.Item
             name="mobile"
             label={t("mobile")}
+            validateTrigger="onBlur"
             rules={[
               {
                 required: true,
                 message: t("MobileValidationRequired"),
               },
-              // {
-              //   validator(_, value) {
-              //     const parsedPhoneNumber =
-              //       phoneUtil.parseAndKeepRawInput(value);
-              //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-              //       return Promise.resolve();
-              //     } else {
-              //       return Promise.reject(new Error("Phone is not valid!"));
-              //     }
-              //   },
-              // },
+              {
+                validator(_, value) {
+                  const parsedPhoneNumber =
+                    phoneUtil.parseAndKeepRawInput(value);
+                  if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
+                    return Promise.resolve();
+                  } else {
+                    return Promise.reject(new Error("Phone is not valid!"));
+                  }
+                },
+              },
             ]}
           >
             <PhoneInput
@@ -125,7 +143,6 @@ export default function Register() {
           <Form.Item
             name="email"
             label={t("email")}
-            // validateTrigger="onBlur"
             rules={[
               {
                 required: true,
