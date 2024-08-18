@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import AuthProvider from "./providers/authProvider";
 
 import type { Metadata } from "next";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -31,17 +32,19 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body>
-        <AuthProvider>
-          <NextIntlClientProvider messages={messages}>
-            <ConfigProvider
-              theme={{
-                token: { colorPrimary: "#7179CE", fontFamily: "Tajawal" },
-              }}
-            >
-              {children}
-            </ConfigProvider>
-          </NextIntlClientProvider>
-        </AuthProvider>
+        <AntdRegistry>
+          <AuthProvider>
+            <NextIntlClientProvider messages={messages}>
+              <ConfigProvider
+                theme={{
+                  token: { colorPrimary: "#7179CE", fontFamily: "Tajawal" },
+                }}
+              >
+                {children}
+              </ConfigProvider>
+            </NextIntlClientProvider>
+          </AuthProvider>
+        </AntdRegistry>
       </body>
     </html>
   );
