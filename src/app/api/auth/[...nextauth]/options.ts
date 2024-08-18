@@ -17,11 +17,11 @@ export const options: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "text" },
+        otp: { label: "OTP", type: "text" },
       },
       async authorize(credentials, req) {
         const res: any = await axios
-          .post(`${process.env.BASE_URL}auth/login/`, credentials)
+          .post(`${process.env.NEXT_PUBLIC_BASE_URL}auth/login/`, credentials)
           .catch((err) => console.log(err));
 
         const user = await res?.data;
