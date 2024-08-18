@@ -1,5 +1,6 @@
 "use client";
-import { RootState } from "@/store/rootReducer";
+import { authActions } from "@/store/reducers/authentcationSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { Button, Form, Input, message } from "antd";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -11,16 +12,18 @@ export default function RegisterOTP() {
   const t = useTranslations();
   const router = useRouter();
   const [loginForm] = Form.useForm();
-  const { email }: any = useSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+
+  const { loginEmail }: any = useSelector((state: RootState) => state.auth);
   async function login(values: any) {
     const res = await signIn("credentials", {
       otp: values.otp,
-      email: email,
+      email: loginEmail,
     });
   }
 
   useEffect(() => {
-    if (!email) {
+    if (!loginEmail) {
       message.error("RequestOTPFirst");
       router.push("../login");
     }
