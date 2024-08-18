@@ -58,5 +58,7 @@
   "client": "Client",
   "wanttohire": "Want to hire Someone",
   "freelancer": "Freelancer",
-  "makeMoney": "Want to make money"
+  "makeMoney": "Want to make money",
+  "sendOTP": "Send OTP",
+  "RequestOTPFirst": "Request OTP First"
 }
