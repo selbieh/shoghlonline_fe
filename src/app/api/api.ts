@@ -33,6 +33,16 @@ export async function postRequest(
   return res;
 }
 
+export async function postAuthRequest(path: string, body: any) {
+  const res = axios
+    .create({ baseURL })
+    .post(path, body)
+    .catch((error: any) => {
+      return error?.response?.data;
+    });
+  return res;
+}
+
 export function handelErrors(err: any) {
   if (err.response?.status == 404) {
     //window.location.href = "/404";
