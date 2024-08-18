@@ -1,27 +1,30 @@
 "use client";
-
-import { Button, Divider, Form, Input } from "antd";
+import { postRequest } from "@/app/api/api";
+import { authActions } from "@/store/reducers/authentcationSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import { Button, Divider, Form, Input, message } from "antd";
+import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { PhoneNumberUtil } from "google-libphonenumber";
-import { PhoneInput } from "react-international-phone";
-import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const t = useTranslations();
-  const [form] = Form.useForm();
-  const phoneUtil = PhoneNumberUtil.getInstance();
-  const [phone, setPhone] = useState("");
+  const [requestOTPForm] = Form.useForm();
   const router = useRouter();
-  const { data: session } = useSession();
+  const dispatch = useAppDispatch();
 
-  async function credentialsLogin(values: any) {
-    console.log(values);
-    const res = await signIn("credentials", {
-      password: values.password,
-      email: values.email,
+  async function requestOTP(values: { email: string }) {
+    postRequest("auth/request-otp/", values).then((res) => {
+      if (StatusSuccessCodes.includes(res?.status)) {
+        message.success(`${res?.data?.detail}`);
+        dispatch(authActions.setEmail(values?.email));
+        router.push("./login/otp");
+      } else {
+        message.error(`${res.detail}`);
+      }
     });
   }
 
@@ -84,10 +87,10 @@ const Login = () => {
       <div>
         <Form
           name="validateOnly"
-          form={form}
+          form={requestOTPForm}
           autoComplete="off"
           layout="vertical"
-          onFinish={credentialsLogin}
+          onFinish={requestOTP}
         >
           <Form.Item
             name="email"
@@ -119,7 +122,7 @@ const Login = () => {
               placeholder={t("Please Enter Your Email")}
             />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             name="password"
             label={t("password")}
             rules={[
@@ -148,17 +151,17 @@ const Login = () => {
               id="password"
               placeholder={t("Please Enter A New Password")}
             />
-          </Form.Item>
-          <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
+          </Form.Item> */}
+          {/* <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
             {t("forgotPassword")}
-          </a>
+          </a> */}
           <Form.Item className="mt-8">
             <Button
               type="primary"
               htmlType="submit"
               className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
             >
-              {t("login")}
+              {t("sendOTP")}
             </Button>
           </Form.Item>
         </Form>
