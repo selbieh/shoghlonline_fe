@@ -128,6 +128,7 @@ export default function RootLayout({
         <Header
           style={{
             backgroundColor: "white",
+            height: "65px",
           }}
         >
           <Divider
@@ -142,8 +143,17 @@ export default function RootLayout({
               backgroundColor: "white",
             }}
           />
+          <Divider
+            style={{ backgroundColor: "#DEEAFF", height: "1px", margin: 0 }}
+          />
         </Header>
-        <Content style={{ padding: "0 48px", minHeight: "52vh" }}>
+        <Content
+          style={{
+            padding: "0 48px",
+            minHeight: "52vh",
+            backgroundColor: "white",
+          }}
+        >
           {children}
         </Content>
         <Footer style={{ margin: 0, padding: 0 }}>

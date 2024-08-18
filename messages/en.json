@@ -60,5 +60,19 @@
   "freelancer": "Freelancer",
   "makeMoney": "Want to make money",
   "sendOTP": "Send OTP",
-  "RequestOTPFirst": "Request OTP First"
+  "RequestOTPFirst": "Request OTP First",
+  "skills": "Skills",
+  "rating": "Rating",
+  "projectsCompleted": "Projects Completed",
+  "introductionVideo": "Introduction Video",
+  "languages": "Languages",
+  "teaching": "Teaching",
+  "experiences": "Experiences",
+  "certifications": "Certifications",
+  "show": "Show",
+  "linkedAccounts": "Linked Accounts",
+  "hourPrice": "Hour Price",
+  "hours/week": "Hours / Week",
+  "description": "Description",
+  "commonQuestions": "Common Questions"
 }
