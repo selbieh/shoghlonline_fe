@@ -43,5 +43,5 @@ export function handelErrors(err: any) {
     // message.error("sorry your are not allowed");
     signOut({ callbackUrl: "/auth/login" });
   }
-  return err?.response?.data?.errors;
+  return err?.response?.data;
 }
