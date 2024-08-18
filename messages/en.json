@@ -41,5 +41,19 @@
   "contactUs": "Contact Us",
   "email": "Email",
   "phone": "Phone",
-  "address": "Address"
+  "address": "Address",
+  "skills": "Skills",
+  "rating": "Rating",
+  "projectsCompleted": "Projects Completed",
+  "introductionVideo": "Introduction Video",
+  "languages": "Languages",
+  "teaching": "Teaching",
+  "experiences": "Experiences",
+  "certifications": "Certifications",
+  "show": "Show",
+  "linkedAccounts": "Linked Accounts",
+  "hourPrice": "Hour Price",
+  "hours/week": "Hours / Week",
+  "description": "Description",
+  "commonQuestions": "Common Questions"
 }

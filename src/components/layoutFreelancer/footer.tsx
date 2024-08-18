@@ -24,7 +24,7 @@ const FooterFreelancer = () => {
           {t("support")}
         </h3>
         <p className="font-[Tajawal] text-[16px] font-normal leading-[22.4px] text-[#E2E8F0] py-2">
-          {t("commanQuestions")}
+          {t("commonQuestions")}
         </p>
         <p className="font-[Tajawal] text-[16px] font-normal leading-[22.4px] text-[#E2E8F0] py-2">
           {t("technicalSupport")}
