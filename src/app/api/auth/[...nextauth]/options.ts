@@ -16,13 +16,13 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        mobile: { label: "Mobile", type: "text" },
-        password: { label: "Password", type: "text" },
+        email: { label: "Email", type: "email" },
+        otp: { label: "OTP", type: "text" },
       },
       async authorize(credentials, req) {
         const res: any = await axios
           .post(`${process.env.BASE_URL}auth/login/`, credentials)
-          .catch();
+          .catch((err) => console.log(err));
 
         const user = await res?.data;
         if (user) {

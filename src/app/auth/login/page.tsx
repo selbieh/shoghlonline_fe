@@ -1,26 +1,30 @@
 "use client";
-
-import { Button, Divider, Form, Input } from "antd";
+import { postRequest } from "@/app/api/api";
+import { authActions } from "@/store/reducers/authentcationSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import { Button, Divider, Form, Input, message } from "antd";
+import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { PhoneNumberUtil } from "google-libphonenumber";
-import { PhoneInput } from "react-international-phone";
-import { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Login = () => {
   const t = useTranslations();
-  const [form] = Form.useForm();
-  const phoneUtil = PhoneNumberUtil.getInstance();
-  const [phone, setPhone] = useState("");
+  const [requestOTPForm] = Form.useForm();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  const { data: session } = useSession();
-
-  async function credentialsLogin(values: any) {
-    console.log(values);
-    const res = await signIn("credentials", {
-      password: values.password,
-      mobile: values.mobile,
+  async function requestOTP(values: { email: string }) {
+    postRequest("auth/request-otp/", values).then((res) => {
+      if (StatusSuccessCodes.includes(res?.status)) {
+        message.success(`${res?.data?.detail}`);
+        dispatch(authActions.setLoginEmail(values?.email));
+        router.push("./login/otp");
+      } else {
+        message.error(`${res.detail}`);
+      }
     });
   }
 
@@ -45,7 +49,7 @@ const Login = () => {
           </p>
           <a
             className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#0089ED]"
-            href="/register"
+            href="./register"
           >
             {t("register")}
           </a>
@@ -77,26 +81,27 @@ const Login = () => {
 
       <Divider>
         <span className="font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px]">
-          {t("orByMobile")}
+          {t("orByEmail")}
         </span>
       </Divider>
       <div>
         <Form
           name="validateOnly"
-          form={form}
+          form={requestOTPForm}
           autoComplete="off"
           layout="vertical"
-          onFinish={credentialsLogin}
+          onFinish={requestOTP}
         >
           <Form.Item
-            name="mobile"
-            label={t("mobile")}
+            name="email"
+            label={t("email")}
             // validateTrigger="onBlur"
             rules={[
               {
-                required: false,
-                message: t("MobileValidationRequired"),
+                required: true,
+                message: t("EmailValidationRequired"),
               },
+              { type: "email" },
               // {
               //   validator(_, value) {
               //     const parsedPhoneNumber =
@@ -110,37 +115,14 @@ const Login = () => {
               // },
             ]}
           >
-            <PhoneInput
-              style={{ direction: "ltr", width: "100%" }}
-              defaultCountry="eg"
-              placeholder="Mobile"
+            <Input
+              type="text"
               className="h-[56px]"
-              value={phone}
-              onChange={(phone) => {
-                setPhone(phone);
-              }}
-              forceDialCode={true}
-              inputStyle={{
-                height: "56px",
-                fontSize: "14px",
-                borderRadius: "12px",
-                padding: "10px",
-                border: "1px solid #E7E8EC",
-                width: "100%",
-              }}
-              countrySelectorStyleProps={{
-                style: {
-                  height: "56px",
-                  padding: "10px",
-                  borderRadius: "12px",
-                  border: "1px solid #E7E8EC",
-                  marginRight: "5px",
-                },
-                buttonStyle: { height: "40px", border: "none" },
-              }}
+              id="email"
+              placeholder={t("Please Enter Your Email")}
             />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             name="password"
             label={t("password")}
             rules={[
@@ -169,21 +151,26 @@ const Login = () => {
               id="password"
               placeholder={t("Please Enter A New Password")}
             />
-          </Form.Item>
-          <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
+          </Form.Item> */}
+          {/* <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
             {t("forgotPassword")}
-          </a>
+          </a> */}
           <Form.Item className="mt-8">
             <Button
               type="primary"
               htmlType="submit"
               className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
             >
-              {t("login")}
+              {t("sendOTP")}
             </Button>
           </Form.Item>
         </Form>
-        <Button className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]">
+        <Button
+          onClick={() => {
+            router.push("./register");
+          }}
+          className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
+        >
           {t("createAccount")}
         </Button>
       </div>

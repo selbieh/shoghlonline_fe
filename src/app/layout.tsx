@@ -1,13 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import "react-international-phone/style.css";
 
+import { store } from "@/store/rootReducer";
 import { ConfigProvider } from "antd";
-import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import { SessionProvider } from "next-auth/react";
+import { getLocale, getMessages } from "next-intl/server";
+import { Inter } from "next/font/google";
+import { Provider } from "react-redux";
+
 import AuthProvider from "./providers/authProvider";
+
+import type { Metadata } from "next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

@@ -27,6 +27,7 @@ const Hero = () => {
               <Button
                 type="primary"
                 className="h-[38px] rounded-md font-[Tajawal] text-[12px] font-bold leading-[18px]"
+                href="/auth/register"
               >
                 {t("joinUs")}
               </Button>
