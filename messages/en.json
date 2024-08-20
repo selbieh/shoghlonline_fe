@@ -74,5 +74,16 @@
   "hourPrice": "Hour Price",
   "hours/week": "Hours / Week",
   "description": "Description",
-  "commonQuestions": "Common Questions"
+  "commonQuestions": "Common Questions",
+  "settings": "Settings",
+  "profileCompleted": "Profile Completed",
+  "completeProfile": "Complete your profile to attract more customers!",
+  "completeProfileDesc": "Complete profiles increase your chances of attracting customers by 5x.",
+  "completeProfileNow": "Complete Profile Now",
+  "totalJobs": "Total Jobs",
+  "displayAll": "Display All",
+  "feedback": "Feedback",
+  "completedJob": "Completed Jobs",
+  "previousWork": "Previous Work",
+  "displayProject": "Display Project"
 }

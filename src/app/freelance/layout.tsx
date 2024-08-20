@@ -78,20 +78,16 @@ export default function RootLayout({
   return (
     <>
       <Layout>
-        <Header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: "white",
-          }}
-        >
+        <Header className="flex  items-center justify-between bg-white">
           <div>
             <Space size={"middle"}>
               <Avatar icon={<FaRegUserCircle />} size={24} />
               <IoNotificationsOutline size={24} />
               <CiMail size={24} />
-              <Space.Compact>
+              <Space.Compact
+                className="hidden md:flex lg:flex xl:flex"
+                size="middle"
+              >
                 <Select defaultValue="1" options={options} />
                 <Search
                   placeholder={t("search")}
@@ -149,10 +145,10 @@ export default function RootLayout({
         </Header>
         <Content
           style={{
-            padding: "0 48px",
             minHeight: "52vh",
             backgroundColor: "white",
           }}
+          className="px-2 md:px-12 lg:px-12 xl:px-12"
         >
           {children}
         </Content>

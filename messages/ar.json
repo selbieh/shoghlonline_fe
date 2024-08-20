@@ -74,5 +74,16 @@
   "hourPrice": "سعر الساعة",
   "hours/week": "ساعة / أسبوع",
   "description": "الوصف",
-  "commonQuestions": "الأسئلة الشائعة"
+  "commonQuestions": "الأسئلة الشائعة",
+  "settings": "إعدادات",
+  "profileCompleted": "ملفك مكتمل بنسبة ",
+  "completeProfile": "أكمل ملفك الشخصي لجذب المزيد من العملاء!",
+  "completeProfileDesc": "الملفات الشخصية المكتملة تزيد من فرص جذب العملاء بمقدار 5 أضعاف.",
+  "completeProfileNow": "أكمل الملف الشخصي الآن",
+  "totalJobs": "إجمالي الوظائف",
+  "displayAll": "عرض الكل",
+  "feedback": "اراء العملاء",
+  "completedJob": "الوظائف المكتملة",
+  "previousWork": "العمل السابق",
+  "displayProject": "عرض المشروع"
 }
