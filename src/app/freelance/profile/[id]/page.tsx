@@ -17,7 +17,7 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
   const t = useTranslations();
   return (
     <div className="flex flex-col md:flex-row bg-white">
-      <div className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3  p-4 flex justify-center items-center gap-4 flex-col">
+      <div className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3  p-4 flex justify-start items-center gap-4 flex-col">
         <MainInfo></MainInfo>
         <Card
           className="w-[370px] h-[155px] bg-[#F7F9FF] rounded-xl shadow-sm border-[1px] border-[#E0E1E6]"
@@ -95,7 +95,7 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
             <FaArrowLeft color="#7179CE" />
           </div>
         </div>
-        <div className="flex flex-wrap md:flex-row gap-4 md:gap-12">
+        <div className="flex flex-wrap md:flex-row justify-between gap-4 md:gap-12">
           <StatsCard></StatsCard>
           <StatsCard></StatsCard>
           <StatsCard></StatsCard>
