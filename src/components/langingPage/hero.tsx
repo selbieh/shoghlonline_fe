@@ -20,7 +20,6 @@ const Hero = () => {
             <Space>
               <Button
                 className="h-[38px] rounded-md text-[#000] border-[#D2D5DA] font-[Tajawal] text-[12px] font-bold leading-[18px]"
-                style={{ height: "38px" }}
                 href="/auth/login"
               >
                 {t("login")}
@@ -28,7 +27,6 @@ const Hero = () => {
               <Button
                 type="primary"
                 className="h-[38px] rounded-md font-[Tajawal] text-[12px] font-bold leading-[18px]"
-                style={{ height: "38px" }}
                 href="/auth/register"
               >
                 {t("joinUs")}
@@ -65,7 +63,6 @@ const Hero = () => {
             <Button
               type="primary"
               className="h-[38px] rounded-md font-[Tajawal] text-[12px] font-bold leading-[18px] mt-9"
-              style={{ height: "38px" }}
             >
               {t("heroBtn")}
             </Button>
