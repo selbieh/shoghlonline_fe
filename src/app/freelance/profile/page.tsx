@@ -1,4 +1,6 @@
 "use client";
+import { GetByIdReq } from "@/app/api/api";
+import AuthGuard from "@/components/authenticationHOC/authenticated";
 import CompletedJobs from "@/components/profile/completedJobs";
 import FeedbackProfile from "@/components/profile/feedback";
 import MainInfo from "@/components/profile/mainInfo";
@@ -6,15 +8,39 @@ import PreviousWork from "@/components/profile/previousWork";
 import QualificationInfo from "@/components/profile/qualificationInfo";
 import ServicesProfile from "@/components/profile/services";
 import StatsCard from "@/components/profile/statsCard";
-import { Button, Card, Divider, Progress, Rate, Space, Tag } from "antd";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import {
+  Button,
+  Card,
+  Divider,
+  message,
+  Progress,
+  Rate,
+  Space,
+  Tag,
+} from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaArrowLeft, FaRegEdit } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 
-const Profile = ({ params: { id } }: { params: { id: string } }) => {
+function Profile() {
   const t = useTranslations();
+
+  useEffect(() => {
+    getUserProfileData();
+  }, []);
+
+  const getUserProfileData = () => {
+    GetByIdReq(`api/v1/client/profile/`).then((res: any) => {
+      if (StatusSuccessCodes.includes(res.status)) {
+        console.log(res);
+      } else {
+        message.error(`${res.detail}`);
+      }
+    });
+  };
   return (
     <div className="flex flex-col md:flex-row bg-white">
       <div className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3  p-4 flex justify-start items-center gap-4 flex-col">
@@ -197,6 +223,6 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Profile;

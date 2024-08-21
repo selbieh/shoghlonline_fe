@@ -20,6 +20,18 @@ export async function setAuthorizationToken(token?: string) {
   }
 }
 
+export function GetReq(path: string) {
+  setAuthorizationToken();
+  const res = axios.create({ baseURL }).get(path).catch(handelErrors);
+  return res;
+}
+
+export function GetByIdReq(path: string) {
+  setAuthorizationToken();
+  const res = axios.create({ baseURL }).get(path).catch(handelErrors);
+
+  return res;
+}
 export async function postRequest(
   path: string,
   body: any,
