@@ -39,11 +39,13 @@ export default async function RootLayout({
                 token: {
                   colorPrimary: "#7179CE",
                   fontFamily: "Tajawal",
-                  controlHeight: 56,
+                  // controlHeight: 56,
                 },
               }}
             >
-              <AntdRegistry>{children}</AntdRegistry>
+              {/* <AntdRegistry> */}
+              {children}
+              {/* </AntdRegistry> */}
             </ConfigProvider>
           </NextIntlClientProvider>
         </AuthProvider>
