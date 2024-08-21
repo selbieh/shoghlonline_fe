@@ -6,11 +6,9 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 export async function setAuthorizationToken(token?: string) {
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
     return;
   } else {
     const session: any = await getSession();
-
     const userToken = session?.token;
     if (userToken) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
@@ -20,14 +18,14 @@ export async function setAuthorizationToken(token?: string) {
   }
 }
 
-export function GetReq(path: string) {
-  setAuthorizationToken();
+export async function GetReq(path: string) {
+  await setAuthorizationToken();
   const res = axios.create({ baseURL }).get(path).catch(handelErrors);
   return res;
 }
 
-export function GetByIdReq(path: string) {
-  setAuthorizationToken();
+export async function GetByIdReq(path: string) {
+  await setAuthorizationToken();
   const res = axios.create({ baseURL }).get(path).catch(handelErrors);
 
   return res;
