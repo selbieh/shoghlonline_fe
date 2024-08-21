@@ -85,5 +85,6 @@
   "feedback": "اراء العملاء",
   "completedJob": "الوظائف المكتملة",
   "previousWork": "العمل السابق",
-  "displayProject": "عرض المشروع"
+  "displayProject": "عرض المشروع",
+  "EmailValidationInvalid": "البريد الإلكتروني غير صالح"
 }

@@ -13,10 +13,10 @@ export default function ClientOrFreeLance() {
         <Image src="/images/logo.svg" alt="banner" width={117} height={39} />
       </div>
       <div className="flex flex-col  h-fit m-10">
-        <div className=" font-[Tajawal] font-bold text-[24px] ">
+        <div className="  font-bold text-[24px] ">
           {t("helloChooseClientOrFreelancer")}
         </div>
-        <div className=" font-[Tajawal] text-[rgba(98,_99,_108,_1)] text-[16px] ">
+        <div className="  text-[rgba(98,_99,_108,_1)] text-[16px] ">
           {t("youCanChangeBetweenClientAndFreelance")}
         </div>
       </div>

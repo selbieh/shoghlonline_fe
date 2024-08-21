@@ -15,7 +15,7 @@ const QualificationInfo = () => {
       }}
     >
       <div className="flex justify-between items-center">
-        <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  pb-2">
+        <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
           {t("introductionVideo")}
         </h3>
         <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
@@ -32,7 +32,7 @@ const QualificationInfo = () => {
       </span>
       <Divider />
       <div className="flex justify-between items-center">
-        <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  pb-2">
+        <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
           {t("languages")}
         </h3>
         <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
@@ -40,15 +40,15 @@ const QualificationInfo = () => {
         </Button>
       </div>
 
-      <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+      <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
         العربية :
-        <span className="font-[Tajawal] text-[12px] font-medium leading-[24px]  px-1">
+        <span className=" text-[12px] font-medium leading-[24px]  px-1">
           اساسية
         </span>
       </p>
       <Divider />
       <div className="flex justify-between items-center">
-        <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  pb-2">
+        <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
           {t("teaching")}
         </h3>
         <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
@@ -58,20 +58,20 @@ const QualificationInfo = () => {
 
       <div className="flex justify-between">
         <div>
-          <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+          <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
             جامعة القاهرة
           </p>
-          <span className="font-[Tajawal] text-[12px] font-medium leading-[24px]  px-1">
+          <span className=" text-[12px] font-medium leading-[24px]  px-1">
             بكالوريوس فنون
           </span>
         </div>
-        <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+        <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
           2020-2021
         </p>
       </div>
       <Divider />
       <div className="flex justify-between items-center">
-        <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  pb-2">
+        <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
           {t("experiences")}
         </h3>
         <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
@@ -81,20 +81,20 @@ const QualificationInfo = () => {
 
       <div className="flex justify-between">
         <div>
-          <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+          <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
             جامعة القاهرة
           </p>
-          <span className="font-[Tajawal] text-[12px] font-medium leading-[24px]  px-1">
+          <span className=" text-[12px] font-medium leading-[24px]  px-1">
             بكالوريوس فنون
           </span>
         </div>
-        <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+        <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
           2020-2021
         </p>
       </div>
       <Divider />
       <div className="flex justify-between items-center">
-        <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  pb-2">
+        <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
           {t("certifications")}
         </h3>
         <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
@@ -104,24 +104,24 @@ const QualificationInfo = () => {
 
       <div className="flex justify-between">
         <div>
-          <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+          <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
             الجهة
           </p>
-          <span className="font-[Tajawal] text-[12px] font-medium leading-[24px]  px-1">
+          <span className=" text-[12px] font-medium leading-[24px]  px-1">
             اسم الشهادة
           </span>
         </div>
-        <p className="font-[Tajawal] text-[12px] font-bold leading-[24px]  text-[#62636C]">
+        <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
           <Button
             type="default"
-            className="h-[34px] px-[12px] py-[8px] rounded-[6px] font-[Tajawal] text-[12px] font-bold leading-[18px] text-[#7179CE]"
+            className="h-[34px] px-[12px] py-[8px] rounded-[6px]  text-[12px] font-bold leading-[18px] text-[#7179CE]"
           >
             {t("show")}
           </Button>
         </p>
       </div>
       <Divider />
-      <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  pb-2">
+      <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
         {t("linkedAccounts")}
       </h3>
       <div className="flex gap-3">

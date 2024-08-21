@@ -85,5 +85,6 @@
   "feedback": "Feedback",
   "completedJob": "Completed Jobs",
   "previousWork": "Previous Work",
-  "displayProject": "Display Project"
+  "displayProject": "Display Project",
+  "EmailValidationInvalid": "Email Invalid"
 }

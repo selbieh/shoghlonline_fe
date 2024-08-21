@@ -102,13 +102,13 @@ export default function RootLayout({
             <Space size={"large"}>
               <a
                 href="#"
-                className="font-[Tajawal] text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
+                className=" text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
               >
                 {t("services")}
               </a>
               <a
                 href="#"
-                className="font-[Tajawal] text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
+                className=" text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
               >
                 {t("jobs")}
               </a>

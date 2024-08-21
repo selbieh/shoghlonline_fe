@@ -3,7 +3,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <section className="h-[100vh] bg-[linear-gradient(180deg,_#7179CE_50%,_#fff_50%)]">
       <div className="logo p-10">
-        <Image src="/images/logo-2.svg" alt="banner" width={117} height={39} />
+        <a href="/">
+          <Image
+            src="/images/logo-2.svg"
+            alt="banner"
+            width={117}
+            height={39}
+          />
+        </a>
       </div>
       <div className="flex items-center h-fit flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row ">
         <div className="w-[96%] sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 flex justify-center">

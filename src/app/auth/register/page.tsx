@@ -20,10 +20,10 @@ export default function Register() {
   const router = useRouter();
 
   async function registerFormFinish(values: any) {
+    dispatch(authActions.setRegisterEmail(values?.email));
     postRequest("api/v1/client/register/", values).then((res: any) => {
       if (StatusSuccessCodes.includes(res.status)) {
         message.success(`${res?.data[0]}`);
-        dispatch(authActions.setRegisterEmail(values?.email));
         router.push("./register/otp");
       } else {
         res?.errors?.map((err: any) => {
@@ -36,15 +36,15 @@ export default function Register() {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h1 className="font-[Tajawal] text-[24px] font-bold leading-[52px] text-[#000000]">
+        <h1 className=" text-[24px] font-bold leading-[52px] text-[#000000]">
           {t("createAccount")}
         </h1>
         <div>
-          <p className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#8D8D8D] ">
+          <p className=" text-[13px] font-normal leading-[15.6px] text-[#8D8D8D] ">
             {t("haveAccount")}
           </p>
           <a
-            className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#0089ED]"
+            className=" text-[13px] font-normal leading-[15.6px] text-[#0089ED]"
             href="./login"
           >
             {t("login")}
@@ -54,7 +54,7 @@ export default function Register() {
       <div className="flex gap-4 w-full justify-between items-center py-8">
         <div className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer">
           <Image src="/images/google.svg" alt="google" width={26} height={26} />
-          <span className="px-4 font-[Tajawal] text-[16px] font-normal leading-[19.2px] text-[#4285F4]">
+          <span className="px-4  text-[16px] font-normal leading-[19.2px] text-[#4285F4]">
             {t("loginWithGoogle")}
           </span>
         </div>
@@ -76,7 +76,7 @@ export default function Register() {
       </div>
 
       <Divider>
-        <span className="font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px]">
+        <span className=" text-[14px] font-normal leading-[24px] tracking-[0.5px]">
           {t("orByEmail")}
         </span>
       </Divider>
@@ -148,18 +148,7 @@ export default function Register() {
                 required: true,
                 message: t("EmailValidationRequired"),
               },
-              { type: "email" },
-              // {
-              //   validator(_, value) {
-              //     const parsedPhoneNumber =
-              //       phoneUtil.parseAndKeepRawInput(value);
-              //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-              //       return Promise.resolve();
-              //     } else {
-              //       return Promise.reject(new Error("Phone is not valid!"));
-              //     }
-              //   },
-              // },
+              { type: "email", message: t("EmailValidationInvalid") },
             ]}
           >
             <Input

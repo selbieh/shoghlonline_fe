@@ -46,12 +46,12 @@ export default function RegisterOTP() {
   return (
     <div>
       <div className="flex justify-between items-center">
-        <h1 className="font-[Tajawal] text-[24px] font-bold leading-[52px] text-[#000000]">
+        <h1 className=" text-[24px] font-bold leading-[52px] text-[#000000]">
           {t("enterOTP")}
         </h1>
       </div>
       <div className="flex justify-between items-center mb-5">
-        <h1 className="font-[Tajawal] text-[16px]   text-[rgba(98,_99,_108,_1)] w-[248px]">
+        <h1 className=" text-[16px]   text-[rgba(98,_99,_108,_1)] w-[248px]">
           {t("otpSentToEmail")}
         </h1>
       </div>

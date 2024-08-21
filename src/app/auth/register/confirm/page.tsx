@@ -19,7 +19,7 @@ export default function ConfirmPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-5">
-        <h1 className="font-[Tajawal] text-[24px] font-bold leading-[52px] text-[#000000]">
+        <h1 className=" text-[24px] font-bold leading-[52px] text-[#000000]">
           {t("createAccount")}
         </h1>
       </div>

@@ -19,14 +19,14 @@ const Hero = () => {
           <div className="sign">
             <Space>
               <Button
-                className="h-[38px] rounded-md text-[#000] border-[#D2D5DA] font-[Tajawal] text-[12px] font-bold leading-[18px]"
+                className="h-[38px] rounded-md text-[#000] border-[#D2D5DA]  text-[12px] font-bold leading-[18px]"
                 href="/auth/login"
               >
                 {t("login")}
               </Button>
               <Button
                 type="primary"
-                className="h-[38px] rounded-md font-[Tajawal] text-[12px] font-bold leading-[18px]"
+                className="h-[38px] rounded-md  text-[12px] font-bold leading-[18px]"
                 href="/auth/register"
               >
                 {t("joinUs")}
@@ -44,7 +44,7 @@ const Hero = () => {
               height={59}
             />
             <div>
-              <h2 className="font-[Tajawal] text-[46px] font-medium leading-[55.2px]">
+              <h2 className=" text-[46px] font-medium leading-[55.2px]">
                 {t("heroTitle")}
               </h2>
             </div>
@@ -56,13 +56,13 @@ const Hero = () => {
               className="my-9"
             />
             <div>
-              <p className="font-[Tajawal] text-[24px] font-normal leading-[28.8px] ">
+              <p className=" text-[24px] font-normal leading-[28.8px] ">
                 {t("heroText")}
               </p>
             </div>
             <Button
               type="primary"
-              className="h-[38px] rounded-md font-[Tajawal] text-[12px] font-bold leading-[18px] mt-9"
+              className="h-[38px] rounded-md  text-[12px] font-bold leading-[18px] mt-9"
             >
               {t("heroBtn")}
             </Button>

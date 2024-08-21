@@ -28,11 +28,11 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
           }}
         >
           <div className="flex justify-between">
-            <span className="font-[Tajawal] text-[14px] font-bold leading-[24px] ">
+            <span className=" text-[14px] font-bold leading-[24px] ">
               {t("rating")}
             </span>
             <span>
-              <span className="font-[Tajawal] text-[16px] font-bold leading-[24px]  px-2">
+              <span className=" text-[16px] font-bold leading-[24px]  px-2">
                 3.5
               </span>
               <Rate disabled defaultValue={2} />
@@ -41,7 +41,7 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
           <Divider />
 
           <div className="flex justify-between">
-            <span className="w-[-webkit-fill-available] font-[Tajawal] text-[14px] font-bold leading-[24px] ">
+            <span className="w-[-webkit-fill-available]  text-[14px] font-bold leading-[24px] ">
               {t("projectsCompleted")}
             </span>
             <span className="contents px-2 w-[45%]">
@@ -55,7 +55,7 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
         <div className="flex justify-end">
           <Button
             type="primary"
-            className="h-[38px] rounded-md font-[Tajawal] text-[12px] font-bold leading-[18px]"
+            className="h-[38px] rounded-md  text-[12px] font-bold leading-[18px]"
             href=""
           >
             <IoSettingsOutline />
@@ -71,7 +71,7 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
                 percent={70}
                 size={79}
                 format={(percent) => (
-                  <span className="text-[#000000] px-1 font-[Tajawal] text-[9px] font-medium leading-[10.8px] ">
+                  <span className="text-[#000000] px-1  text-[9px] font-medium leading-[10.8px] ">
                     {t("profileCompleted")} {percent} %
                   </span>
                 )}
@@ -118,7 +118,7 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
                 >
                   <FaRegEdit color="#fff" size={15} />
                 </Button>
-                <h3 className="font-[Tajawal] text-[24px] font-medium leading-[24px] text-center md:text-left">
+                <h3 className=" text-[24px] font-medium leading-[24px] text-center md:text-left">
                   مصمم المو قع
                 </h3>
               </Space>
@@ -131,13 +131,13 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
                 <FaRegEdit color="#fff" size={15} />
               </Button>
               <div className="text-center md:text-left">
-                <h3 className="font-[Tajawal] text-[16px] font-medium leading-[24px] text-black">
+                <h3 className=" text-[16px] font-medium leading-[24px] text-black">
                   {t("hourPrice")}{" "}
-                  <span className="font-[Tajawal] text-[16px] font-bold leading-[24px]">
+                  <span className=" text-[16px] font-bold leading-[24px]">
                     20$
                   </span>
                 </h3>
-                <p className="text-[#80828D] font-[Tajawal] text-[12px] font-medium leading-[24px]">
+                <p className="text-[#80828D]  text-[12px] font-medium leading-[24px]">
                   50 {t("hours/week")}
                 </p>
               </div>
@@ -152,11 +152,11 @@ const Profile = ({ params: { id } }: { params: { id: string } }) => {
               >
                 <FaRegEdit color="#fff" size={15} />
               </Button>
-              <h3 className="py-3 font-[Tajawal] text-[16px] font-medium leading-[24px] text-right md:text-left">
+              <h3 className="py-3  text-[16px] font-medium leading-[24px] text-right md:text-left">
                 {t("description")}
               </h3>
             </div>
-            <p className="font-[Tajawal] text-[12px] font-medium leading-[24px] text-[#62636C]">
+            <p className=" text-[12px] font-medium leading-[24px] text-[#62636C]">
               أنا مصمم واجهات مواقع محترف مع خبرة تتجاوز [عدد السنوات] عامًا في
               تطوير تصاميم واجهات مستخدم رائعة وسهلة الاستخدام. أعمل بشغف على
               تحويل الأفكار إلى تصاميم بصرية جذابة تتماشى مع احتياجات المستخدم

@@ -22,10 +22,8 @@ const MainInfo = () => {
           height={104}
           className="rounded-full"
         />
-        <p className="font-[Tajawal] text-[16px] font-medium leading-[24px] ">
-          full name
-        </p>
-        <p className="font-[Tajawal] text-[16px] font-medium leading-[24px] ">
+        <p className=" text-[16px] font-medium leading-[24px] ">full name</p>
+        <p className=" text-[16px] font-medium leading-[24px] ">
           example@example.com
         </p>
         <div className="flex gap-3">
@@ -36,7 +34,7 @@ const MainInfo = () => {
               width={16}
               height={16}
             />
-            <span className="font-[Tajawal] text-[11px] font-medium leading-[16px] ">
+            <span className=" text-[11px] font-medium leading-[16px] ">
               العنوان
             </span>
           </span>
@@ -47,7 +45,7 @@ const MainInfo = () => {
               width={16}
               height={16}
             />
-            <span className="font-[Tajawal] text-[11px] font-medium leading-[16px] ">
+            <span className=" text-[11px] font-medium leading-[16px] ">
               2:10 مساء
             </span>
           </span>
@@ -55,7 +53,7 @@ const MainInfo = () => {
       </div>
       <div className="mt-5">
         <div className="flex justify-between items-center">
-          <h3 className="font-[Tajawal] text-[14px] font-bold leading-[24px]  text-[#000]">
+          <h3 className=" text-[14px] font-bold leading-[24px]  text-[#000]">
             {t("skills")}
           </h3>
           <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
@@ -69,7 +67,7 @@ const MainInfo = () => {
             bordered={false}
             className="bg-[#ECF2FF] w-[117px] h-[40px] px-[16px] py-[8px] rounded-[28px] text-center"
           >
-            <span className="text-[#20102B] font-[Tajawal] text-[14px] font-normal leading-[24px] ">
+            <span className="text-[#20102B]  text-[14px] font-normal leading-[24px] ">
               magenta
             </span>
           </Tag>

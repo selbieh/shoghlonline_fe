@@ -17,10 +17,10 @@ const Login = () => {
   const dispatch = useAppDispatch();
 
   async function requestOTP(values: { email: string }) {
+    dispatch(authActions.setLoginEmail(values?.email));
     postRequest("auth/request-otp/", values).then((res) => {
       if (StatusSuccessCodes.includes(res?.status)) {
         message.success(`${res?.data?.detail}`);
-        dispatch(authActions.setLoginEmail(values?.email));
         router.push("./login/otp");
       } else {
         message.error(`${res.detail}`);
@@ -40,15 +40,15 @@ const Login = () => {
         TEST LOG OUT
       </Button>
       <div className="flex justify-between items-center">
-        <h1 className="font-[Tajawal] text-[24px] font-bold leading-[52px] text-[#000000]">
+        <h1 className=" text-[24px] font-bold leading-[52px] text-[#000000]">
           {t("login")}
         </h1>
         <div>
-          <p className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#8D8D8D] ">
+          <p className=" text-[13px] font-normal leading-[15.6px] text-[#8D8D8D] ">
             {t("dontHaveAccount")}
           </p>
           <a
-            className="font-[Tajawal] text-[13px] font-normal leading-[15.6px] text-[#0089ED]"
+            className=" text-[13px] font-normal leading-[15.6px] text-[#0089ED]"
             href="./register"
           >
             {t("register")}
@@ -58,7 +58,7 @@ const Login = () => {
       <div className="flex gap-4 w-full justify-between items-center py-8">
         <div className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer">
           <Image src="/images/google.svg" alt="google" width={26} height={26} />
-          <span className="px-4 font-[Tajawal] text-[16px] font-normal leading-[19.2px] text-[#4285F4]">
+          <span className="px-4  text-[16px] font-normal leading-[19.2px] text-[#4285F4]">
             {t("loginWithGoogle")}
           </span>
         </div>
@@ -80,7 +80,7 @@ const Login = () => {
       </div>
 
       <Divider>
-        <span className="font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px]">
+        <span className=" text-[14px] font-normal leading-[24px] tracking-[0.5px]">
           {t("orByEmail")}
         </span>
       </Divider>
@@ -152,7 +152,7 @@ const Login = () => {
               placeholder={t("Please Enter A New Password")}
             />
           </Form.Item> */}
-          {/* <a className="text-[#4285F4] font-[Tajawal] text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
+          {/* <a className="text-[#4285F4]  text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
             {t("forgotPassword")}
           </a> */}
           <Form.Item className="mt-8">
