@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { getSession, signOut } from "next-auth/react";
 
-const baseURL = process.env.BASE_URL;
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function setAuthorizationToken(token?: string) {
   if (token) {
