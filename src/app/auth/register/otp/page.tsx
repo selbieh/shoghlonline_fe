@@ -69,7 +69,7 @@ export default function RegisterOTP() {
             name="otp"
             label={<p className="mb-2 text-[16px]">{t("enterOTP")}</p>}
           >
-            <Input.OTP className="h-[74px]" length={5} size="large" />
+            <Input.OTP className="h-[74px]" length={5} size="large" dir="ltr" />
           </Form.Item>
           <Form.Item className="mt-8">
             <Button
