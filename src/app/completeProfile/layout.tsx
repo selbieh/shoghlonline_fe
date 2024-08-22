@@ -17,12 +17,20 @@ export default function RootLayout({
       theme={{
         components: {
           Select: {
-            clearBg: "red",
             optionActiveBg: "#f7f9ff",
             optionPadding: 10,
             optionFontSize: 18,
             multipleItemBg: "#ecf2ff",
             multipleItemHeight: 40,
+          },
+          Input: {
+            controlHeight: 56,
+          },
+          DatePicker: {
+            controlHeight: 56,
+          },
+          TreeSelect: {
+            titleHeight: 40,
           },
         },
       }}
