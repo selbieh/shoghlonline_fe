@@ -86,5 +86,14 @@
   "completedJob": "الوظائف المكتملة",
   "previousWork": "العمل السابق",
   "displayProject": "عرض المشروع",
-  "EmailValidationInvalid": "البريد الإلكتروني غير صالح"
+  "EmailValidationInvalid": "البريد الإلكتروني غير صالح",
+  "profileSetup": "تهيئة الحساب",
+  "thisInformationHelpsIncreaseYourChancesOfGettingGigs": "تساعد هذه المعلومات علي زيادة فرص حصولك علي الأعمال",
+  "work and skills": "العمل والمهارات",
+  "jobTitle": "المسمى الوظيفي",
+  "enterJobTitle": "ادخل المسمى الوظيفي",
+  "enterSkills": "ادخل مهاراتك",
+  "maxSkills": "15 مهارة بحد اقصى",
+  "skip": "تخطي",
+  "profileReady": "ملفك الشخصي جاهز بنسبة 20%"
 }

@@ -86,5 +86,14 @@
   "completedJob": "Completed Jobs",
   "previousWork": "Previous Work",
   "displayProject": "Display Project",
-  "EmailValidationInvalid": "Email Invalid"
+  "EmailValidationInvalid": "Email Invalid",
+  "profileSetup": "Profile Setup",
+  "thisInformationHelpsIncreaseYourChancesOfGettingGigs": "This Information Helps Increase Your Chances Of Getting Gigs",
+  "work and skills": "Work and Skills",
+  "jobTitle": "jobTitle",
+  "enterJobTitle": "Enter Job Title",
+  "enterSkills": "Enter Skills",
+  "maxSkills": "15 skill Max",
+  "skip": "Skip",
+  "profileReady": "Your profile is 20% ready"
 }
