@@ -1,5 +1,5 @@
 "use client";
-import { postRequest } from "@/app/api/api";
+import { postAuthRequest, postRequest } from "@/app/api/api";
 import { authActions } from "@/store/reducers/authentcationSlice";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { StatusSuccessCodes } from "@/utils/successStatus";
@@ -18,7 +18,7 @@ const Login = () => {
 
   async function requestOTP(values: { email: string }) {
     dispatch(authActions.setLoginEmail(values?.email));
-    postRequest("auth/request-otp/", values).then((res) => {
+    postAuthRequest("auth/request-otp/", values).then((res) => {
       if (StatusSuccessCodes.includes(res?.status)) {
         message.success(`${res?.data?.detail}`);
         router.push("./login/otp");
