@@ -1,9 +1,15 @@
+import { getUserLocale } from "@/services/locale";
 import axios, { AxiosRequestConfig } from "axios";
 import { getSession, signOut } from "next-auth/react";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export async function setAuthorizationToken(token?: string) {
+  if (typeof window !== "undefined") {
+    const locale = await getUserLocale();
+    console.log(locale);
+    axios.defaults.headers.common["Accept-Language"] = `${locale}`;
+  }
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return;
