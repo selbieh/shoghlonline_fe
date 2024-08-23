@@ -1,5 +1,6 @@
 import Advertise from "@/components/freelance/homePage/advertise";
 import CompleteYourProfile from "@/components/freelance/homePage/completeYourProfile";
+import GigOffer from "@/components/freelance/homePage/gigOffer";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import React from "react";
 
@@ -11,7 +12,16 @@ const Freelance = () => {
         <InviteFriends />
         <Advertise />
       </div>
-      <div></div>
+      <div className="w-full">
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+        <GigOffer data={null} />
+      </div>
     </div>
   );
 };
