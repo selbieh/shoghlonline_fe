@@ -86,6 +86,9 @@
   "completedJob": "الوظائف المكتملة",
   "previousWork": "العمل السابق",
   "displayProject": "عرض المشروع",
+
+  "completeYourProfile": "أكمل ملفك الشخصي",
+  "increaseYourChances": "يزيد من فرصك في جذب العملاء والحصول على المزيد من الفرص",
   "EmailValidationInvalid": "البريد الإلكتروني غير صالح",
   "profileSetup": "تهيئة الحساب",
   "thisInformationHelpsIncreaseYourChancesOfGettingGigs": "تساعد هذه المعلومات علي زيادة فرص حصولك علي الأعمال",
@@ -121,7 +124,5 @@
   "year": "سنة",
   "graduationYear": "سنة التخرج",
   "whatServicesDoYouProvide": "ما هي الخدمات التي تقدمها؟",
-  "choseServices": "اختر الخدمات",
-  "completeYourProfile": "أكمل ملفك الشخصي",
-  "increaseYourChances": "يزيد من فرصك في جذب العملاء والحصول على المزيد من الفرص"
+  "choseServices": "اختر الخدمات"
 }

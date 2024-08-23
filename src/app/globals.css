@@ -19,3 +19,11 @@
     padding: 5px !important;
 
 }
+
+.ant-select-outlined.ant-select-multiple .ant-select-selection-item{
+    border-radius: 28px;
+    Padding: 8px, 16px, 8px, 16px;
+    Gap: 10px;
+    align-items: center;
+    font-size: 18px;
+}
