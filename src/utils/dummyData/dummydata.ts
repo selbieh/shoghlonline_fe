@@ -1,4 +1,4 @@
-const skillsOptions = [{}];
+const skillsOptions: any[] = [];
 
 for (let i = 0; i < 5; i++) {
   skillsOptions.push({
@@ -8,19 +8,19 @@ for (let i = 0; i < 5; i++) {
     value: `skill ${i}`,
   });
 }
-const servicesOptions = [{}];
+const servicesOptions: any[] = [];
 
 for (let i = 0; i < 5; i++) {
   let nestedServices = [];
   for (let ii = 0; ii < 5; ii++) {
     nestedServices.push({
-      title: `الخدمة ${ii}`,
+      label: `الخدمة ${ii}`,
       value: `service ${Math.random()}`,
       key: `${Math.random()}`,
     });
   }
   servicesOptions.push({
-    title: `الخدمة ${i}`,
+    label: `الخدمة ${i}`,
     value: `service ${i}`,
     children: nestedServices,
   });

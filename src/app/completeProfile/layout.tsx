@@ -29,8 +29,14 @@ export default function RootLayout({
           DatePicker: {
             controlHeight: 56,
           },
-          TreeSelect: {
-            titleHeight: 40,
+          Cascader: {
+            lineHeight: 5,
+            // controlWidth: 50,
+            controlItemWidth: 237,
+            dropdownHeight: 357,
+            // menuPadding: 50,
+            // optionPadding: 50,
+            // optionSelectedBg: "red",
           },
         },
       }}

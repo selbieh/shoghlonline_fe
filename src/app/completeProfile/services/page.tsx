@@ -2,7 +2,7 @@
 import { useTranslations } from "next-intl";
 import React from "react";
 import Image from "next/image";
-import { Button, Divider, Form, Input, Select, TreeSelect } from "antd";
+import { Button, Cascader, Divider, Form } from "antd";
 import { servicesOptions } from "@/utils/dummyData/dummydata";
 import { CiCircleRemove } from "react-icons/ci";
 
@@ -32,16 +32,16 @@ export default function ServicesPage() {
           className="w-full max-w-[750px] h-[200px]"
           rules={[{ type: "array" }]}
         >
-          <TreeSelect
+          <Cascader
             placeholder={t("choseServices")}
             multiple
             removeIcon={<CiCircleRemove size={25} />}
             className="min-h-[56px]"
             id="chooseService"
             allowClear
-            virtual={false}
-            style={{ width: "100%" }}
-            treeData={servicesOptions}
+            options={servicesOptions}
+            expandTrigger="hover"
+            showCheckedStrategy={Cascader.SHOW_CHILD}
           />
         </Form.Item>
         <Divider style={{ backgroundColor: "#7179ce", height: "1px" }} />
