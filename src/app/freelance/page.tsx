@@ -1,3 +1,4 @@
+import Advertise from "@/components/freelance/homePage/advertise";
 import CompleteYourProfile from "@/components/freelance/homePage/completeYourProfile";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import React from "react";
@@ -8,6 +9,7 @@ const Freelance = () => {
       <div>
         <CompleteYourProfile />
         <InviteFriends />
+        <Advertise />
       </div>
       <div></div>
     </div>
