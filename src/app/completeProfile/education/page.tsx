@@ -4,18 +4,27 @@ import EducationCard from "@/components/completeProfile/educationCard";
 import { Button, Divider } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function EducationPage() {
   const t = useTranslations();
   const [addEducationModalOpen, setAddEducationModalOpen] =
     useState<boolean>(false);
+  const router = useRouter();
 
   function openAddEducationModal() {
     setAddEducationModalOpen(true);
   }
   function closeAddEducationModal() {
     setAddEducationModalOpen(false);
+  }
+
+  function skip() {
+    router.push("./services");
+  }
+  function next() {
+    router.push("./services");
   }
 
   return (
@@ -49,10 +58,14 @@ export default function EducationPage() {
             htmlType="submit"
             type="primary"
             className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]"
+            onClick={next}
           >
             {t("next")}
           </Button>
-          <Button className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]">
+          <Button
+            className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]"
+            onClick={skip}
+          >
             {t("skip")}
           </Button>
         </div>

@@ -14,6 +14,7 @@ export default function ServicesPage() {
     console.log(values);
   }
 
+  function skip() {}
   return (
     <div className="h-fit  flex flex-col px-[50px] m-10">
       <div className="  font-bold text-[24px] ">
@@ -53,7 +54,10 @@ export default function ServicesPage() {
             >
               {t("next")}
             </Button>
-            <Button className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]">
+            <Button
+              className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]"
+              onClick={skip}
+            >
               {t("skip")}
             </Button>
           </div>
