@@ -66,9 +66,6 @@ export default function GigOffer({ data }: { data: any }) {
         حد سواء.
       </div>
       <div className="flex flex-row flex-wrap gap-5 mx-10">
-        <div className="w-[88px] h-[21px] rounded-[12px] py-[7px] px-[12px] bg-[#deeaff] flex items-center ">
-          فوتوشوب
-        </div>
         <GigTag>فوتوشوب</GigTag>
       </div>
       <div className="flex flex-row flex-wrap gap-5 m-10">

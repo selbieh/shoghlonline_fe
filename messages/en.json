@@ -133,5 +133,20 @@
   "gigsSuitsYouTab": "Explore popular gigs that suits the skills and experience you chose.",
   "gigsThatMaySuitsYou": "Gigs Suits You",
   "bookmarkedGigs": "Bookmarked Gigs",
-  "more": "More"
+  "more": "More",
+  "submitProposal": "Submit Proposal",
+  "bookmark": "Bookmark",
+  "status": "Status",
+  "estimatedTime": "Estimated Time",
+  "constPrice": "Constant Price",
+  "offers": "Offers",
+  "avgPrice": "Average Price",
+  "gigDetails": "Gig Details",
+  "requiredSkills": "Required Skills",
+  "clientInfo": "Client Info",
+  "paymentVerified": "Payment Verified",
+  "completedJobs": "Completed Jobs",
+  "openJobs": "Open Jobs",
+  "totalSpent": "Total Spent",
+  "share": "Share"
 }

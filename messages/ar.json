@@ -134,5 +134,20 @@
   "gigsSuitsYouTab": "اكتشف الوظائف الشائعة التي تتوافق مع خبراتك والمهارات التي اخترتها",
   "gigsThatMaySuitsYou": "وظائف قد تناسبك",
   "bookmarkedGigs": "الوظائف المحفوظة",
-  "more": "المزيد"
+  "more": "المزيد",
+  "submitProposal": "قدم عرضاً",
+  "bookmark": "حفظ",
+  "status": "الحالة",
+  "estimatedTime": "الوقت التقديري للمشروع",
+  "constPrice": "سعر ثابت",
+  "offers": "العروض",
+  "avgPrice": "متوسط سعر العروض",
+  "gigDetails": "تفاصيل الوظيفة",
+  "requiredSkills": "المهارات المطلوبة",
+  "clientInfo": "معلومات العميل",
+  "paymentVerified": "تم التحقق من الدفع",
+  "completedJobs": "الوظائف المكتملة",
+  "openJobs": "الوظائف المفتوحة",
+  "totalSpent": "اجمالي الانفاق",
+  "share": "شارك"
 }
