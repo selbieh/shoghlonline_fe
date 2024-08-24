@@ -1,10 +1,18 @@
 import Image from "next/image";
 import GigTag from "./gigTag";
 import { Divider } from "antd";
+import { useRouter } from "next/navigation";
 
 export default function GigOffer({ data }: { data: any }) {
+  const router = useRouter();
+  function goToGigDetailsPage() {
+    router.push("/freelance/gigDetails/5");
+  }
   return (
-    <div className=" hover:bg-[#f7f9ff] hover:cursor-pointer">
+    <div
+      className=" hover:bg-[#f7f9ff] hover:cursor-pointer"
+      onClick={goToGigDetailsPage}
+    >
       <div className=" flex flex-row justify-between w-full my-5">
         <div className="flex flex-row items-center">
           <div className=" font-bold text-[16px] mx-5">
