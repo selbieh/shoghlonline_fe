@@ -21,7 +21,7 @@ const Freelance = () => {
           {t("gigsThatMaySuitsYou")}
         </div>
       ),
-      children: <BookmarkedGigs />,
+      children: <GigsSuitsYou />,
     },
     {
       key: "2",
@@ -36,7 +36,7 @@ const Freelance = () => {
           <span>{t("bookmarkedGigs")}</span>
         </div>
       ),
-      children: <GigsSuitsYou />,
+      children: <BookmarkedGigs />,
     },
   ];
 
