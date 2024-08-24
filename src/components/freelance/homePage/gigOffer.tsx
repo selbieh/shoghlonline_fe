@@ -4,8 +4,8 @@ import { Divider } from "antd";
 
 export default function GigOffer({ data }: { data: any }) {
   return (
-    <div>
-      <div className=" flex flex-row justify-between w-full m-5">
+    <div className=" hover:bg-[#f7f9ff] hover:cursor-pointer">
+      <div className=" flex flex-row justify-between w-full my-5">
         <div className="flex flex-row items-center">
           <div className=" font-bold text-[16px] mx-5">
             مطلوب مصمم جرافيك لتصميم نماذج التطبيقات والمواقع الإلكترونية
