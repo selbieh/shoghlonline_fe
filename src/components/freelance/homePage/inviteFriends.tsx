@@ -12,7 +12,7 @@ export default function InviteFriends() {
     console.log(linkText);
     navigator.clipboard
       .writeText(linkText)
-      .then(() => message.success("Link Copied: " + linkText))
+      .then(() => message.success(t("Link Copied") + " : " + linkText))
       .catch((err) => message.error("Error copying text: ", err));
   }
 
