@@ -5,13 +5,19 @@ import Image from "next/image";
 import { Button, ConfigProvider, Divider, Form, Input, Select } from "antd";
 import { skillsOptions } from "@/utils/dummyData/dummydata";
 import { CiCircleRemove } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 export default function SkillsPage() {
   const t = useTranslations();
   const [workAndSkillsForm] = Form.useForm();
-
+  const router = useRouter();
   function submitSkillsForm(values: any) {
     console.log(values);
+    router.push("./experience");
+  }
+
+  function skip() {
+    router.push("./experience");
   }
 
   return (
@@ -64,7 +70,10 @@ export default function SkillsPage() {
             >
               {t("next")}
             </Button>
-            <Button className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]">
+            <Button
+              className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]"
+              onClick={skip}
+            >
               {t("skip")}
             </Button>
           </div>

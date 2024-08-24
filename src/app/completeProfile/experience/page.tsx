@@ -4,18 +4,27 @@ import ExperienceCard from "@/components/completeProfile/experienceCard";
 import { Button, Divider } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function ExperiencePage() {
   const t = useTranslations();
   const [addExperienceModalOpen, setAddExperienceModalOpen] =
     useState<boolean>(false);
+  const router = useRouter();
 
   function openAddExperienceModal() {
     setAddExperienceModalOpen(true);
   }
   function closeAddExperienceModal() {
     setAddExperienceModalOpen(false);
+  }
+
+  function skip() {
+    router.push("./education");
+  }
+  function next() {
+    router.push("./education");
   }
 
   return (
@@ -48,13 +57,16 @@ export default function ExperiencePage() {
       <div className="flex flex-row justify-between w-full">
         <div className="flex flex-row gap-5 w-full">
           <Button
-            htmlType="submit"
             type="primary"
             className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]"
+            onClick={next}
           >
             {t("next")}
           </Button>
-          <Button className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]">
+          <Button
+            className="w-full max-w-[251px] h-[56px] rounded-[12px] px-[20px] py-[10px]"
+            onClick={skip}
+          >
             {t("skip")}
           </Button>
         </div>
