@@ -14,6 +14,7 @@ import Search, { SearchProps } from "antd/es/input/Search";
 import { useTranslations } from "next-intl";
 const { Header, Content, Footer } = Layout;
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { CiMail } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -24,6 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const t = useTranslations();
+  const router = useRouter();
   const items1: MenuProps["items"] = [
     {
       key: "1",
@@ -81,7 +83,12 @@ export default function RootLayout({
         <Header className="flex  items-center justify-between bg-white">
           <div>
             <Space size={"middle"}>
-              <Avatar icon={<FaRegUserCircle />} size={24} />
+              <Avatar
+                icon={<FaRegUserCircle />}
+                size={24}
+                className="cursor-pointer hover:scale-110 transition-all"
+                onClick={() => router.push("/freelance/profile")}
+              />
               <IoNotificationsOutline size={24} />
               <CiMail size={24} />
               <Space.Compact

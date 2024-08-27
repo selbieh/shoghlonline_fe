@@ -43,7 +43,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
       setImageUrl(userData?.profile_picture);
     }
     if (userData?.skills) {
-      setSkillsTags(userData?.skills);
+      setCurrentSkillsTags(userData?.skills);
     }
   }, [userData]);
   const patchUserData = (data: any) => {
@@ -51,6 +51,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
       if (StatusSuccessCodes.includes(res?.status)) {
         setLoading(false);
         setImageUrl(res?.data?.profile_picture);
+        setCurrentSkillsTags(res?.data?.skills);
         message.success(t("updatedSuccessfully"));
       } else {
         message.error(`${res?.detail}`);
@@ -90,6 +91,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
+    setSkillsTags(currentSkillsTags);
     setIsModalOpen(true);
   };
 
@@ -104,6 +106,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
     setIsModalOpen(false);
   };
   const [skillsTags, setSkillsTags] = useState<string[]>([]);
+  const [currentSkillsTags, setCurrentSkillsTags] = useState<string[]>([]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<InputRef>(null);
@@ -137,6 +140,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
   };
 
   //#endregion Skills Modal
+
   return (
     <>
       <Card
@@ -163,18 +167,13 @@ const MainInfo = ({ userData, isOwner }: any) => {
                 style={{ width: "100%" }}
                 width={104}
                 height={104}
+                className="rounded-full"
               />
             ) : (
               uploadButton
             )}
           </Upload>
-          {/* <Image
-          src="https://via.placeholder.com/104"
-          alt="Profile"
-          width={104}
-          height={104}
-          className="rounded-full"
-        /> */}
+
           <p className=" text-[16px] font-medium leading-[24px] ">
             {userData?.first_name} {userData?.last_name}
           </p>
@@ -194,7 +193,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
               </span>
             </span>
             <span className="flex gap-2">
-              <img
+              <Image
                 src="/icons/time-clock-nine.svg"
                 alt="time-clock-nine"
                 width={16}
@@ -223,8 +222,8 @@ const MainInfo = ({ userData, isOwner }: any) => {
           </div>
 
           <div className="flex gap-2 p-3">
-            {skillsTags.length > 0 ? (
-              skillsTags.map<React.ReactNode>((tag, index) => {
+            {currentSkillsTags.length > 0 ? (
+              currentSkillsTags.map<React.ReactNode>((tag, index) => {
                 const isLongTag = tag.length > 20;
                 const tagElem = (
                   <Tag
@@ -268,7 +267,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
             const tagElem = (
               <Tag
                 key={tag}
-                // closable={index !== 0}
+                closable
                 style={{ userSelect: "none" }}
                 onClose={() => handleClose(tag)}
               >
