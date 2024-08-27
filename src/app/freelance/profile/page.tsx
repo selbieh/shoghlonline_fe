@@ -25,17 +25,21 @@ import React, { useEffect } from "react";
 import { FaArrowLeft, FaRegEdit } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 
-function Profile() {
+function Profile({ params: { id } }: any) {
+  console.log("id", id);
   const t = useTranslations();
-
+  const [userData, setUserData] = React.useState<any>({});
+  const [isOwner, setIsOwner] = React.useState<boolean>(true);
   useEffect(() => {
     getUserProfileData();
+    setIsOwner(id ? false : true);
   }, []);
 
   const getUserProfileData = () => {
     GetByIdReq(`api/v1/client/profile/`).then((res: any) => {
       if (StatusSuccessCodes.includes(res.status)) {
         console.log(res);
+        setUserData(res?.data);
       } else {
         message.error(`${res.detail}`);
       }
@@ -44,7 +48,7 @@ function Profile() {
   return (
     <div className="flex flex-col md:flex-row bg-white">
       <div className="w-full md:w-1/3 lg:w-1/3 xl:w-1/3  p-4 flex justify-start items-center gap-4 flex-col">
-        <MainInfo></MainInfo>
+        <MainInfo userData={userData} isOwner={isOwner}></MainInfo>
         <Card
           className="w-[370px] h-[155px] bg-[#F7F9FF] rounded-xl shadow-sm border-[1px] border-[#E0E1E6]"
           styles={{
@@ -225,4 +229,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default AuthGuard(Profile);

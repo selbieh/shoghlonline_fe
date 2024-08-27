@@ -148,5 +148,9 @@
   "completedJobs": "Completed Jobs",
   "openJobs": "Open Jobs",
   "totalSpent": "Total Spent",
-  "share": "Share"
+  "share": "Share",
+  "updatedSuccessfully": "Updated Successfully",
+  "Upload": "Upload",
+  "Address": "Address",
+  "addNewSkill": "Add New Skill"
 }

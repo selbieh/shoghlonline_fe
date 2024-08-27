@@ -30,7 +30,7 @@ const Login = () => {
 
   return (
     <div>
-      <Button
+      {/* <Button
         type="primary"
         onClick={() => {
           signOut();
@@ -38,7 +38,7 @@ const Login = () => {
         className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
       >
         TEST LOG OUT
-      </Button>
+      </Button> */}
       <div className="flex justify-between items-center">
         <h1 className=" text-[24px] font-bold leading-[52px] text-[#000000]">
           {t("login")}
@@ -101,18 +101,7 @@ const Login = () => {
                 required: true,
                 message: t("EmailValidationRequired"),
               },
-              { type: "email" },
-              // {
-              //   validator(_, value) {
-              //     const parsedPhoneNumber =
-              //       phoneUtil.parseAndKeepRawInput(value);
-              //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-              //       return Promise.resolve();
-              //     } else {
-              //       return Promise.reject(new Error("Phone is not valid!"));
-              //     }
-              //   },
-              // },
+              { type: "email", message: t("EmailValidationInvalid") },
             ]}
           >
             <Input
@@ -122,39 +111,7 @@ const Login = () => {
               placeholder={t("Please Enter Your Email")}
             />
           </Form.Item>
-          {/* <Form.Item
-            name="password"
-            label={t("password")}
-            rules={[
-              { required: true, message: t("passwordValidation") },
-              // {
-              //   validator(_, value) {
-              //     if (
-              //       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[-_[@$#}{+=!%*?&])[A-Za-z\d@$-_[}+={#!%*?&]{8,}$/.test(
-              //         value
-              //       )
-              //     ) {
-              //       return Promise.resolve();
-              //     } else {
-              //       return Promise.reject(
-              //         new Error(
-              //           "min 8 characters, at least one UPPERCASE letter, one lowercase letter, one number and one special character"
-              //         )
-              //       );
-              //     }
-              //   },
-              // },
-            ]}
-          >
-            <Input.Password
-              className="h-[56px]"
-              id="password"
-              placeholder={t("Please Enter A New Password")}
-            />
-          </Form.Item> */}
-          {/* <a className="text-[#4285F4]  text-[14px] font-normal leading-[24px] tracking-[0.5px] py-2 my-2">
-            {t("forgotPassword")}
-          </a> */}
+
           <Form.Item className="mt-8">
             <Button
               type="primary"

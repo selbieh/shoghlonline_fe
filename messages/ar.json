@@ -86,10 +86,8 @@
   "completedJob": "الوظائف المكتملة",
   "previousWork": "العمل السابق",
   "displayProject": "عرض المشروع",
-
   "completeYourProfile": "أكمل ملفك الشخصي",
   "increaseYourChances": "يزيد من فرصك في جذب العملاء والحصول على المزيد من الفرص",
-  "EmailValidationInvalid": "البريد الإلكتروني غير صالح",
   "profileSetup": "تهيئة الحساب",
   "thisInformationHelpsIncreaseYourChancesOfGettingGigs": "تساعد هذه المعلومات علي زيادة فرص حصولك علي الأعمال",
   "work and skills": "العمل والمهارات",
@@ -149,5 +147,10 @@
   "completedJobs": "الوظائف المكتملة",
   "openJobs": "الوظائف المفتوحة",
   "totalSpent": "اجمالي الانفاق",
-  "share": "شارك"
+  "share": "شارك",
+  "EmailValidationInvalid": "البريد الإلكتروني غير صالح",
+  "updatedSuccessfully": "تم التحديث بنجاح",
+  "Upload": "رفع",
+  "Address": "العنوان",
+  "addNewSkill": "إضافة مهارة جديدة"
 }

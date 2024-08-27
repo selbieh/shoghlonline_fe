@@ -59,6 +59,26 @@ export async function postAuthRequest(path: string, body: any) {
   return res;
 }
 
+export async function PatchReq(
+  path: string,
+  body: any,
+  PatchProgress?: {
+    pos: boolean;
+    PostProgressFunction: (postProgress: any) => void;
+  }
+) {
+  setAuthorizationToken();
+  const res = axios
+    .create({ baseURL })
+    .patch(path, body, {
+      onUploadProgress: function (axiosProgressEvent) {
+        PatchProgress?.PostProgressFunction(axiosProgressEvent?.progress);
+      },
+    })
+    .catch(handelErrors);
+  return res;
+}
+
 export function handelErrors(err: any) {
   if (err.response?.status == 404) {
     //window.location.href = "/404";
