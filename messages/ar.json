@@ -121,5 +121,7 @@
   "year": "سنة",
   "graduationYear": "سنة التخرج",
   "whatServicesDoYouProvide": "ما هي الخدمات التي تقدمها؟",
-  "choseServices": "اختر الخدمات"
+  "choseServices": "اختر الخدمات",
+  "noMatchedSkills": "لا يوجد مهارات متطابقة",
+  "updatedSuccessfully": "تم تحديث بياناتك بنجاح"
 }

@@ -121,5 +121,7 @@
   "year": "Year",
   "graduationYear": "Graduation Year",
   "whatServicesDoYouProvide": "What services do you provide?",
-  "choseServices": "Choose Services"
+  "choseServices": "Choose Services",
+  "noMatchedSkills": "No skill matches your search",
+  "updatedSuccessfully": "Updated Successfully"
 }

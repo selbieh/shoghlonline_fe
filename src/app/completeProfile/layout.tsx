@@ -1,9 +1,12 @@
 "use client";
 import { useTranslations } from "next-intl";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Image from "next/image";
 import Layout, { Content, Header } from "antd/es/layout/layout";
 import { ConfigProvider } from "antd";
+import { useAppDispatch } from "@/store/rootReducer";
+import { getFreelancerProfileData } from "@/store/reducers/freelanceProfile";
+import { useSession } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -11,6 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const t = useTranslations();
+  const dispatch = useAppDispatch();
+  const { data }: { data: any } = useSession<any>();
+  useEffect(() => {
+    dispatch(getFreelancerProfileData([{}, data?.user_id]));
+  });
 
   return (
     <ConfigProvider

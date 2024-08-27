@@ -24,18 +24,31 @@ export async function setAuthorizationToken(token?: string) {
   }
 }
 
-export async function GetReq(path: string) {
+export async function GetReq(path: string, config?: AxiosRequestConfig) {
   await setAuthorizationToken();
-  const res = axios.create({ baseURL }).get(path).catch(handelErrors);
+  const res = axios.create({ baseURL }).get(path, config).catch(handelErrors);
+  return res;
+}
+
+export async function PatchReq(
+  path: string,
+  body: any,
+  config?: AxiosRequestConfig
+) {
+  await setAuthorizationToken();
+  const res = axios
+    .create({ baseURL })
+    .patch(path, body, config)
+    .catch(handelErrors);
   return res;
 }
 
 export async function GetByIdReq(path: string) {
   await setAuthorizationToken();
   const res = axios.create({ baseURL }).get(path).catch(handelErrors);
-
   return res;
 }
+
 export async function postRequest(
   path: string,
   body: any,

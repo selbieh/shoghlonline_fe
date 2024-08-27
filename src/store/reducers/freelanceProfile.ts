@@ -1,36 +1,83 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { GetReq, handelErrors } from "@/app/api/api";
+import { FreelancerProfileInitialState } from "@/utils/types/sliceInitialStates/IFreelancerProfile";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { AxiosRequestConfig } from "axios";
 
-const initialState = {
-  profile_picture: null,
-  job_title: null,
-  bio_text: null,
-  bio_video: null,
-  location: null,
-  website: null,
-  linkedin: null,
-  github: null,
-  skills: null,
-  experience: null,
-  education: null,
-  certifications: null,
-  projects: null,
-  languages: null,
-  interests: null,
-  resume: null,
-  portfolio: null,
-  availability: null,
-  services: null,
-  hourly_price: null,
-  first_name: null,
-  last_name: null,
-  gender: null,
-  date_of_birth: null,
+const initialState: FreelancerProfileInitialState = {
+  loadingGetFreelancerProfileData: false,
+  getFreelancerProfileDataServerError: null,
+  freelancerProfileData: null,
+  loadingGetAvailableSkills: false,
+  getAvailableSkillsServerError: null,
+  availableSkills: null,
+  skillsList: [],
 };
+
+export const getAvailableSkills = createAsyncThunk(
+  "profile/getAvailableSkills",
+  async (config: AxiosRequestConfig, { rejectWithValue }) => {
+    try {
+      const res = await GetReq(`api/v1/client/skills/`, config);
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
+export const getFreelancerProfileData = createAsyncThunk(
+  "profile/getFreelancerProfileData",
+  async (
+    [config, freelancerId]: [AxiosRequestConfig, number],
+    { rejectWithValue }
+  ) => {
+    try {
+      const res = await GetReq(
+        `api/v1/client/profile/${freelancerId}/`,
+        config
+      );
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
 
 const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAvailableSkills.pending, (state) => {
+      state.loadingGetAvailableSkills = true;
+      state.getAvailableSkillsServerError = null;
+    });
+    builder.addCase(getAvailableSkills.fulfilled, (state, action) => {
+      state.loadingGetAvailableSkills = false;
+      state.availableSkills = action.payload.data;
+      state.skillsList = action.payload.data?.results?.map((skill: any) => {
+        return {
+          label: skill.name,
+          value: skill.id,
+        };
+      });
+    });
+    builder.addCase(getAvailableSkills.rejected, (state, action) => {
+      state.loadingGetAvailableSkills = false;
+      state.getAvailableSkillsServerError = action.payload;
+    });
+    builder.addCase(getFreelancerProfileData.pending, (state, action) => {
+      state.loadingGetFreelancerProfileData = true;
+      state.getFreelancerProfileDataServerError = action.payload;
+    });
+    builder.addCase(getFreelancerProfileData.fulfilled, (state, action) => {
+      state.loadingGetFreelancerProfileData = false;
+      state.freelancerProfileData = action.payload.data;
+    });
+    builder.addCase(getFreelancerProfileData.rejected, (state, action) => {
+      state.loadingGetFreelancerProfileData = false;
+      state.getFreelancerProfileDataServerError = action.payload;
+    });
+  },
 });
 
 export const ProfileReducer = profileSlice.reducer;
