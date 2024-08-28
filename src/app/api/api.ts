@@ -30,18 +30,18 @@ export async function GetReq(path: string, config?: AxiosRequestConfig) {
   return res;
 }
 
-export async function PatchReq(
-  path: string,
-  body: any,
-  config?: AxiosRequestConfig
-) {
-  await setAuthorizationToken();
-  const res = axios
-    .create({ baseURL })
-    .patch(path, body, config)
-    .catch(handelErrors);
-  return res;
-}
+// export async function PatchReq(
+//   path: string,
+//   body: any,
+//   config?: AxiosRequestConfig
+// ) {
+//   await setAuthorizationToken();
+//   const res = axios
+//     .create({ baseURL })
+//     .patch(path, body, config)
+//     .catch(handelErrors);
+//   return res;
+// }
 
 export async function GetByIdReq(path: string) {
   await setAuthorizationToken();
