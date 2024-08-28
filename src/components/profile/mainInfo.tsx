@@ -17,6 +17,7 @@ import {
   Input,
   Empty,
 } from "antd";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -37,6 +38,8 @@ const beforeUpload = (file: FileType) => {
 };
 const MainInfo = ({ userData, isOwner }: any) => {
   const t = useTranslations();
+  const { data }: { data: any } = useSession<any>();
+
   const [loading, setLoading] = useState(false);
   const [currentSkillsTags, setCurrentSkillsTags] = useState<any>([]);
   const router = useRouter();
@@ -49,7 +52,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
     }
   }, [userData]);
   const patchUserData = (data: any) => {
-    PatchReq("api/v1/client/profile/", data).then((res) => {
+    PatchReq(`api/v1/client/profile/${data.user_id}/`, data).then((res) => {
       if (StatusSuccessCodes.includes(res?.status)) {
         setLoading(false);
         setImageUrl(res?.data?.profile_picture);

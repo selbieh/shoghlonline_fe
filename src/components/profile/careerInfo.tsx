@@ -13,7 +13,7 @@ import {
 import TextArea from "antd/es/input/TextArea";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 
 const CareerInfo = ({ userData, isOwner }: any) => {
@@ -22,14 +22,15 @@ const CareerInfo = ({ userData, isOwner }: any) => {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [typeItems, setTypeItems] = useState("");
-  const [careerInfo, setCareerInfo] = useState<any>({
-    job_title: userData?.job_title,
-    bio_text: userData?.bio_text,
-    hourly_price: userData?.hourly_price,
-  });
   const [job_title, setJobTitle] = useState<any>(userData?.job_title);
   const [bio_text, setBioText] = useState<any>(userData?.bio_text);
   const [hourly_price, setHourlyPrice] = useState<any>(userData?.hourly_price);
+
+  useEffect(() => {
+    setBioText(userData?.bio_text);
+    setJobTitle(userData?.job_title);
+    setHourlyPrice(userData?.hourly_price);
+  }, [userData]);
   const showModal = (typeItem: any) => {
     form.setFieldsValue({
       job_title: job_title,
