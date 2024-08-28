@@ -1,6 +1,7 @@
 "use client";
 import { GetByIdReq } from "@/app/api/api";
 import AuthGuard from "@/components/authenticationHOC/authenticated";
+import CareerInfo from "@/components/profile/careerInfo";
 import CompletedJobs from "@/components/profile/completedJobs";
 import FeedbackProfile from "@/components/profile/feedback";
 import MainInfo from "@/components/profile/mainInfo";
@@ -139,60 +140,7 @@ function Profile({ params: { id } }: any) {
             },
           }}
         >
-          <div className="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row justify-between items-center">
-            <div className="flex flex-col md:flex-row items-center mb-4 md:mb-0">
-              <Space className="flex flex-col md:flex-row items-center">
-                <Button
-                  type="primary"
-                  className="p-0 h-[28px] w-[28px] rounded-md mb-2 md:mb-0"
-                >
-                  <FaRegEdit color="#fff" size={15} />
-                </Button>
-                <h3 className=" text-[24px] font-medium leading-[24px] text-center md:text-left">
-                  مصمم المو قع
-                </h3>
-              </Space>
-            </div>
-            <div className="flex flex-col md:flex-row gap-4 items-center">
-              <Button
-                type="primary"
-                className="p-0 h-[28px] w-[28px] rounded-md mb-2 md:mb-0"
-              >
-                <FaRegEdit color="#fff" size={15} />
-              </Button>
-              <div className="text-center md:text-left">
-                <h3 className=" text-[16px] font-medium leading-[24px] text-black">
-                  {t("hourPrice")}{" "}
-                  <span className=" text-[16px] font-bold leading-[24px]">
-                    20$
-                  </span>
-                </h3>
-                <p className="text-[#80828D]  text-[12px] font-medium leading-[24px]">
-                  50 {t("hours/week")}
-                </p>
-              </div>
-            </div>
-          </div>
-          <Divider />
-          <div>
-            <div className="flex flex-col md:flex-row gap-2 items-center">
-              <Button
-                type="primary"
-                className="p-0 h-[28px] w-[28px] rounded-md mb-2 md:mb-0"
-              >
-                <FaRegEdit color="#fff" size={15} />
-              </Button>
-              <h3 className="py-3  text-[16px] font-medium leading-[24px] text-right md:text-left">
-                {t("description")}
-              </h3>
-            </div>
-            <p className=" text-[12px] font-medium leading-[24px] text-[#62636C]">
-              أنا مصمم واجهات مواقع محترف مع خبرة تتجاوز [عدد السنوات] عامًا في
-              تطوير تصاميم واجهات مستخدم رائعة وسهلة الاستخدام. أعمل بشغف على
-              تحويل الأفكار إلى تصاميم بصرية جذابة تتماشى مع احتياجات المستخدم
-              وتجعل تجربة التصفح سهلة وممتعة.
-            </p>
-          </div>
+          <CareerInfo userData={userData} isOwner={isOwner}></CareerInfo>
         </Card>
         <div className="flex flex-col gap-2 h-[289px] px-[23px] py-[26px] rounded-[12px] border-[1px] border-[solid] border-[#E0E1E6]">
           <h3 className="text-[16px] font-medium leading-[24px] tracking-[0.5px] py-2">

@@ -90,7 +90,7 @@
   "profileSetup": "Profile Setup",
   "thisInformationHelpsIncreaseYourChancesOfGettingGigs": "This Information Helps Increase Your Chances Of Getting Gigs",
   "work and skills": "Work and Skills",
-  "jobTitle": "jobTitle",
+  "jobTitle": "Job Title",
   "enterJobTitle": "Enter Job Title",
   "enterSkills": "Enter Skills",
   "maxSkills": "15 skill Max",
@@ -152,5 +152,7 @@
   "updatedSuccessfully": "Updated Successfully",
   "Upload": "Upload",
   "Address": "Address",
-  "addNewSkill": "Add New Skill"
+  "addNewSkill": "Add New Skill",
+  "jobInfo": "Job Info",
+  "hour": "Hour"
 }

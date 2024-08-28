@@ -19,6 +19,7 @@ import {
 } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { FaPlus, FaRegEdit } from "react-icons/fa";
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
@@ -37,7 +38,8 @@ const beforeUpload = (file: FileType) => {
 const MainInfo = ({ userData, isOwner }: any) => {
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
-
+  const [currentSkillsTags, setCurrentSkillsTags] = useState<any>([]);
+  const router = useRouter();
   useEffect(() => {
     if (userData?.profile_picture) {
       setImageUrl(userData?.profile_picture);
@@ -86,60 +88,6 @@ const MainInfo = ({ userData, isOwner }: any) => {
   };
 
   //#endregion Image Upload
-
-  //#region Skills Modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setSkillsTags(currentSkillsTags);
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    if (skillsTags !== userData?.skills) {
-      patchUserData({ skills: skillsTags });
-    }
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const [skillsTags, setSkillsTags] = useState<string[]>([]);
-  const [currentSkillsTags, setCurrentSkillsTags] = useState<string[]>([]);
-  const [inputVisible, setInputVisible] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const inputRef = useRef<InputRef>(null);
-
-  useEffect(() => {
-    if (inputVisible) {
-      inputRef.current?.focus();
-    }
-  }, [inputVisible]);
-
-  const handleClose = (removedTag: string) => {
-    const newTags = skillsTags.filter((tag) => tag !== removedTag);
-    console.log(newTags);
-    setSkillsTags(newTags);
-  };
-
-  const showInput = () => {
-    setInputVisible(true);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleInputConfirm = () => {
-    if (inputValue && !skillsTags.includes(inputValue)) {
-      setSkillsTags([...skillsTags, inputValue]);
-    }
-    setInputVisible(false);
-    setInputValue("");
-  };
-
-  //#endregion Skills Modal
 
   return (
     <>
@@ -214,7 +162,9 @@ const MainInfo = ({ userData, isOwner }: any) => {
               <Button
                 type="primary"
                 className="p-0 h-[28px] w-[28px] rounded-md"
-                onClick={showModal}
+                onClick={() => {
+                  router.push("/profile/skills");
+                }}
               >
                 <FaRegEdit color="#fff" size={15} />
               </Button>
@@ -223,28 +173,18 @@ const MainInfo = ({ userData, isOwner }: any) => {
 
           <div className="flex gap-2 p-3">
             {currentSkillsTags.length > 0 ? (
-              currentSkillsTags.map<React.ReactNode>((tag, index) => {
-                const isLongTag = tag.length > 20;
-                const tagElem = (
-                  <Tag
-                    key={index}
-                    color="#ECF2FF"
-                    bordered={false}
-                    className="bg-[#ECF2FF] w-[117px] h-[40px] px-[16px] py-[8px] rounded-[28px] text-center"
-                  >
-                    <span className="text-[#20102B]  text-[14px] font-normal leading-[24px] ">
-                      {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-                    </span>
-                  </Tag>
-                );
-                return isLongTag ? (
-                  <Tooltip title={tag} key={tag}>
-                    {tagElem}
-                  </Tooltip>
-                ) : (
-                  tagElem
-                );
-              })
+              currentSkillsTags.map((tag: any) => (
+                <Tag
+                  key={tag.id}
+                  color="#ECF2FF"
+                  bordered={false}
+                  className="bg-[#ECF2FF] w-[117px] h-[40px] px-[16px] py-[8px] rounded-[28px] text-center"
+                >
+                  <span className="text-[#20102B]  text-[14px] font-normal leading-[24px] ">
+                    {tag?.name}
+                  </span>
+                </Tag>
+              ))
             ) : (
               <div className="flex justify-center items-center h-[64px] w-full">
                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
@@ -253,60 +193,6 @@ const MainInfo = ({ userData, isOwner }: any) => {
           </div>
         </div>
       </Card>
-      <Modal
-        title={t("skills")}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okText={t("save")}
-        cancelText={t("cancel")}
-      >
-        <Flex gap="4px 0" wrap>
-          {skillsTags.map<React.ReactNode>((tag, index) => {
-            const isLongTag = tag.length > 20;
-            const tagElem = (
-              <Tag
-                key={tag}
-                closable
-                style={{ userSelect: "none" }}
-                onClose={() => handleClose(tag)}
-              >
-                <span>{isLongTag ? `${tag.slice(0, 20)}...` : tag}</span>
-              </Tag>
-            );
-            return isLongTag ? (
-              <Tooltip title={tag} key={tag}>
-                {tagElem}
-              </Tooltip>
-            ) : (
-              tagElem
-            );
-          })}
-          {inputVisible ? (
-            <Input
-              ref={inputRef}
-              type="text"
-              size="small"
-              style={{
-                height: 22,
-                borderStyle: "dashed",
-              }}
-              value={inputValue}
-              onChange={handleInputChange}
-              onBlur={handleInputConfirm}
-              onPressEnter={handleInputConfirm}
-            />
-          ) : (
-            <Tag
-              icon={<FaPlus />}
-              onClick={showInput}
-              className="flex gap-2 items-center bg-slate-100 text-slate-800"
-            >
-              {t("addNewSkill")}
-            </Tag>
-          )}
-        </Flex>
-      </Modal>
     </>
   );
 };

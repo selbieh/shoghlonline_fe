@@ -152,5 +152,7 @@
   "updatedSuccessfully": "تم التحديث بنجاح",
   "Upload": "رفع",
   "Address": "العنوان",
-  "addNewSkill": "إضافة مهارة جديدة"
+  "addNewSkill": "إضافة مهارة جديدة",
+  "jobInfo": "معلومات العمل",
+  "hour": "ساعة"
 }
