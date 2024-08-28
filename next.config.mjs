@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "via.placeholder.com",
       },
+      {
+        protocol: "http",
+        hostname: "web-production-a4c1.up.railway.app",
+      },
     ],
   },
 };

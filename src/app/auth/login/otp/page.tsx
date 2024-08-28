@@ -16,6 +16,7 @@ export default function RegisterOTP() {
 
   const { loginEmail }: any = useSelector((state: RootState) => state.auth);
   async function login(values: any) {
+    console.log("loginEmail", loginEmail);
     const res = await signIn("credentials", {
       otp: values.otp,
       email: loginEmail,

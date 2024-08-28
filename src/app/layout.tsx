@@ -11,7 +11,6 @@ import { Provider } from "react-redux";
 import AuthProvider from "./providers/authProvider";
 
 import type { Metadata } from "next";
-import { AntdRegistry } from "@ant-design/nextjs-registry";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
