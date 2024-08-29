@@ -1,13 +1,19 @@
 "use client";
 import AddExperienceModal from "@/components/completeProfile/addExperienceModal";
 import ExperienceCard from "@/components/completeProfile/experienceCard";
+import { RootState } from "@/store/rootReducer";
 import { Button, Divider } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function ExperiencePage() {
+  const { freelancerProfileData } = useSelector(
+    (state: RootState) => state.profile
+  );
+  useEffect(() => {}, [freelancerProfileData]);
   const t = useTranslations();
   const [addExperienceModalOpen, setAddExperienceModalOpen] =
     useState<boolean>(false);
@@ -31,7 +37,9 @@ export default function ExperiencePage() {
     <div className="h-fit  flex flex-col px-[50px] m-10">
       <div className="  font-bold text-[24px] m-5 ">{t("experience")}</div>
       <div className="flex flex-row flex-wrap gap-5">
-        <ExperienceCard />
+        {freelancerProfileData?.experiences.map((experience: any) => {
+          return <ExperienceCard key={experience.id} data={experience} />;
+        })}
         <Button
           onClick={openAddExperienceModal}
           icon={
