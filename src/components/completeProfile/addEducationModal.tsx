@@ -1,6 +1,12 @@
-import { Checkbox, DatePicker, Form, Input, Modal } from "antd";
+import { Checkbox, DatePicker, Form, Input, message, Modal } from "antd";
 import { useTranslations } from "next-intl";
 import React, { Fragment } from "react";
+import dayjs from "dayjs";
+import { PatchReq } from "@/app/api/api";
+import { useSession } from "next-auth/react";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import { useAppDispatch } from "@/store/rootReducer";
+import { getFreelancerProfileData } from "@/store/reducers/freelanceProfile";
 
 export default function AddEducationModal({
   isOpen,
@@ -9,11 +15,29 @@ export default function AddEducationModal({
   isOpen: boolean;
   closeModal: () => void;
 }) {
+  const { data }: { data: any } = useSession<any>();
   const t = useTranslations();
   const [addEducationForm] = Form.useForm();
+  const dispatch = useAppDispatch();
 
   function addEducation(values: any) {
+    values.start_date = dayjs(values.start_date).format("YYYY-MM-DD");
+    values.end_date = dayjs(values.end_date).format("YYYY-MM-DD");
+
     console.log(values);
+    let url = `api/v1/client/profile/${data?.user_id}/`;
+    PatchReq(url, { educations: [values] }).then((res: any) => {
+      if (StatusSuccessCodes.includes(res?.status)) {
+        message.success(t("updatedSuccessfully"));
+        dispatch(getFreelancerProfileData([{}, data?.user_id]));
+        addEducationForm.resetFields();
+        closeModal();
+      } else {
+        res.errors.map((err: any) => {
+          message.error(`${err.code}:${err.detail}`);
+        });
+      }
+    });
   }
 
   return (
@@ -34,21 +58,21 @@ export default function AddEducationModal({
       >
         <Form form={addEducationForm} layout="vertical" onFinish={addEducation}>
           <Form.Item
-            name="organization"
+            name="institution"
             label={t("organizationLabel")}
             rules={[{ required: true, message: t("requiredMessage") }]}
           >
             <Input placeholder={t("organizationex")} />
           </Form.Item>
           <Form.Item
-            name="level"
+            name="degree"
             label={t("level")}
             rules={[{ required: true, message: t("requiredMessage") }]}
           >
             <Input placeholder={t("levelex")} />
           </Form.Item>
           <Form.Item
-            name="specialization"
+            name="field_of_study"
             label={t("specialization")}
             rules={[{ required: true, message: t("requiredMessage") }]}
           >
@@ -56,7 +80,7 @@ export default function AddEducationModal({
           </Form.Item>
           <div className="flex flex-row w-full gap-2 ">
             <Form.Item
-              name="from"
+              name="start_date"
               label={t("from")}
               className="w-full"
               rules={[{ required: true, message: t("requiredMessage") }]}
@@ -69,7 +93,7 @@ export default function AddEducationModal({
             </Form.Item>
 
             <Form.Item
-              name="to"
+              name="end_date"
               label={`${t("to")} (${t("graduationYear")})`}
               className="w-full"
             >

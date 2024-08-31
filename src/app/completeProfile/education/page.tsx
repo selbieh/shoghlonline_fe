@@ -1,14 +1,20 @@
 "use client";
 import AddEducationModal from "@/components/completeProfile/addEducationModal";
 import EducationCard from "@/components/completeProfile/educationCard";
+import { RootState } from "@/store/rootReducer";
 import { Button, Divider } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function EducationPage() {
   const t = useTranslations();
+  const { freelancerProfileData } = useSelector(
+    (state: RootState) => state.profile
+  );
+  useEffect(() => {}, [freelancerProfileData]);
   const [addEducationModalOpen, setAddEducationModalOpen] =
     useState<boolean>(false);
   const router = useRouter();
@@ -31,7 +37,9 @@ export default function EducationPage() {
     <div className="h-fit  flex flex-col px-[50px] m-10">
       <div className="  font-bold text-[24px] m-5 ">{t("education")}</div>
       <div className="flex flex-row flex-wrap gap-5">
-        <EducationCard />
+        {freelancerProfileData?.educations.map((education: any) => {
+          return <EducationCard key={education.id} data={education} />;
+        })}
         <Button
           onClick={openAddEducationModal}
           icon={
