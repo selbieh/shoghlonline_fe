@@ -11,6 +11,9 @@ const initialState: FreelancerProfileInitialState = {
   getAvailableSkillsServerError: null,
   availableSkills: null,
   skillsList: [],
+  loadingGetAvailableServices: false,
+  getAvailableServicesServerError: null,
+  availableServices: [],
 };
 
 export const getAvailableSkills = createAsyncThunk(
@@ -24,6 +27,19 @@ export const getAvailableSkills = createAsyncThunk(
     }
   }
 );
+
+export const getAvailableServices = createAsyncThunk(
+  "profile/getAvailableServices",
+  async (config: AxiosRequestConfig, { rejectWithValue }) => {
+    try {
+      const res = await GetReq(`api/v1/client/services/`, config);
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
+
 export const getFreelancerProfileData = createAsyncThunk(
   "profile/getFreelancerProfileData",
   async (
@@ -76,6 +92,25 @@ const profileSlice = createSlice({
     builder.addCase(getFreelancerProfileData.rejected, (state, action) => {
       state.loadingGetFreelancerProfileData = false;
       state.getFreelancerProfileDataServerError = action.payload;
+    });
+    builder.addCase(getAvailableServices.pending, (state, action) => {
+      state.loadingGetAvailableServices = true;
+      state.getAvailableServicesServerError = action.payload;
+    });
+    builder.addCase(getAvailableServices.fulfilled, (state, action) => {
+      state.loadingGetAvailableServices = false;
+      state.availableServices = action.payload.data?.results?.map(
+        (skill: any) => {
+          return {
+            label: skill.name,
+            value: skill.id,
+          };
+        }
+      );
+    });
+    builder.addCase(getAvailableServices.rejected, (state, action) => {
+      state.loadingGetAvailableServices = false;
+      state.getAvailableServicesServerError = action.payload;
     });
   },
 });

@@ -6,6 +6,9 @@ export interface FreelancerProfileInitialState {
   getAvailableSkillsServerError: any | null;
   availableSkills: availableSkillsResponse | null;
   skillsList: any[];
+  loadingGetAvailableServices: boolean;
+  getAvailableServicesServerError: any | null;
+  availableServices: any[] | [];
 }
 
 interface availableSkillsResponse {

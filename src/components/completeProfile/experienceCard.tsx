@@ -3,7 +3,6 @@ import React from "react";
 
 export default function ExperienceCard({ data }: { data: any }) {
   const t = useTranslations();
-  console.log(data);
   return (
     <div className="w-[244px] h-[131px] rounded-[12px] border-[1px] p-[5px]  bg-[#fdfdfe] border-[#deeaff] flex flex-col ">
       <div className="py-2">

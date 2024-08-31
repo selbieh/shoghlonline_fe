@@ -1,19 +1,32 @@
 "use client";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { Button, Cascader, Divider, Form } from "antd";
 import { servicesOptions } from "@/utils/dummyData/dummydata";
 import { CiCircleRemove } from "react-icons/ci";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { getAvailableServices } from "@/store/reducers/freelanceProfile";
+import { useSelector } from "react-redux";
 
 export default function ServicesPage() {
   const t = useTranslations();
   const [servicesForm] = Form.useForm();
+  const dispatch = useAppDispatch();
+  const {
+    loadingGetAvailableServices,
+    availableServices,
+    getAvailableServicesServerError,
+  } = useSelector((state: RootState) => state.profile);
+
+  useEffect(() => {
+    dispatch(getAvailableServices({}));
+  }, []);
 
   function submitServicesForm(values: any) {
     console.log(values);
   }
-
+  console.log(availableServices);
   function skip() {}
   return (
     <div className="h-fit  flex flex-col px-[50px] m-10">
@@ -39,7 +52,7 @@ export default function ServicesPage() {
             className="min-h-[56px]"
             id="chooseService"
             allowClear
-            options={servicesOptions}
+            options={availableServices}
             expandTrigger="hover"
             showCheckedStrategy={Cascader.SHOW_CHILD}
           />
