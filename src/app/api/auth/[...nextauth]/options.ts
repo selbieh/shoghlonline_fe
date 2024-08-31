@@ -72,7 +72,7 @@ export const options: NextAuthOptions = {
       return false;
     },
     async redirect({ url, baseUrl }) {
-      return "/freelance";
+      return "/clientOrFreelance";
     },
   },
   session: {
