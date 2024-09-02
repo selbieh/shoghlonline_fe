@@ -11,6 +11,10 @@ const initialState: FreelancerProfileInitialState = {
   getAvailableSkillsServerError: null,
   availableSkills: null,
   skillsList: [],
+  loadingGetAvailableServices: false,
+  getAvailableServicesServerError: null,
+  availableServices: [],
+  profileReady: 0,
 };
 
 export const getAvailableSkills = createAsyncThunk(
@@ -24,6 +28,19 @@ export const getAvailableSkills = createAsyncThunk(
     }
   }
 );
+
+export const getAvailableServices = createAsyncThunk(
+  "profile/getAvailableServices",
+  async (config: AxiosRequestConfig, { rejectWithValue }) => {
+    try {
+      const res = await GetReq(`api/v1/client/services/`, config);
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
+
 export const getFreelancerProfileData = createAsyncThunk(
   "profile/getFreelancerProfileData",
   async (
@@ -53,7 +70,7 @@ const profileSlice = createSlice({
     });
     builder.addCase(getAvailableSkills.fulfilled, (state, action) => {
       state.loadingGetAvailableSkills = false;
-      state.availableSkills = action.payload.data;
+      // state.availableSkills = action?.payload?.data;
       state.skillsList = action.payload.data?.results?.map((skill: any) => {
         return {
           label: skill.name,
@@ -67,15 +84,45 @@ const profileSlice = createSlice({
     });
     builder.addCase(getFreelancerProfileData.pending, (state, action) => {
       state.loadingGetFreelancerProfileData = true;
-      state.getFreelancerProfileDataServerError = action.payload;
+      state.getFreelancerProfileDataServerError = action?.payload;
     });
     builder.addCase(getFreelancerProfileData.fulfilled, (state, action) => {
       state.loadingGetFreelancerProfileData = false;
-      state.freelancerProfileData = action.payload.data;
+      state.freelancerProfileData = action?.payload?.data;
+      state.profileReady =
+        Number(action?.payload?.data?.services?.length > 0) +
+        Number(action?.payload?.data?.skills?.length > 0) +
+        Number(action?.payload?.data?.educations?.length > 0) +
+        Number(action?.payload?.data?.experiences?.length > 0);
     });
     builder.addCase(getFreelancerProfileData.rejected, (state, action) => {
       state.loadingGetFreelancerProfileData = false;
       state.getFreelancerProfileDataServerError = action.payload;
+    });
+    builder.addCase(getAvailableServices.pending, (state, action) => {
+      state.loadingGetAvailableServices = true;
+      state.getAvailableServicesServerError = action.payload;
+    });
+    builder.addCase(getAvailableServices.fulfilled, (state, action) => {
+      state.loadingGetAvailableServices = false;
+      state.availableServices = action?.payload?.data?.results?.map(
+        (skill: any) => {
+          return {
+            label: skill.name,
+            value: skill.id,
+            children: skill?.subservices?.map((subservice: any) => {
+              return {
+                label: subservice?.name,
+                value: subservice?.id,
+              };
+            }),
+          };
+        }
+      );
+    });
+    builder.addCase(getAvailableServices.rejected, (state, action) => {
+      state.loadingGetAvailableServices = false;
+      state.getAvailableServicesServerError = action.payload;
     });
   },
 });

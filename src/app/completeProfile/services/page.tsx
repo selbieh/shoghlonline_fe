@@ -1,20 +1,77 @@
 "use client";
 import { useTranslations } from "next-intl";
-import React from "react";
-import Image from "next/image";
-import { Button, Cascader, Divider, Form } from "antd";
+import React, { useEffect } from "react";
+import { Button, Cascader, Divider, Form, message, Progress } from "antd";
 import { servicesOptions } from "@/utils/dummyData/dummydata";
 import { CiCircleRemove } from "react-icons/ci";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import {
+  getAvailableServices,
+  getFreelancerProfileData,
+  profileActions,
+} from "@/store/reducers/freelanceProfile";
+import { useSelector } from "react-redux";
+import { PatchReq } from "@/app/api/api";
+import { StatusSuccessCodes } from "@/utils/successStatus";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function ServicesPage() {
   const t = useTranslations();
   const [servicesForm] = Form.useForm();
+  const dispatch = useAppDispatch();
+  const {
+    loadingGetAvailableServices,
+    availableServices,
+    getAvailableServicesServerError,
+    freelancerProfileData,
+    profileReady,
+  } = useSelector((state: RootState) => state.profile);
+  const router = useRouter();
+  const { data }: { data: any } = useSession<any>();
+
+  useEffect(() => {
+    dispatch(getAvailableServices({}));
+  }, []);
 
   function submitServicesForm(values: any) {
-    console.log(values);
+    values.services = values?.services?.map((value: any) => {
+      if (value.length === 1) {
+        return value[0];
+      } else {
+        return value[1];
+      }
+    });
+    let url = `api/v1/client/profile/${data?.user_id}/`;
+    PatchReq(url, values).then((res: any) => {
+      if (StatusSuccessCodes.includes(res?.status)) {
+        message.success(t("updatedSuccessfully"));
+        dispatch(getFreelancerProfileData([{}, data?.user_id]));
+        router.push("../freelance/profile");
+      } else {
+        res.errors.map((err: any) => {
+          message.error(`${err.code}:${err.detail}`);
+        });
+      }
+    });
   }
 
-  function skip() {}
+  useEffect(() => {
+    let userServices: any = [];
+    freelancerProfileData?.services?.map((service: any) => {
+      service.subservices.map((sub: any) => {
+        userServices.push([service.id, sub.id]);
+      });
+    }),
+      servicesForm.setFieldsValue({
+        ...freelancerProfileData,
+        services: userServices,
+      });
+  }, [freelancerProfileData]);
+
+  function skip() {
+    router.push("../freelance/profile");
+  }
   return (
     <div className="h-fit  flex flex-col px-[50px] m-10">
       <div className="  font-bold text-[24px] ">
@@ -35,11 +92,12 @@ export default function ServicesPage() {
           <Cascader
             placeholder={t("choseServices")}
             multiple
+            defaultValue={freelancerProfileData?.servcies}
             removeIcon={<CiCircleRemove size={25} />}
             className="min-h-[56px]"
             id="chooseService"
             allowClear
-            options={servicesOptions}
+            options={availableServices}
             expandTrigger="hover"
             showCheckedStrategy={Cascader.SHOW_CHILD}
           />
@@ -62,8 +120,15 @@ export default function ServicesPage() {
             </Button>
           </div>
           <div className="flex flex-col h-[50px] justify-between">
-            <div className=" text-[16px]">{t("profileReady")}</div>
-            <Image src="/icons/steps.svg" alt="steps" width={250} height={5} />
+            <div className=" text-[16px]">
+              {t("profileReady")} {profileReady / 0.04}%
+            </div>
+            <Progress
+              steps={4}
+              percent={profileReady / 0.04}
+              size={[50, 2]}
+              strokeColor={"#7179CE"}
+            />
           </div>
         </div>
       </Form>
