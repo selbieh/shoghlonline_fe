@@ -14,6 +14,7 @@ const initialState: FreelancerProfileInitialState = {
   loadingGetAvailableServices: false,
   getAvailableServicesServerError: null,
   availableServices: [],
+  profileReady: 0,
 };
 
 export const getAvailableSkills = createAsyncThunk(
@@ -69,7 +70,7 @@ const profileSlice = createSlice({
     });
     builder.addCase(getAvailableSkills.fulfilled, (state, action) => {
       state.loadingGetAvailableSkills = false;
-      state.availableSkills = action.payload.data;
+      // state.availableSkills = action?.payload?.data;
       state.skillsList = action.payload.data?.results?.map((skill: any) => {
         return {
           label: skill.name,
@@ -83,11 +84,16 @@ const profileSlice = createSlice({
     });
     builder.addCase(getFreelancerProfileData.pending, (state, action) => {
       state.loadingGetFreelancerProfileData = true;
-      state.getFreelancerProfileDataServerError = action.payload;
+      state.getFreelancerProfileDataServerError = action?.payload;
     });
     builder.addCase(getFreelancerProfileData.fulfilled, (state, action) => {
       state.loadingGetFreelancerProfileData = false;
-      state.freelancerProfileData = action.payload.data;
+      state.freelancerProfileData = action?.payload?.data;
+      state.profileReady =
+        Number(action?.payload?.data?.services?.length > 0) +
+        Number(action?.payload?.data?.skills?.length > 0) +
+        Number(action?.payload?.data?.educations?.length > 0) +
+        Number(action?.payload?.data?.experiences?.length > 0);
     });
     builder.addCase(getFreelancerProfileData.rejected, (state, action) => {
       state.loadingGetFreelancerProfileData = false;
@@ -99,11 +105,17 @@ const profileSlice = createSlice({
     });
     builder.addCase(getAvailableServices.fulfilled, (state, action) => {
       state.loadingGetAvailableServices = false;
-      state.availableServices = action.payload.data?.results?.map(
+      state.availableServices = action?.payload?.data?.results?.map(
         (skill: any) => {
           return {
             label: skill.name,
             value: skill.id,
+            children: skill?.subservices?.map((subservice: any) => {
+              return {
+                label: subservice?.name,
+                value: subservice?.id,
+              };
+            }),
           };
         }
       );

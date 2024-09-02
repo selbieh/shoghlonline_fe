@@ -9,6 +9,7 @@ export interface FreelancerProfileInitialState {
   loadingGetAvailableServices: boolean;
   getAvailableServicesServerError: any | null;
   availableServices: any[] | [];
+  profileReady: number;
 }
 
 interface availableSkillsResponse {
