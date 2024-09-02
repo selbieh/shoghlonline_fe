@@ -1,6 +1,7 @@
 "use client";
 import ClientDetailsSection from "@/components/freelance/gigDetailsPage/clientDetailsSection";
 import GigDetailsSection from "@/components/freelance/gigDetailsPage/gigDetailsSection";
+import GigProposals from "@/components/freelance/gigDetailsPage/gigProposals";
 import ShareSection from "@/components/freelance/gigDetailsPage/shareSection";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import { Button } from "antd";
@@ -74,6 +75,9 @@ export default function GigDetailsPage() {
           الوصول. إذا كنت مبدعًا وتتمتع بشغف بتصميم منتجات رقمية تركز على
           المستخدم، فنحن نود أن نسمع منك! يرجى تضمين رابط لمحفظة أعمالك مع طلب
           التقديم.
+          <div>
+            <GigProposals />
+          </div>
         </div>
         <div className="flex flex-col gap-5">
           <GigDetailsSection />
