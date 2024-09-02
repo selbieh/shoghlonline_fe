@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
-import Image from "next/image";
 import { Button, Cascader, Divider, Form, message, Progress } from "antd";
 import { servicesOptions } from "@/utils/dummyData/dummydata";
 import { CiCircleRemove } from "react-icons/ci";
@@ -43,13 +42,12 @@ export default function ServicesPage() {
         return value[1];
       }
     });
-    console.log(values);
     let url = `api/v1/client/profile/${data?.user_id}/`;
     PatchReq(url, values).then((res: any) => {
       if (StatusSuccessCodes.includes(res?.status)) {
         message.success(t("updatedSuccessfully"));
         dispatch(getFreelancerProfileData([{}, data?.user_id]));
-        // router.push("./experience");
+        router.push("../freelance/profile");
       } else {
         res.errors.map((err: any) => {
           message.error(`${err.code}:${err.detail}`);
@@ -59,14 +57,21 @@ export default function ServicesPage() {
   }
 
   useEffect(() => {
-    servicesForm.setFieldsValue({
-      ...freelancerProfileData,
-      services: freelancerProfileData?.services?.map((service: any) => {
-        return [1, service.id];
-      }),
-    });
+    let userServices: any = [];
+    freelancerProfileData?.services?.map((service: any) => {
+      service.subservices.map((sub: any) => {
+        userServices.push([service.id, sub.id]);
+      });
+    }),
+      servicesForm.setFieldsValue({
+        ...freelancerProfileData,
+        services: userServices,
+      });
   }, [freelancerProfileData]);
-  function skip() {}
+
+  function skip() {
+    router.push("../freelance/profile");
+  }
   return (
     <div className="h-fit  flex flex-col px-[50px] m-10">
       <div className="  font-bold text-[24px] ">
