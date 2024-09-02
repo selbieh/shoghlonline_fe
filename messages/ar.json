@@ -156,5 +156,9 @@
   "addNewSkill": "إضافة مهارة جديدة",
   "jobInfo": "معلومات العمل",
   "hour": "ساعة",
-  "proposals": "العروض المقدمة"
+  "proposals": "العروض المقدمة",
+  "submitingProposal": "تقديم عرض",
+  "jobDescription": "وصف الوظيفة",
+  "uploadFile": "ارفع ملف",
+  "draganddropafile": "او اسحب ملف وافلته هنا"
 }

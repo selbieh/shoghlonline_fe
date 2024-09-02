@@ -156,5 +156,9 @@
   "addNewSkill": "Add New Skill",
   "jobInfo": "Job Info",
   "hour": "Hour",
-  "proposals": "Proposals"
+  "proposals": "Proposals",
+  "submitingProposal": "Submitting Proposal",
+  "jobDescription": "Job Description",
+  "uploadFile": "Upload File",
+  "draganddropafile": "Or Drag and Drop a File Here"
 }
