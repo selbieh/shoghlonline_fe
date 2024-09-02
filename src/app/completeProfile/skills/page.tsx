@@ -9,6 +9,7 @@ import {
   Form,
   Input,
   message,
+  Progress,
   Select,
   Spin,
 } from "antd";
@@ -25,8 +26,12 @@ import { StatusSuccessCodes } from "@/utils/successStatus";
 import { useSession } from "next-auth/react";
 
 export default function SkillsPage() {
-  const { loadingGetAvailableSkills, skillsList, freelancerProfileData } =
-    useSelector((state: RootState) => state.profile);
+  const {
+    loadingGetAvailableSkills,
+    skillsList,
+    freelancerProfileData,
+    profileReady,
+  } = useSelector((state: RootState) => state.profile);
   const t = useTranslations();
   const [workAndSkillsForm] = Form.useForm();
   const router = useRouter();
@@ -148,8 +153,15 @@ export default function SkillsPage() {
             </Button>
           </div>
           <div className="flex flex-col h-[50px] justify-between">
-            <div className=" text-[16px]">{t("profileReady")}</div>
-            <Image src="/icons/steps.svg" alt="steps" width={250} height={5} />
+            <div className=" text-[16px]">
+              {t("profileReady")} {profileReady / 0.04}%
+            </div>
+            <Progress
+              steps={4}
+              percent={profileReady / 0.04}
+              size={[50, 2]}
+              strokeColor={"#7179CE"}
+            />
           </div>
         </div>
       </Form>

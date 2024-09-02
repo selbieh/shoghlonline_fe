@@ -2,7 +2,7 @@
 import AddExperienceModal from "@/components/completeProfile/addExperienceModal";
 import ExperienceCard from "@/components/completeProfile/experienceCard";
 import { RootState } from "@/store/rootReducer";
-import { Button, Divider } from "antd";
+import { Button, Divider, Progress } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function ExperiencePage() {
-  const { freelancerProfileData } = useSelector(
+  const { freelancerProfileData, profileReady } = useSelector(
     (state: RootState) => state.profile
   );
   useEffect(() => {}, [freelancerProfileData]);
@@ -79,8 +79,15 @@ export default function ExperiencePage() {
           </Button>
         </div>
         <div className="flex flex-col h-[50px] justify-between">
-          <div className=" text-[16px]">{t("profileReady")}</div>
-          <Image src="/icons/steps.svg" alt="steps" width={250} height={5} />
+          <div className=" text-[16px]">
+            {t("profileReady")} {profileReady / 0.04}%
+          </div>
+          <Progress
+            steps={4}
+            percent={profileReady / 0.04}
+            size={[50, 2]}
+            strokeColor={"#7179CE"}
+          />
         </div>
       </div>
     </div>
