@@ -113,7 +113,7 @@
   "education": "التعليم",
   "addEducation": "اضافة تعليم",
   "organization": "جهة التعليم",
-  "level": "الدرجة",
+  "level": "المستوي",
   "specialization": "مجال الدراسة",
   "organizationLabel": "جهة التعليم (مدرسة / جامعة/ معهد/ مركز دورات)",
   "organizationex": "مثال: جامعة اكسفورد",
@@ -155,5 +155,16 @@
   "Address": "العنوان",
   "addNewSkill": "إضافة مهارة جديدة",
   "jobInfo": "معلومات العمل",
-  "hour": "ساعة"
+  "hour": "ساعة",
+  "nameOfLanguage": "اسم اللغة",
+  "addNewLanguage": "إضافة لغة جديدة",
+  "language": "لغة",
+  "Beginner": "مبتدئ",
+  "Intermediate": "متوسط",
+  "Advanced": "متقدم",
+  "Native": "محلي",
+  "Present": "حتي الان",
+  "nameOfCertificate": "اسم الشهادة",
+  "issuedBy": "صادرة عن",
+  "addNewCertificate": "إضافة شهادة جديدة"
 }

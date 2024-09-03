@@ -155,5 +155,17 @@
   "Address": "Address",
   "addNewSkill": "Add New Skill",
   "jobInfo": "Job Info",
-  "hour": "Hour"
+  "hour": "Hour",
+  "nameOfLanguage": "Name Of Language",
+  "addNewLanguage": "Add New Language",
+  "language": "language",
+  "Beginner": "Beginner",
+  "Intermediate": "Intermediate",
+  "Advanced": "Advanced",
+  "Native": "Native",
+  "Present": "Present",
+  "certificate": "certificate",
+  "nameOfCertificate": "Certificate Name",
+  "issuedBy": "Issued By",
+  "addNewCertificate": "Add New Certificate"
 }
