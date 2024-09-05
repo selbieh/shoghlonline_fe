@@ -10,19 +10,11 @@ import QualificationInfo from "@/components/profile/qualificationInfo";
 import ServicesProfile from "@/components/profile/services";
 import StatsCard from "@/components/profile/statsCard";
 import { StatusSuccessCodes } from "@/utils/successStatus";
-import {
-  Button,
-  Card,
-  Divider,
-  message,
-  Progress,
-  Rate,
-  Space,
-  Tag,
-} from "antd";
+import { Button, Card, Divider, message, Progress, Rate } from "antd";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import { BiSolidFlagAlt } from "react-icons/bi";
 import { FaArrowLeft, FaRegEdit } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 
@@ -31,6 +23,8 @@ function Profile({ params: { id } }: any) {
   const t = useTranslations();
   const [userData, setUserData] = React.useState<any>({});
   const [isOwner, setIsOwner] = React.useState<boolean>(true);
+  const router = useRouter();
+  const [completedProjects, setCompletedProjects] = React.useState(0);
   useEffect(() => {
     getUserProfileData();
     setIsOwner(id ? false : true);
@@ -41,6 +35,12 @@ function Profile({ params: { id } }: any) {
       if (StatusSuccessCodes.includes(res.status)) {
         console.log(res);
         setUserData(res?.data);
+        setCompletedProjects(
+          (res?.data?.completed_projects * 100) /
+            (res?.data?.completed_projects +
+              res?.data?.project_cancelled +
+              res?.data?.project_ongoing)
+        );
       } else {
         message.error(`${res.detail}`);
       }
@@ -66,7 +66,7 @@ function Profile({ params: { id } }: any) {
               <span className=" text-[16px] font-bold leading-[24px]  px-2">
                 3.5
               </span>
-              <Rate disabled defaultValue={2} />
+              <Rate disabled defaultValue={userData?.rating} />
             </span>
           </div>
           <Divider />
@@ -76,11 +76,14 @@ function Profile({ params: { id } }: any) {
               {t("projectsCompleted")}
             </span>
             <span className="contents px-2 w-[45%]">
-              <Progress size="small" percent={30} />
+              <Progress size="small" percent={completedProjects} />
             </span>
           </div>
         </Card>
-        <QualificationInfo></QualificationInfo>
+        <QualificationInfo
+          userData={userData}
+          isOwner={isOwner}
+        ></QualificationInfo>
       </div>
       <div className="w-full md:w-2/3 lg:w-2/3 xl:w-2/3 p-4 flex gap-4 flex-col">
         <div className="flex justify-end">
@@ -120,10 +123,16 @@ function Profile({ params: { id } }: any) {
             </div>
           </div>
           <div className="flex w-full md:w-1/4 justify-center md:justify-end gap-2">
-            <h3 className="text-[12px] font-bold leading-[18px] text-[#7179CE]">
+            <h3
+              className="text-[12px] font-bold leading-[18px] text-[#7179CE] cursor-pointer"
+              onClick={() => {
+                router.push("/completeProfile/skills");
+              }}
+            >
               {t("completeProfileNow")}
             </h3>
-            <FaArrowLeft color="#7179CE" />
+            {}
+            <BiSolidFlagAlt color="#7179CE" />
           </div>
         </div>
         <div className="flex flex-wrap md:flex-row justify-between gap-4 md:gap-12">
