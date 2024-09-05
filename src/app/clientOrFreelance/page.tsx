@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { Button, Radio } from "antd";
 import AuthGuard from "@/components/authenticationHOC/authenticated";
 import { useRouter } from "next/navigation";
+import FreelanceIcon from "@/components/clientOrFreelance/freelanceIcon";
+import ClientIcon from "@/components/clientOrFreelance/clientIcon";
 
 function ClientOrFreeLance() {
   const t = useTranslations();
@@ -18,7 +20,6 @@ function ClientOrFreeLance() {
       router.push("/freelance");
     }
   }
-
   return (
     <section className="h-[100vh] ">
       <div className="logo p-10">
@@ -43,7 +44,7 @@ function ClientOrFreeLance() {
                 setClientOrFreelancer(e.target.value);
               }}
             >
-              <Radio
+              <Radio.Button
                 key={"client"}
                 style={{
                   height: "230px",
@@ -51,18 +52,43 @@ function ClientOrFreeLance() {
                 }}
                 value={"client"}
               >
-                <div className="h-[230px] w-[230px] border-[2px] rounded-xl border-[#345bcb] justify-center items-center flex flex-col cursor-pointer bg-[#7179ce]">
-                  <Image
+                <div
+                  className={
+                    clientOrFreelancer === "client"
+                      ? " bg-[#7179CE] h-[230px] w-[230px] border-[2px] rounded-xl border-[#345bcb] justify-center items-center flex flex-col cursor-pointer "
+                      : "bg-white h-[230px] w-[230px] border-[2px] rounded-xl border-[#345bcb] justify-center items-center flex flex-col cursor-pointer "
+                  }
+                >
+                  {/* <Image
                     src="/images/client.svg"
                     alt="client"
                     width={117}
                     height={39}
+                  /> */}
+                  <ClientIcon
+                    fill={clientOrFreelancer === "client" ? "white" : "#7179CE"}
                   />
-                  <div className="text-white">{t("client")}</div>
-                  <div className="text-white">{t("wanttohire")}</div>{" "}
+                  <div
+                    className={
+                      clientOrFreelancer === "client"
+                        ? "text-white"
+                        : "text-[#7179ce]"
+                    }
+                  >
+                    {t("client")}
+                  </div>
+                  <div
+                    className={
+                      clientOrFreelancer === "client"
+                        ? "text-white"
+                        : "text-[#7179ce]"
+                    }
+                  >
+                    {t("wanttohire")}
+                  </div>{" "}
                 </div>
-              </Radio>
-              <Radio
+              </Radio.Button>
+              <Radio.Button
                 key={"freelancer"}
                 style={{
                   height: "230px",
@@ -70,17 +96,38 @@ function ClientOrFreeLance() {
                 }}
                 value={"freelancer"}
               >
-                <div className="h-[230px] w-[230px] border-[2px] rounded-xl border-[#345bcb] justify-center items-center flex flex-col cursor-pointer">
-                  <Image
-                    src="/images/freelancer.svg"
-                    alt="freelancer"
-                    width={117}
-                    height={39}
+                <div
+                  className={
+                    clientOrFreelancer === "freelancer"
+                      ? " bg-[#7179CE] h-[230px] w-[230px] border-[2px] rounded-xl border-[#345bcb] justify-center items-center flex flex-col cursor-pointer "
+                      : "bg-white h-[230px] w-[230px] border-[2px] rounded-xl border-[#345bcb] justify-center items-center flex flex-col cursor-pointer "
+                  }
+                >
+                  <FreelanceIcon
+                    fill={
+                      clientOrFreelancer === "freelancer" ? "white" : "#7179CE"
+                    }
                   />
-                  <div className="text-[#7179ce]">{t("freelancer")}</div>
-                  <div className="text-[#7179ce]">{t("makeMoney")}</div>{" "}
+                  <div
+                    className={
+                      clientOrFreelancer === "freelancer"
+                        ? "text-white"
+                        : "text-[#7179ce]"
+                    }
+                  >
+                    {t("freelancer")}
+                  </div>
+                  <div
+                    className={
+                      clientOrFreelancer === "freelancer"
+                        ? "text-white"
+                        : "text-[#7179ce]"
+                    }
+                  >
+                    {t("makeMoney")}
+                  </div>{" "}
                 </div>
-              </Radio>
+              </Radio.Button>
             </Radio.Group>
           </div>
           <div className="w-full">
