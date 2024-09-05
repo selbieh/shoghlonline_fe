@@ -92,7 +92,6 @@ export default function ServicesPage() {
           <Cascader
             placeholder={t("choseServices")}
             multiple
-            defaultValue={freelancerProfileData?.servcies}
             removeIcon={<CiCircleRemove size={25} />}
             className="min-h-[56px]"
             id="chooseService"

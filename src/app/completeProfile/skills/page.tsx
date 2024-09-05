@@ -93,7 +93,6 @@ export default function SkillsPage() {
           rules={[{ required: true, message: t("requiredMessage") }]}
         >
           <Input
-            defaultValue={freelancerProfileData?.job_title}
             placeholder={t("enterJobTitle")}
             className="h-[56px]"
             type="text"
@@ -110,7 +109,6 @@ export default function SkillsPage() {
           ]}
         >
           <Select
-            defaultValue={freelancerProfileData?.skills}
             placeholder={t("enterSkills")}
             removeIcon={<CiCircleRemove size={25} />}
             className="min-h-[56px]"
