@@ -29,13 +29,11 @@ export default function LocaleSwitcherSelect() {
       value: "ar",
       label: t("ar"),
       onClick: (val: any) => {
-        console.log("val", val);
         onChange(val.key);
       },
     },
   ];
   function onChange(value: string) {
-    console.log("value", value);
     const locale = value as Locale;
     startTransition(() => {
       setUserLocale(locale);
@@ -47,7 +45,6 @@ export default function LocaleSwitcherSelect() {
       <Dropdown menu={{ items: items }}>
         <IoLanguage size={24} />
       </Dropdown>
-      {/* <Select options={items} defaultValue={defaultValue} onChange={onChange} /> */}
     </div>
   );
 }

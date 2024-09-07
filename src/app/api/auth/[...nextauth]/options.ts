@@ -71,8 +71,12 @@ export const options: NextAuthOptions = {
       }
       return false;
     },
-    async redirect({ url, baseUrl }) {
-      return "/freelance";
+    async redirect(props) {
+      if (props.url.split("/").includes("auth")) {
+        return "/clientOrFreelance";
+      } else {
+        return "/";
+      }
     },
   },
   session: {

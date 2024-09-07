@@ -166,7 +166,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
                 type="primary"
                 className="p-0 h-[28px] w-[28px] rounded-md"
                 onClick={() => {
-                  router.push("/profile/skills");
+                  router.push("/completeProfile/skills");
                 }}
               >
                 <FaRegEdit color="#fff" size={15} />
