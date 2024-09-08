@@ -14,7 +14,7 @@ import Search, { SearchProps } from "antd/es/input/Search";
 import { useTranslations } from "next-intl";
 const { Header, Content, Footer } = Layout;
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { CiMail } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -26,6 +26,10 @@ export default function RootLayout({
 }) {
   const t = useTranslations();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const pathname = usePathname();
+  const { replace } = useRouter();
   const items1: MenuProps["items"] = [
     {
       key: "1",
@@ -147,6 +151,11 @@ export default function RootLayout({
           <Menu
             mode="horizontal"
             items={items1}
+            onSelect={(e) => {
+              console.log(e);
+              params.set("category", e.key);
+              replace(`${pathname}?category=${e.key}`);
+            }}
             style={{
               flex: 1,
               minWidth: 0,

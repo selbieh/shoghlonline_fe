@@ -197,5 +197,18 @@
   "proposalAppliedSuccessfully": "تم تقديم الطلب بنجاح",
   "proposalSuccessMessage": "تهانينا! لقد تم تقديم طلبك بنجاح للوظيفة. سيقوم العميل بمراجعة عرضك قريبًا. في هذه الأثناء، تابع بريدك الوارد للحصول على أي تحديثات أو رسائل من العميل.",
   "backToJob": "العودة للوظيفة",
-  "backToHome": "العودة للصفحة الرئيسية"
+  "backToHome": "العودة للصفحة الرئيسية",
+  "filter": "التصفية",
+  "clear": "مسح",
+  "categories": "الفئات",
+  "experienceLabel": "الخبرة",
+  "beginner": "مبتدئ",
+  "intermediate": "متوسط",
+  "expert": "خبير",
+  "location": "الموقع",
+  "projectType": "نوع المشروع",
+  "fixedPrice": "سعر ثابت",
+  "byHour": "بالساعة",
+  "highest": "أعلى",
+  "least": "أقل"
 }

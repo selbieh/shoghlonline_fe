@@ -5,14 +5,17 @@ import BookmarkedGigs from "@/components/freelance/homePage/bookmarkedGigs";
 import CompleteYourProfile from "@/components/freelance/homePage/completeYourProfile";
 import GigsSuitsYou from "@/components/freelance/homePage/gigsSuitsYou";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
+import SearchAndFiltersSide from "@/components/freelance/homePage/searchAndFiltersSide";
 import { Tabs, TabsProps } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 const Freelance = () => {
   const t = useTranslations();
-
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
   const tabsItems: TabsProps["items"] = [
     {
       key: "1",
@@ -42,11 +45,21 @@ const Freelance = () => {
 
   return (
     <div className="flex flex-row">
-      <div>
+      {/* <div>
         <CompleteYourProfile />
         <InviteFriends />
         <Advertise />
-      </div>
+      </div> */}
+      {params.has("category") ? (
+        <SearchAndFiltersSide />
+      ) : (
+        <div>
+          <CompleteYourProfile />
+          <InviteFriends />
+          <Advertise />
+        </div>
+      )}
+
       <div>
         <Tabs items={tabsItems} />
       </div>
