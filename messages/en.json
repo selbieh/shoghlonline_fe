@@ -198,5 +198,20 @@
   "proposalAppliedSuccessfully": "Proposal Applied Successfully",
   "proposalSuccessMessage": "Congrats! Your proposal for this job have been applied successfully. the client will review it soon. Meanwhile, check your inbox to get updates and message from the client.",
   "backToJob": "Back To Job",
-  "backToHome": "Back To Home"
+  "backToHome": "Back To Home",
+  "filter": "Filters",
+  "clear": "Clear",
+  "categories": "Categories",
+  "experienceLabel": "Experience",
+  "beginner": "Beginner",
+  "intermediate": "Intermediate",
+  "expert": "Expert",
+  "location": "Location",
+  "projectType": "Project Type",
+  "fixedPrice": "Fixed Price",
+  "byHour": "By Hour",
+  "highest": "Highest",
+  "least": "Least",
+  "receiveNotifications": "Receive Notifications for similar Gigs",
+  "bestResults": "Best Results"
 }

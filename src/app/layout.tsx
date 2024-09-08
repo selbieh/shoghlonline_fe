@@ -40,6 +40,7 @@ export default async function RootLayout({
                   colorPrimary: "#7179CE",
                   fontFamily: "Tajawal",
                   controlHeight: 56,
+                  controlInteractiveSize: 16,
                 },
               }}
             >
