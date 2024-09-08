@@ -1,15 +1,18 @@
 "use client";
 import ClientDetailsSection from "@/components/freelance/gigDetailsPage/clientDetailsSection";
 import GigDetailsSection from "@/components/freelance/gigDetailsPage/gigDetailsSection";
+import GigProposals from "@/components/freelance/gigDetailsPage/gigProposals";
 import ShareSection from "@/components/freelance/gigDetailsPage/shareSection";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import { Button } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function GigDetailsPage() {
   const t = useTranslations();
+  const router = useRouter();
   return (
     <div className="m-10">
       <div>
@@ -23,6 +26,9 @@ export default function GigDetailsPage() {
               style={{ height: "42px" }}
               className="w-[219px] h-[42px] rounded-[6px] py-[12px] px-[20px]"
               type="primary"
+              onClick={() => {
+                router.push("../proposal/5");
+              }}
             >
               {t("submitProposal")}
             </Button>
@@ -76,6 +82,9 @@ export default function GigDetailsPage() {
           الوصول. إذا كنت مبدعًا وتتمتع بشغف بتصميم منتجات رقمية تركز على
           المستخدم، فنحن نود أن نسمع منك! يرجى تضمين رابط لمحفظة أعمالك مع طلب
           التقديم.
+          <div>
+            <GigProposals />
+          </div>
         </div>
         <div className="flex flex-col gap-5">
           <GigDetailsSection />
