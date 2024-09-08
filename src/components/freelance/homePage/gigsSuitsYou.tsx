@@ -49,6 +49,7 @@ export default function GigsSuitsYou() {
         <GigOffer data={null} />
         <div className="w-full flex items-center justify-center">
           <Button
+            style={{ height: "34px" }}
             className="w-[95px] h-[34px] rounded-[6px] py-[8px] px-[12]"
             type="primary"
           >

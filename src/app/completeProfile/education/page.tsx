@@ -50,6 +50,7 @@ export default function EducationPage() {
               height={24}
             ></Image>
           }
+          style={{ height: "131px" }}
           className="w-[244px] h-[131px] rounded-[12px] border-[1px] px-[50px] py-[40px] bg-[#f7f9ff] border-[#7179ce] flex flex-row items-center justify-center"
         >
           <div className=" text-[#7179ce] text-[14px]">{t("addEducation")}</div>

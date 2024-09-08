@@ -61,7 +61,10 @@ const PreviousWork = () => {
               Europe Street beat
             </span>
             <div className="flex justify-center items-center py-3">
-              <Button className="flex items-center justify-between h-[34px] px-[8px] py-[12px] rounded-[6px] text-[#7179CE]">
+              <Button
+                style={{ height: "34px" }}
+                className="flex items-center justify-between h-[34px] px-[8px] py-[12px] rounded-[6px] text-[#7179CE]"
+              >
                 {t("displayProject")}
               </Button>
             </div>

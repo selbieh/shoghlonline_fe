@@ -88,6 +88,7 @@ function Profile({ params: { id } }: any) {
       <div className="w-full md:w-2/3 lg:w-2/3 xl:w-2/3 p-4 flex gap-4 flex-col">
         <div className="flex justify-end">
           <Button
+            style={{ height: "32px" }}
             type="primary"
             className="h-[38px] rounded-md  text-[12px] font-bold leading-[18px]"
             href=""
@@ -174,7 +175,11 @@ function Profile({ params: { id } }: any) {
             <h3 className="text-[16px] font-medium leading-[24px] tracking-[0.5px] py-2">
               {t("previousWork")}
             </h3>
-            <Button type="primary" className="p-0 h-[28px] w-[28px] rounded-md">
+            <Button
+              style={{ height: "28px" }}
+              type="primary"
+              className="p-0 h-[28px] w-[28px] rounded-md"
+            >
               <FaRegEdit color="#fff" size={15} />
             </Button>
           </div>

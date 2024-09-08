@@ -36,7 +36,9 @@ export default function GigProposals() {
       <FreelancerProposalCard />
       <FreelancerProposalCard />
       <div className="p-5">
-        <Button type="primary">{t("more")}</Button>
+        <Button style={{ height: "34px" }} type="primary">
+          {t("more")}
+        </Button>
       </div>
     </div>
   );

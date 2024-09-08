@@ -50,7 +50,14 @@ export default function RootLayout({
       }}
     >
       <Layout>
-        <Header className="flex h-fit justify-between bg-white">
+        <Header
+          className="flex h-fit justify-between bg-white"
+          style={{
+            backgroundColor: "white",
+            height: "fit",
+            lineHeight: "fit",
+          }}
+        >
           <div className="flex flex-col  h-fit m-5">
             <div className="  font-bold text-[24px] ">{t("profileSetup")}</div>
             <div className="  text-[rgba(98,_99,_108,_1)] text-[16px] ">

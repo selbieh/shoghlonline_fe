@@ -59,6 +59,7 @@ const Certifications = ({ userData, isOwner }: any) => {
         </h3>
         {isOwner && (
           <Button
+            style={{ height: "28px" }}
             onClick={showModal}
             type="primary"
             className="p-0 h-[28px] w-[28px] rounded-md"
@@ -80,6 +81,7 @@ const Certifications = ({ userData, isOwner }: any) => {
             </div>
             <p className=" text-[12px] font-bold leading-[24px]  text-[#62636C]">
               <Button
+                style={{ height: "34px" }}
                 type="default"
                 className="h-[34px] px-[12px] py-[8px] rounded-[6px]  text-[12px] font-bold leading-[18px] text-[#7179CE]"
               >
@@ -142,7 +144,12 @@ const Certifications = ({ userData, isOwner }: any) => {
                   </Card>
                 ))}
 
-                <Button type="dashed" onClick={() => add()} block>
+                <Button
+                  style={{ height: "34px" }}
+                  type="dashed"
+                  onClick={() => add()}
+                  block
+                >
                   + {t("addNewCertificate")}
                 </Button>
               </div>

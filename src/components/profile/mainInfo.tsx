@@ -163,6 +163,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
             </h3>
             {isOwner && (
               <Button
+                style={{ height: "28px" }}
                 type="primary"
                 className="p-0 h-[28px] w-[28px] rounded-md"
                 onClick={() => {

@@ -69,6 +69,7 @@ const CareerInfo = ({ userData, isOwner }: any) => {
           <Space className="flex flex-col md:flex-row items-center">
             {isOwner && (
               <Button
+                style={{ height: "28px" }}
                 onClick={() => showModal("jobTitle")}
                 type="primary"
                 className="p-0 h-[28px] w-[28px] rounded-md mb-2 md:mb-0"
@@ -84,6 +85,7 @@ const CareerInfo = ({ userData, isOwner }: any) => {
         <div className="flex flex-col md:flex-row gap-4 items-center">
           {isOwner && (
             <Button
+              style={{ height: "28px" }}
               onClick={() => showModal("priceHour")}
               type="primary"
               className="p-0 h-[28px] w-[28px] rounded-md mb-2 md:mb-0"
@@ -109,6 +111,7 @@ const CareerInfo = ({ userData, isOwner }: any) => {
         <div className="flex flex-col md:flex-row gap-2 items-center">
           {isOwner && (
             <Button
+              style={{ height: "28px" }}
               onClick={() => showModal("description")}
               type="primary"
               className="p-0 h-[28px] w-[28px] rounded-md mb-2 md:mb-0"
