@@ -154,7 +154,7 @@ export default function RootLayout({
             onSelect={(e) => {
               console.log(e);
               params.set("category", e.key);
-              replace(`${pathname}?category=${e.key}`);
+              router.push(`/freelance/freelanceSearchAndCategory/${e.key}`);
             }}
             style={{
               flex: 1,

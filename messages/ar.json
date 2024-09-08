@@ -210,5 +210,7 @@
   "fixedPrice": "سعر ثابت",
   "byHour": "بالساعة",
   "highest": "أعلى",
-  "least": "أقل"
+  "least": "أقل",
+  "receiveNotifications": "استقبال اشعارات لهذا البحث",
+  "bestResults": "أفضل النتائج"
 }

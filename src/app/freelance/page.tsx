@@ -14,8 +14,6 @@ import React from "react";
 
 const Freelance = () => {
   const t = useTranslations();
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
   const tabsItems: TabsProps["items"] = [
     {
       key: "1",
@@ -45,20 +43,11 @@ const Freelance = () => {
 
   return (
     <div className="flex flex-row">
-      {/* <div>
+      <div>
         <CompleteYourProfile />
         <InviteFriends />
         <Advertise />
-      </div> */}
-      {params.has("category") ? (
-        <SearchAndFiltersSide />
-      ) : (
-        <div>
-          <CompleteYourProfile />
-          <InviteFriends />
-          <Advertise />
-        </div>
-      )}
+      </div>
 
       <div>
         <Tabs items={tabsItems} />

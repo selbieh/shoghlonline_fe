@@ -211,5 +211,7 @@
   "fixedPrice": "Fixed Price",
   "byHour": "By Hour",
   "highest": "Highest",
-  "least": "Least"
+  "least": "Least",
+  "receiveNotifications": "Receive Notifications for similar Gigs",
+  "bestResults": "Best Results"
 }
