@@ -15,11 +15,14 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { FiMinusCircle } from "react-icons/fi";
+import ProposalSuccessModal from "./proposalSuccessModal";
+import { useRouter } from "next/navigation";
 const { Dragger } = Upload;
 export default function ProposalForm() {
   const t = useTranslations();
   const [paymentMethod, setPaymentMethod] = useState<string>("totalJob");
-
+  const [proposalSuccessModalOpen, setProposalSuccessModalOpen] =
+    useState<boolean>(false);
   const suffixSelector = (
     <Form.Item name="suffix">
       <Select style={{ width: 70 }} className="h-[56px] min-w-fit">
@@ -30,6 +33,10 @@ export default function ProposalForm() {
       </Select>
     </Form.Item>
   );
+
+  function closeProposalModal() {
+    setProposalSuccessModalOpen(false);
+  }
   return (
     <div className=" w-full rounded-[12px] border-[1px] py-[30px] px-[24px] my-[20px]">
       <Form layout="vertical">
@@ -216,12 +223,22 @@ export default function ProposalForm() {
           </Form.Item>
         </div>
         <div className="flex flex-row justify-end gap-5 px-2">
-          <Button type="primary" className="h-[34px] w-[84px]">
+          <Button
+            type="primary"
+            className="h-[34px] w-[84px]"
+            onClick={() => {
+              setProposalSuccessModalOpen(true);
+            }}
+          >
             {t("apply")}
           </Button>
           <Button className="h-[34px] w-[84px]">{t("cancel")}</Button>
         </div>
       </Form>
+      <ProposalSuccessModal
+        isOpen={proposalSuccessModalOpen}
+        close={closeProposalModal}
+      />
     </div>
   );
 }

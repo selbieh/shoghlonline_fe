@@ -193,5 +193,10 @@
   "stepPrice": "Step Price",
   "completeOn": "Complete On",
   "jobSteps": "Job Steps",
-  "addStep": "Add New Step"
+  "addStep": "Add New Step",
+  "success": "success",
+  "proposalAppliedSuccessfully": "Proposal Applied Successfully",
+  "proposalSuccessMessage": "Congrats! Your proposal for this job have been applied successfully. the client will review it soon. Meanwhile, check your inbox to get updates and message from the client.",
+  "backToJob": "Back To Job",
+  "backToHome": "Back To Home"
 }
