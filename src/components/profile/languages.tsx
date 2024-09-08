@@ -70,6 +70,7 @@ const Languages = ({ userData, isOwner }: any) => {
         </h3>
         {isOwner && (
           <Button
+            style={{ height: "28px" }}
             onClick={showLangModal}
             type="primary"
             className="p-0 h-[28px] w-[28px] rounded-md"
@@ -147,7 +148,12 @@ const Languages = ({ userData, isOwner }: any) => {
                   </Card>
                 ))}
 
-                <Button type="dashed" onClick={() => add()} block>
+                <Button
+                  style={{ height: "34px" }}
+                  type="dashed"
+                  onClick={() => add()}
+                  block
+                >
                   + {t("addNewLanguage")}
                 </Button>
               </div>

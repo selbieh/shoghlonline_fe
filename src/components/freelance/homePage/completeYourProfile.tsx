@@ -19,6 +19,7 @@ export default function CompleteYourProfile() {
       <div className="flex flex-col justify-center">
         <Progress className="m-2" percent={50} size="small" />
         <Button
+          style={{ height: "34px" }}
           className="bg-transparent border-[1px] border-[#7179ce] h-[34px] w-[238px] m-2"
           onClick={goToCompleteYourProfilePage}
         >

@@ -78,6 +78,7 @@ const QualificationInfo = ({ userData, isOwner }: any) => {
             <Button
               onClick={() => ref.current?.click()}
               type="primary"
+              style={{ height: "28px" }}
               className="p-0 h-[28px] w-[28px] rounded-md"
             >
               <FaRegEdit color="#fff" size={15} />
@@ -112,6 +113,7 @@ const QualificationInfo = ({ userData, isOwner }: any) => {
             <Button
               onClick={() => router.push("/completeProfile/education")}
               type="primary"
+              style={{ height: "28px" }}
               className="p-0 h-[28px] w-[28px] rounded-md"
             >
               <FaRegEdit color="#fff" size={15} />
@@ -151,6 +153,7 @@ const QualificationInfo = ({ userData, isOwner }: any) => {
             <Button
               onClick={() => router.push("/completeProfile/experience")}
               type="primary"
+              style={{ height: "28px" }}
               className="p-0 h-[28px] w-[28px] rounded-md"
             >
               <FaRegEdit color="#fff" size={15} />

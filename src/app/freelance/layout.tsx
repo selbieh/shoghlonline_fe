@@ -80,7 +80,13 @@ export default function RootLayout({
   return (
     <>
       <Layout>
-        <Header className="flex  items-center justify-between bg-white">
+        <Header
+          className="flex  items-center justify-between bg-white"
+          style={{
+            backgroundColor: "white",
+            height: "65px",
+          }}
+        >
           <div>
             <Space size={"middle"}>
               <Avatar
@@ -132,6 +138,7 @@ export default function RootLayout({
           style={{
             backgroundColor: "white",
             height: "65px",
+            lineHeight: "65px",
           }}
         >
           <Divider
@@ -144,6 +151,9 @@ export default function RootLayout({
               flex: 1,
               minWidth: 0,
               backgroundColor: "white",
+              height: "64px",
+              display: "flex",
+              alignItems: "center",
             }}
           />
           <Divider

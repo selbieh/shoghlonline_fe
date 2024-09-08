@@ -20,12 +20,14 @@ export default function GigDetailsPage() {
           </div>
           <div className=" flex flex-row gap-2 items-center">
             <Button
+              style={{ height: "42px" }}
               className="w-[219px] h-[42px] rounded-[6px] py-[12px] px-[20px]"
               type="primary"
             >
               {t("submitProposal")}
             </Button>
             <Button
+              style={{ height: "42px" }}
               className="w-[136px] h-[42px] rounded-[6px] py-[12px] px-[20px] border-[1px] border-[#d2d5da]"
               icon={
                 <Image

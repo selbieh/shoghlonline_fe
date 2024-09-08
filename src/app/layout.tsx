@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import AuthProvider from "./providers/authProvider";
 
 import type { Metadata } from "next";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -38,13 +39,11 @@ export default async function RootLayout({
                 token: {
                   colorPrimary: "#7179CE",
                   fontFamily: "Tajawal",
-                  // controlHeight: 56,
+                  controlHeight: 56,
                 },
               }}
             >
-              {/* <AntdRegistry> */}
-              {children}
-              {/* </AntdRegistry> */}
+              <AntdRegistry>{children}</AntdRegistry>
             </ConfigProvider>
           </NextIntlClientProvider>
         </AuthProvider>
