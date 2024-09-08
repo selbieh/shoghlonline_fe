@@ -19,6 +19,7 @@ const Hero = () => {
           <div className="sign">
             <Space>
               <Button
+                style={{ height: "38px" }}
                 className="h-[38px] rounded-md text-[#000] border-[#D2D5DA]  text-[12px] font-bold leading-[18px]"
                 href="/auth/login"
               >
