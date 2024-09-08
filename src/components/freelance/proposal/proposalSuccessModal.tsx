@@ -36,6 +36,7 @@ export default function ProposalSuccessModal({
         <div className="text-[14px]">{t("proposalSuccessMessage")}</div>
         <div className="flex flex-row gap-2">
           <Button
+            style={{ height: "38px" }}
             type="primary"
             className="h-[38px]"
             onClick={() => {
@@ -46,6 +47,7 @@ export default function ProposalSuccessModal({
             {t("backToJob")}
           </Button>
           <Button
+            style={{ height: "38px" }}
             className="h-[38px]"
             onClick={() => {
               close();

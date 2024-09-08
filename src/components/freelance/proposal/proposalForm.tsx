@@ -25,7 +25,7 @@ export default function ProposalForm() {
     useState<boolean>(false);
   const suffixSelector = (
     <Form.Item name="suffix">
-      <Select style={{ width: 70 }} className="h-[56px] min-w-fit">
+      <Select style={{ width: 80 }} className="h-[56px] min-w-fit">
         <Select.Option value="day">{t("day")}</Select.Option>
         <Select.Option value="week">{t("week")}</Select.Option>
         <Select.Option value="month">{t("month")}</Select.Option>
@@ -65,6 +65,7 @@ export default function ProposalForm() {
                   />
                 </p>
                 <Button
+                  style={{ height: "34px" }}
                   type="primary"
                   icon={
                     <Image
@@ -224,6 +225,7 @@ export default function ProposalForm() {
         </div>
         <div className="flex flex-row justify-end gap-5 px-2">
           <Button
+            style={{ height: "34px" }}
             type="primary"
             className="h-[34px] w-[84px]"
             onClick={() => {
@@ -232,7 +234,9 @@ export default function ProposalForm() {
           >
             {t("apply")}
           </Button>
-          <Button className="h-[34px] w-[84px]">{t("cancel")}</Button>
+          <Button style={{ height: "34px" }} className="h-[34px] w-[84px]">
+            {t("cancel")}
+          </Button>
         </div>
       </Form>
       <ProposalSuccessModal
