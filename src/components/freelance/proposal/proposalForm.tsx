@@ -21,7 +21,7 @@ export default function ProposalForm() {
   const [paymentMethod, setPaymentMethod] = useState<string>("totalJob");
 
   const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
+    <Form.Item name="suffix">
       <Select style={{ width: 70 }} className="h-[56px] min-w-fit">
         <Select.Option value="day">{t("day")}</Select.Option>
         <Select.Option value="week">{t("week")}</Select.Option>
