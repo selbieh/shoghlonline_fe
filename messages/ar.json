@@ -75,7 +75,7 @@
   "hours/week": "ساعة / أسبوع",
   "description": "الوصف",
   "commonQuestions": "الأسئلة الشائعة",
-  "settings": "إعدادات",
+  "settings": "الإعدادات",
   "profileCompleted": "ملفك مكتمل بنسبة ",
   "completeProfile": "أكمل ملفك الشخصي لجذب المزيد من العملاء!",
   "completeProfileDesc": "الملفات الشخصية المكتملة تزيد من فرص جذب العملاء بمقدار 5 أضعاف.",
@@ -212,5 +212,11 @@
   "highest": "أعلى",
   "least": "أقل",
   "receiveNotifications": "استقبال اشعارات لهذا البحث",
-  "bestResults": "أفضل النتائج"
+  "bestResults": "أفضل النتائج",
+  "accountInfo": "معلومات الحساب",
+  "firstNameRequired": "الرجاء إدخال الاسم الأول",
+  "lastNameRequired": "الرجاء إدخال الاسم الأخير",
+  "emailRequired": "الرجاء إدخال البريد الإلكتروني الخاص بك",
+  "deActiveAccount": "تعطيل الحساب",
+  "deActiveAccountText": "عند إلغاء تنشيط حسابك، لن يكون ملفك الشخصي مرئيًا للآخرين، ولن تتلقى أي إشعارات أو رسائل. يمكنك إعادة تنشيط حسابك في أي وقت."
 }

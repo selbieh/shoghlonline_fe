@@ -213,5 +213,11 @@
   "highest": "Highest",
   "least": "Least",
   "receiveNotifications": "Receive Notifications for similar Gigs",
-  "bestResults": "Best Results"
+  "bestResults": "Best Results",
+  "accountInfo": "Account Information",
+  "firstNameRequired": "Please Enter First Name",
+  "lastNameRequired": "Please Enter Last Name",
+  "emailRequired": "Please Enter Your Email",
+  "deActiveAccount": "DeActive Account",
+  "deActiveAccountText": "When you deactivate your account, your profile will not be visible to others, and you will not receive any notifications or messages. You can reactivate your account at any time."
 }

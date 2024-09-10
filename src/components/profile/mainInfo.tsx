@@ -95,7 +95,7 @@ const MainInfo = ({ userData, isOwner }: any) => {
   return (
     <>
       <Card
-        className="w-[370px] h-[378px] bg-[#F7F9FF] rounded-xl shadow-sm border-[1px] border-[#E0E1E6]"
+        className="w-[370px] h-[478px] bg-[#F7F9FF] rounded-xl shadow-sm border-[1px] border-[#E0E1E6]"
         styles={{
           body: {
             padding: "16px, 24px, 16px, 24px",

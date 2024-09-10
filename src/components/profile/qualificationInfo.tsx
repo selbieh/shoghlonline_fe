@@ -189,31 +189,6 @@ const QualificationInfo = ({ userData, isOwner }: any) => {
 
         <Divider />
         <Certifications userData={userData} isOwner={isOwner}></Certifications>
-        <Divider />
-        <h3 className=" text-[14px] font-bold leading-[24px]  pb-2">
-          {t("linkedAccounts")}
-        </h3>
-        <div className="flex gap-3">
-          <div className="rounded-full w-[54px] h-[54px] px-[12px] py-[18px] border-[1px] border-[#BBD2FF] flex justify-center items-center">
-            <img
-              src="/icons/behance.svg"
-              alt="behance"
-              width={29}
-              height={18}
-            />
-          </div>
-          <div className="rounded-full w-[54px] h-[54px] px-[12px] py-[18px] border-[1px] border-[#BBD2FF] flex justify-center items-center">
-            <img
-              src="/icons/linkedin.svg"
-              alt="linkedin"
-              width={29}
-              height={18}
-            />
-          </div>{" "}
-          <div className="rounded-full w-[54px] h-[54px] px-[12px] py-[18px] border-[1px] border-[#BBD2FF] flex justify-center items-center">
-            <img src="/icons/github.svg" alt="github" width={29} height={18} />
-          </div>
-        </div>
       </Card>
     </>
   );

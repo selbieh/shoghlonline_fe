@@ -3,6 +3,7 @@ import FooterFreelancer from "@/components/layoutFreelancer/footer";
 import {
   Avatar,
   Button,
+  ConfigProvider,
   Divider,
   Layout,
   Menu,
@@ -101,18 +102,29 @@ export default function RootLayout({
               />
               <IoNotificationsOutline size={24} />
               <CiMail size={24} />
-              <Space.Compact
-                className="hidden md:flex lg:flex xl:flex"
-                size="middle"
-              >
-                <Select defaultValue="1" options={options} />
-                <Search
-                  placeholder={t("search")}
-                  allowClear
-                  onSearch={onSearch}
-                  style={{ width: 200 }}
-                />
-              </Space.Compact>
+              <div className="searchBox">
+                <ConfigProvider
+                  theme={{
+                    token: {
+                      controlHeight: 40,
+                      // controlInteractiveSize: 16,
+                    },
+                  }}
+                >
+                  <Space.Compact
+                    className="hidden md:flex lg:flex xl:flex"
+                    size="middle"
+                  >
+                    <Select defaultValue="1" options={options} />
+                    <Search
+                      placeholder={t("search")}
+                      allowClear
+                      onSearch={onSearch}
+                      style={{ width: 200 }}
+                    />
+                  </Space.Compact>
+                </ConfigProvider>
+              </div>
             </Space>
           </div>
           <div className="logo">

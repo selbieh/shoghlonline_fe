@@ -19,7 +19,6 @@ import { FaArrowLeft, FaRegEdit } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 
 function Profile({ params: { id } }: any) {
-  console.log("id", id);
   const t = useTranslations();
   const [userData, setUserData] = React.useState<any>({});
   const [isOwner, setIsOwner] = React.useState<boolean>(true);
@@ -91,7 +90,7 @@ function Profile({ params: { id } }: any) {
             style={{ height: "32px" }}
             type="primary"
             className="h-[38px] rounded-md  text-[12px] font-bold leading-[18px]"
-            href=""
+            href="/freelance/settings"
           >
             <IoSettingsOutline />
 
