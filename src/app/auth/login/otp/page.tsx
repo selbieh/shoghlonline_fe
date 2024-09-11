@@ -1,6 +1,7 @@
 "use client";
-import { authActions } from "@/store/reducers/authentcationSlice";
+import { postAuthRequest } from "@/app/api/api";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { StatusSuccessCodes } from "@/utils/successStatus";
 import { Button, Form, Input, message } from "antd";
 import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -13,13 +14,34 @@ export default function RegisterOTP() {
   const router = useRouter();
   const [loginForm] = Form.useForm();
   const dispatch = useAppDispatch();
+  const [loginLoading, setLoginLoading] = useState<boolean>(false);
+  const [resendOTPLoading, setResendOTPLoading] = useState<boolean>(false);
 
   const { loginEmail }: any = useSelector((state: RootState) => state.auth);
   async function login(values: any) {
-    console.log("loginEmail", loginEmail);
+    setLoginLoading(true);
     const res = await signIn("credentials", {
       otp: values.otp,
       email: loginEmail,
+      redirect: false,
+    });
+    setLoginLoading(false);
+    if (!res?.error) {
+      router.push("/clientOrFreelance");
+    } else {
+      message.error(t("invalidOrExpiredOTP"));
+    }
+  }
+
+  async function resendOTP() {
+    setResendOTPLoading(true);
+    postAuthRequest("auth/request-otp/", { email: loginEmail }).then((res) => {
+      setResendOTPLoading(false);
+      if (StatusSuccessCodes.includes(res?.status)) {
+        message.success(`${res?.data?.detail}`);
+      } else {
+        message.error(`${res.detail}`);
+      }
     });
   }
 
@@ -63,11 +85,16 @@ export default function RegisterOTP() {
               type="primary"
               htmlType="submit"
               className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
+              loading={loginLoading}
             >
               {t("login")}
             </Button>
           </Form.Item>
-          <Button className="w-full h-[56px] font-bold px-[20px] py-[10px] rounded-[12px]">
+          <Button
+            className="w-full h-[56px] font-bold px-[20px] py-[10px] rounded-[12px]"
+            loading={resendOTPLoading}
+            onClick={resendOTP}
+          >
             {t("resendOTP")}
           </Button>
         </Form>

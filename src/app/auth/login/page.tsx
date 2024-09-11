@@ -4,10 +4,11 @@ import { authActions } from "@/store/reducers/authentcationSlice";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { StatusSuccessCodes } from "@/utils/successStatus";
 import { Button, Divider, Form, Input, message } from "antd";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const Login = () => {
@@ -15,10 +16,13 @@ const Login = () => {
   const [requestOTPForm] = Form.useForm();
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [sendOtpLoading, setSendOtpLoading] = useState<boolean>(false);
 
   async function requestOTP(values: { email: string }) {
     dispatch(authActions.setLoginEmail(values?.email));
+    setSendOtpLoading(true);
     postAuthRequest("auth/request-otp/", values).then((res) => {
+      setSendOtpLoading(false);
       if (StatusSuccessCodes.includes(res?.status)) {
         message.success(`${res?.data?.detail}`);
         router.push("./login/otp");
@@ -26,6 +30,10 @@ const Login = () => {
         message.error(`${res.detail}`);
       }
     });
+  }
+  async function googleSignIn() {
+    const res = await signIn("google", { redirect: false });
+    console.log(res);
   }
 
   return (
@@ -56,7 +64,10 @@ const Login = () => {
         </div>
       </div>
       <div className="flex gap-4 w-full justify-between items-center py-8">
-        <div className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer">
+        <div
+          className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer"
+          onClick={googleSignIn}
+        >
           <Image src="/images/google.svg" alt="google" width={26} height={26} />
           <span className="px-4  text-[16px] font-normal leading-[19.2px] text-[#4285F4]">
             {t("loginWithGoogle")}
@@ -117,6 +128,7 @@ const Login = () => {
               type="primary"
               htmlType="submit"
               className="w-full h-[56px] px-[20px] py-[10px] rounded-[12px]"
+              loading={sendOtpLoading}
             >
               {t("sendOTP")}
             </Button>
