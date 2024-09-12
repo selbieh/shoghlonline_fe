@@ -6,12 +6,7 @@ import axios from "axios";
 import { JWT } from "next-auth/jwt";
 import { AdapterUser } from "next-auth/adapters";
 import Google from "next-auth/providers/google";
-import {
-  handelErrors,
-  postAuthRequest,
-  postRequest,
-  setAuthorizationToken,
-} from "../../api";
+import { handelErrors, setAuthorizationToken } from "../../api";
 import { StatusSuccessCodes } from "@/utils/successStatus";
 
 export const options: NextAuthOptions = {

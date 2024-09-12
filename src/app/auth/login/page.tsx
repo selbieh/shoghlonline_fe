@@ -32,8 +32,10 @@ const Login = () => {
     });
   }
   async function googleSignIn() {
-    const res = await signIn("google", { redirect: false });
-    console.log(res);
+    const res = await signIn("google", {
+      redirect: false,
+      callbackUrl: "/clientOrFreelance",
+    });
   }
 
   return (
