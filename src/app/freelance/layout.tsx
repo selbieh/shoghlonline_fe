@@ -1,21 +1,25 @@
 "use client";
+import AvatarDropdownMenu from "@/components/freelance/homePage/avatarDropdownMenu";
 import FooterFreelancer from "@/components/layoutFreelancer/footer";
 import {
   Avatar,
   Button,
   ConfigProvider,
   Divider,
+  Dropdown,
   Layout,
   Menu,
   MenuProps,
   Select,
   Space,
+  Switch,
 } from "antd";
 import Search, { SearchProps } from "antd/es/input/Search";
 import { useTranslations } from "next-intl";
 const { Header, Content, Footer } = Layout;
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React from "react";
 import { CiMail } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -82,6 +86,72 @@ export default function RootLayout({
   const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
     console.log(info?.source, value);
 
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      icon: (
+        <Avatar
+          icon={<FaRegUserCircle />}
+          size={24}
+          className="cursor-pointer hover:scale-110 transition-all"
+          onClick={() => router.push("/freelance/profile")}
+        />
+      ),
+
+      label: (
+        <div className="flex flex-row justify-between">
+          <div>Name</div>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#34c759",
+                // controlInteractiveSize: 16,
+              },
+            }}
+          >
+            <Switch
+              checkedChildren={t("online")}
+              unCheckedChildren={t("offline")}
+              defaultChecked
+            />
+          </ConfigProvider>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          2nd menu item (disabled)
+        </a>
+      ),
+      // icon: <SmileOutlined />,
+      disabled: true,
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          3rd menu item (disabled)
+        </a>
+      ),
+      disabled: true,
+    },
+    {
+      key: "4",
+      danger: true,
+      label: "a danger item",
+    },
+  ];
+
   return (
     <>
       <Layout>
@@ -94,12 +164,18 @@ export default function RootLayout({
         >
           <div>
             <Space size={"middle"}>
-              <Avatar
-                icon={<FaRegUserCircle />}
-                size={24}
-                className="cursor-pointer hover:scale-110 transition-all"
-                onClick={() => router.push("/freelance/profile")}
-              />
+              <Dropdown dropdownRender={(menu) => <AvatarDropdownMenu />}>
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <Avatar
+                      icon={<FaRegUserCircle />}
+                      size={24}
+                      className="cursor-pointer hover:scale-110 transition-all"
+                      onClick={() => router.push("/freelance/profile/1")}
+                    />
+                  </Space>
+                </a>
+              </Dropdown>
               <IoNotificationsOutline size={24} />
               <CiMail size={24} />
               <div className="searchBox">
