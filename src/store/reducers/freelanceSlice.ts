@@ -22,7 +22,18 @@ const freelanceSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(,(state)=>{})
+    builder.addCase(getVacancies.pending, (state: any) => {
+      state.getVacanciesLoading = true;
+      state.getVacanciesError = null;
+    }),
+      builder.addCase(getVacancies.fulfilled, (state: any) => {
+        state.getVacanciesLoading = true;
+        state.getVacanciesError = null;
+      }),
+      builder.addCase(getVacancies.pending, (state: any) => {
+        state.getVacanciesLoading = true;
+        state.getVacanciesError = null;
+      });
   },
 });
 
