@@ -1,6 +1,6 @@
 "use client";
 import { Breadcrumb, Button, Divider } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import ShareSection from "@/components/freelance/gigDetailsPage/shareSection";
@@ -9,6 +9,7 @@ import FreelancerDetailsSection from "@/components/client/freelancerInfoSection"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ServiceStatsCard from "@/components/client/serviceStatsCard";
+import EditingServicePolicyModal from "@/components/client/editingServicePolicyModal";
 
 export default function ServiceDetailsPage({
   params,
@@ -16,6 +17,8 @@ export default function ServiceDetailsPage({
   params: { service: number[] };
 }) {
   const t = useTranslations();
+  const [serviceEditPolicyModal, setServiceEditPolicyModal] =
+    useState<boolean>(false);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -33,6 +36,13 @@ export default function ServiceDetailsPage({
       slidesToSlide: 1, // optional, default to 1.
     },
   };
+
+  function openModal() {
+    setServiceEditPolicyModal(true);
+  }
+  function closeModal() {
+    setServiceEditPolicyModal(false);
+  }
 
   return (
     <div className="w-full p-[50px]">
@@ -83,6 +93,7 @@ export default function ServiceDetailsPage({
                   height={24}
                 />
               }
+              onClick={openModal}
             >
               {t("edit")}
             </Button>
@@ -202,6 +213,10 @@ export default function ServiceDetailsPage({
           {/* </div> */}
         </Carousel>
       </div>
+      <EditingServicePolicyModal
+        modalOpen={serviceEditPolicyModal}
+        closeModal={closeModal}
+      />
     </div>
   );
 }

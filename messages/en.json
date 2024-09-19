@@ -250,5 +250,8 @@
   "newOrders": "New Orders",
   "completedOrders": "Completed Orders",
   "totalOrders": "Total Orders",
-  "totalProfit": "Total Profit"
+  "totalProfit": "Total Profit",
+  "editServicesModalTitle": "Service Edit Policy On Shoghl Online",
+  "agree": "Agree",
+  "editService": "Edit Service"
 }

@@ -249,5 +249,8 @@
   "newOrders": "الطلبات الجديدة",
   "completedOrders": "الطلبات المكتملة",
   "totalOrders": "اجمالي الطلبات",
-  "totalProfit": "اجمالي الارباح"
+  "totalProfit": "اجمالي الارباح",
+  "editServicesModalTitle": "سياسة تعديل الخدمة على شغل أونلاين",
+  "agree": "أوافق علي سياسات تعديل الخدمة علي شغل اون لاين",
+  "editService": "تعديل الخدمة"
 }
