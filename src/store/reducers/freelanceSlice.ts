@@ -3,7 +3,11 @@ import { freelanceInitialState } from "@/utils/types/sliceInitialStates/IFreelan
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosRequestConfig } from "axios";
 
-const initialState: freelanceInitialState = {};
+const initialState: freelanceInitialState = {
+  vacancies: [],
+  getVacanciesError: null,
+  getVacanciesLoading: false,
+};
 
 export const getVacancies = createAsyncThunk(
   "freelance/vacancies",
@@ -22,17 +26,18 @@ const freelanceSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getVacancies.pending, (state: any) => {
+    builder.addCase(getVacancies.pending, (state: any, action) => {
       state.getVacanciesLoading = true;
       state.getVacanciesError = null;
     }),
-      builder.addCase(getVacancies.fulfilled, (state: any) => {
-        state.getVacanciesLoading = true;
+      builder.addCase(getVacancies.fulfilled, (state: any, action: any) => {
+        state.getVacanciesLoading = false;
         state.getVacanciesError = null;
+        state.vacancies = action.payload;
       }),
-      builder.addCase(getVacancies.pending, (state: any) => {
-        state.getVacanciesLoading = true;
-        state.getVacanciesError = null;
+      builder.addCase(getVacancies.rejected, (state: any, action) => {
+        state.getVacanciesLoading = false;
+        state.getVacanciesError = action.payload;
       });
   },
 });

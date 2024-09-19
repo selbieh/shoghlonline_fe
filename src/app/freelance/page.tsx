@@ -6,16 +6,21 @@ import CompleteYourProfile from "@/components/freelance/homePage/completeYourPro
 import GigsSuitsYou from "@/components/freelance/homePage/gigsSuitsYou";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import SearchAndFiltersSide from "@/components/freelance/homePage/searchAndFiltersSide";
-import { RootState } from "@/store/rootReducer";
+import { getVacancies } from "@/store/reducers/freelanceSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { Tabs, TabsProps } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Freelance = () => {
   const t = useTranslations();
   const { profileReady } = useSelector((state: RootState) => state.profile);
+  const { vacancies, getVacanciesError, getVacanciesLoading } = useSelector(
+    (state: RootState) => state.freelance
+  );
+  const dispatch = useAppDispatch();
 
   const tabsItems: TabsProps["items"] = [
     {
@@ -43,7 +48,9 @@ const Freelance = () => {
       children: <BookmarkedGigs />,
     },
   ];
-  console.log(profileReady);
+  useEffect(() => {
+    dispatch(getVacancies({}));
+  }, []);
   return (
     <div className="flex flex-row">
       <div>
