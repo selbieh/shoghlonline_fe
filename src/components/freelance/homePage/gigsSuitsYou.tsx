@@ -13,6 +13,18 @@ export default function GigsSuitsYou() {
       label: t("newest"),
       key: "1",
     },
+    {
+      label: t("oldest"),
+      key: "2",
+    },
+    {
+      label: t("priceUp"),
+      key: "3",
+    },
+    {
+      label: t("priceDown"),
+      key: "4",
+    },
   ];
 
   function sortBy(e: any) {
@@ -32,7 +44,10 @@ export default function GigsSuitsYou() {
       <div className="w-full rounded-[12px] py-[26px] border-[1px] border-[#e0e1e6] m-5 p-5">
         <div className="px-10 border-b-[1px] border-b-[#e0e1e6] pb-5 flex gap-2 items-center">
           <span>{t("sortBy")}</span>
-          <Dropdown menu={{ items, onClick: (e) => sortBy(e) }}>
+          <Dropdown
+            menu={{ items, onClick: (e) => sortBy(e) }}
+            // dropdownRender={}
+          >
             <Space className=" w-[86px] h-[40px] border-[1px] border-[#e0e1e6] rounded-[12px] p-[10px]">
               الاحدث
               <IoIosArrowDown size={18} />

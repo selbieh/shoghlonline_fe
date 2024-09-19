@@ -154,6 +154,7 @@ export default function RootLayout({
 
   return (
     <>
+      <title>{pathname}</title>
       <Layout>
         <Header
           className="flex  items-center justify-between bg-white"
