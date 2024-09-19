@@ -76,9 +76,10 @@ export const options: NextAuthOptions = {
       if (params?.account?.provider === "google") {
         let body = {
           access_token: params?.account?.access_token,
-          // code:params.account.
+          email: params?.profile?.email,
           id_token: params?.account?.id_token,
         };
+        console.log(params);
         const res: any = await axios
           .post(`${process.env.NEXT_PUBLIC_BASE_URL}auth/google/`, body)
           .catch((err) => {
