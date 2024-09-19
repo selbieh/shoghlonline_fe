@@ -3,19 +3,29 @@ import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useTransition } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { CiSettings } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdLogout, MdOutlineLanguage } from "react-icons/md";
 import { Locale } from "../../../../config";
 import { setUserLocale } from "@/services/locale";
+import { useRouter } from "next/navigation";
 
 export default function AvatarDropdownMenu() {
   const t = useTranslations();
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const [mode, setMode] = useState<string | null>();
   async function logout() {
     signOut();
   }
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      let mode = localStorage.getItem("mode");
+      setMode(mode);
+    }
+  }, []);
 
   const items = [
     {
@@ -43,6 +53,7 @@ export default function AvatarDropdownMenu() {
     });
   }
 
+  console.log(mode);
   return (
     <div className="w-[352px] h-fit border-[1px] rounded-[12px] border-[#7179ce] bg-white">
       <Link
@@ -68,13 +79,16 @@ export default function AvatarDropdownMenu() {
           <Switch
             checkedChildren={t("online")}
             unCheckedChildren={t("offline")}
-            defaultChecked
+            // defaultChecked
           />
         </ConfigProvider>
       </Link>
       <div
         className="w-full h-[60px] p-[10px] flex flex-row gap-2 items-center hover:bg-[#f7f9ff] cursor-pointer
 "
+        onClick={() => {
+          router.push("/freelance/settings");
+        }}
       >
         <CiSettings size={18} />
         <span className=" text-[14px]">{t("settings")}</span>
@@ -93,7 +107,21 @@ export default function AvatarDropdownMenu() {
           <span>{t("enterAsClient")}</span>
         </div>
 
-        <Switch defaultChecked={false} />
+        <Switch
+          value={mode === `client`}
+          onChange={(e) => {
+            console.log(e);
+            if (e === true) {
+              setMode("client");
+              router.push("/client");
+              localStorage.setItem("mode", "client");
+            } else {
+              router.push("/freelance");
+              localStorage.setItem("mode", "freelancer");
+              setMode("freelancer");
+            }
+          }}
+        />
       </div>
       <div
         className="w-full h-[60px] p-[10px] flex flex-row gap-2 items-center hover:bg-[#f7f9ff] cursor-pointer
