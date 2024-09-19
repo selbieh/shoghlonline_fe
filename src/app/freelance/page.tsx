@@ -22,6 +22,8 @@ const Freelance = () => {
   );
   const dispatch = useAppDispatch();
 
+  console.log(vacancies);
+
   const tabsItems: TabsProps["items"] = [
     {
       key: "1",
@@ -66,4 +68,5 @@ const Freelance = () => {
   );
 };
 
-export default AuthGuard(Freelance);
+// export default AuthGuard(Freelance);
+export default Freelance;

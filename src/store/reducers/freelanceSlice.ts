@@ -13,7 +13,7 @@ export const getVacancies = createAsyncThunk(
   "freelance/vacancies",
   async (config: AxiosRequestConfig, { rejectWithValue }) => {
     try {
-      const res = await GetReq(`api/v1/vacancy/vacancies`, config);
+      const res = await GetReq(`api/v1/vacancy/vacancies/`, config);
       return res;
     } catch (error: any) {
       return rejectWithValue(handelErrors(error));
@@ -33,7 +33,7 @@ const freelanceSlice = createSlice({
       builder.addCase(getVacancies.fulfilled, (state: any, action: any) => {
         state.getVacanciesLoading = false;
         state.getVacanciesError = null;
-        state.vacancies = action.payload;
+        state.vacancies = action.payload.data;
       }),
       builder.addCase(getVacancies.rejected, (state: any, action) => {
         state.getVacanciesLoading = false;
