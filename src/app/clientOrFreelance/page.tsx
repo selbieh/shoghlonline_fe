@@ -16,6 +16,7 @@ function ClientOrFreeLance() {
   function chooseMode() {
     window.localStorage.setItem("mode", clientOrFreelancer);
     if (clientOrFreelancer === "client") {
+      router.push("/client");
     } else if (clientOrFreelancer === "freelancer") {
       router.push("/freelance");
     }
