@@ -5,6 +5,7 @@ import { useAppDispatch } from "@/store/rootReducer";
 import { StatusSuccessCodes } from "@/utils/successStatus";
 import { Button, Divider, Form, Input, message } from "antd";
 import { PhoneNumberUtil } from "google-libphonenumber";
+import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -33,6 +34,13 @@ export default function Register() {
     });
   }
 
+  async function googleSignIn() {
+    const res = await signIn("google", {
+      redirect: false,
+      callbackUrl: "/clientOrFreelance",
+    });
+  }
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -52,7 +60,10 @@ export default function Register() {
         </div>
       </div>
       <div className="flex gap-4 w-full justify-between items-center py-8">
-        <div className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer">
+        <div
+          className="w-[434px] flex justify-center items-center bg-[#E9F1FF] rounded-[10px] h-[55px] cursor-pointer"
+          onClick={googleSignIn}
+        >
           <Image src="/images/google.svg" alt="google" width={26} height={26} />
           <span className="px-4  text-[16px] font-normal leading-[19.2px] text-[#4285F4]">
             {t("loginWithGoogle")}

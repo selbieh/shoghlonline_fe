@@ -1,17 +1,19 @@
 import { Account, NextAuthOptions, Profile, Session, User } from "next-auth";
-import Github from "next-auth/providers/github";
 import CredentialsProvider, {
   CredentialInput,
 } from "next-auth/providers/credentials";
 import axios from "axios";
 import { JWT } from "next-auth/jwt";
 import { AdapterUser } from "next-auth/adapters";
+import Google from "next-auth/providers/google";
+import { handelErrors, setAuthorizationToken } from "../../api";
+import { StatusSuccessCodes } from "@/utils/successStatus";
 
 export const options: NextAuthOptions = {
   providers: [
-    Github({
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
       name: "credentials",
@@ -22,7 +24,9 @@ export const options: NextAuthOptions = {
       async authorize(credentials, req) {
         const res: any = await axios
           .post(`${process.env.NEXT_PUBLIC_BASE_URL}auth/login/`, credentials)
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            throw err;
+          });
 
         const user = await res?.data;
         if (user) {
@@ -69,14 +73,42 @@ export const options: NextAuthOptions = {
       if (params?.account?.provider === "credentials") {
         return params?.user;
       }
+      if (params?.account?.provider === "google") {
+        let body = {
+          access_token: params?.account?.access_token,
+          email: params?.profile?.email,
+          id_token: params?.account?.id_token,
+        };
+        console.log(params);
+        const res: any = await axios
+          .post(`${process.env.NEXT_PUBLIC_BASE_URL}auth/google/`, body)
+          .catch((err) => {
+            throw err;
+          });
+        if (StatusSuccessCodes.includes(res.status)) {
+          console.log("response db fdb", res?.data);
+          setAuthorizationToken(res?.data?.access);
+          const user = res?.data?.user;
+          const accessToken = res?.data?.access;
+          if (user && accessToken) {
+            params.account.accessToken = accessToken;
+            // user.token =accessToken;
+            params.account.id = res.data.user.id;
+            return { ...user };
+          } else {
+            return null;
+          }
+        } else {
+          return handelErrors(res);
+        }
+      }
       return false;
     },
     async redirect(props) {
-      if (props.url.split("/").includes("auth")) {
-        return "/clientOrFreelance";
-      } else {
-        return "/";
-      }
+      if (props.url.startsWith("/")) return `${props.baseUrl}${props.url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(props.url).origin === props.baseUrl) return props.url;
+      return props.baseUrl;
     },
   },
   session: {
