@@ -2,12 +2,17 @@ import Image from "next/image";
 import GigTag from "./gigTag";
 import { Divider } from "antd";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "use-intl";
+import { Vacancy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
+import { AvailableSkill } from "@/utils/types/sliceInitialStates/IFreelancerProfile";
 
-export default function GigOffer({ data }: { data: any }) {
+export default function GigOffer({ data }: { data: Vacancy }) {
+  const t = useTranslations();
   const router = useRouter();
   function goToGigDetailsPage() {
     router.push("/freelance/gigDetails/5");
   }
+
   return (
     <div
       className=" hover:bg-[#f7f9ff] hover:cursor-pointer"
@@ -15,9 +20,7 @@ export default function GigOffer({ data }: { data: any }) {
     >
       <div className=" flex flex-row justify-between w-full my-5">
         <div className="flex flex-row items-center">
-          <div className=" font-bold text-[16px] mx-5">
-            مطلوب مصمم جرافيك لتصميم نماذج التطبيقات والمواقع الإلكترونية
-          </div>
+          <div className=" font-bold text-[16px] mx-5">{data?.title} </div>
           <Image
             src={"/icons/bookmark.svg"}
             alt="bookmark"
@@ -32,7 +35,9 @@ export default function GigOffer({ data }: { data: any }) {
             width={24}
             height={24}
           />
-          <span>منذ 10 دقائق</span>
+          <span>
+            {t("since")} {new Date(data?.created_at).toLocaleDateString("CA")}
+          </span>
         </div>
       </div>
       <div className="flex flex-row gap-20 mx-10">
@@ -57,16 +62,11 @@ export default function GigOffer({ data }: { data: any }) {
           <span>1:3 شهور</span>
         </div>
       </div>
-      <div className=" m-10">
-        نبحث عن مصمم جرافيك ماهر لإنشاء نماذج تطبيقات ومواقع إلكترونية جذابة
-        بصريًا لوكالتنا. يجب أن يكون المرشح المثالي لديه فهم قوي لمبادئ التصميم
-        والقدرة على العمل وفقًا لإرشادات علامتنا التجارية. تشمل المسؤوليات
-        الرئيسية إنشاء نماذج تمثل بدقة رؤية العميل وترجمتها إلى تصاميم جذابة.
-        يجب أن يكون لدى المصمم خبرة في إنشاء نماذج للمنصات المحمولة والويب على
-        حد سواء.
-      </div>
+      <div className=" m-10">{data?.description}</div>
       <div className="flex flex-row flex-wrap gap-5 mx-10">
-        <GigTag>فوتوشوب</GigTag>
+        {data?.skills?.map((skill: AvailableSkill) => {
+          return <GigTag key={Math.random()}>{skill.name}</GigTag>;
+        })}
       </div>
       <div className="flex flex-row flex-wrap gap-5 m-10">
         <div className="flex flex-row items-center gap-1">
@@ -76,7 +76,7 @@ export default function GigOffer({ data }: { data: any }) {
             width={24}
             height={24}
           />
-          <span>القاهرة - مصر</span>
+          <span>{data?.location}</span>
         </div>
         <div className="flex flex-row items-center gap-1">
           <Image
