@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosRequestConfig } from "axios";
 
 const initialState: freelanceInitialState = {
-  vacancies: [],
+  vacancies: { count: 0, next: null, previous: null, results: [] },
   getVacanciesError: null,
   getVacanciesLoading: false,
 };

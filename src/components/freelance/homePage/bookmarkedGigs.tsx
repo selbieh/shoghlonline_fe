@@ -39,14 +39,14 @@ export default function BookmarkedGigs() {
             </Space>
           </Dropdown>
         </div>
+        {/* <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
+        <GigOffer data={null} /> */}
         <div className="w-full flex items-center justify-center">
           <Button
             style={{ height: "34px" }}

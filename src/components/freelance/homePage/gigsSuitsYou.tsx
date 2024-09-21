@@ -90,8 +90,8 @@ export default function GigsSuitsYou() {
             })}
           </>
         )}
-        {/*
-        <GigOffer data={null} />
+
+        {/* <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
@@ -99,7 +99,7 @@ export default function GigsSuitsYou() {
         <GigOffer data={null} />
         <GigOffer data={null} /> */}
         <div className="w-full flex items-center justify-center">
-          {vacancies.next && (
+          {vacancies?.next && (
             <Button
               style={{ height: "34px" }}
               className="w-[95px] h-[34px] rounded-[6px] py-[8px] px-[12]"
