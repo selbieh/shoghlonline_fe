@@ -9,26 +9,19 @@ export async function setAuthorizationToken(token?: string) {
     const locale = await getUserLocale();
     axios.defaults.headers.common["Accept-Language"] = `${locale}`;
   }
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5MzUxNzk4LCJpYXQiOjE3MjY3NTk3OTgsImp0aSI6IjkwNTAwMTljODM1YzQyZTRhMmVhYjFiN2UwMjBlNzRkIiwidXNlcl9pZCI6IjE5IiwiZmlyc3RfbmFtZSI6InN0cmluZyIsImxhc3RfbmFtZSI6InN0cmluZyJ9.gzsrrISHNKxASd5d21dFbXBtyScWg9V5osaBgXYWqog`;
 
-  // if (token) {
-  //   axios.defaults.headers.common[
-  //     "Authorization"
-  //   ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5MzUxNzk4LCJpYXQiOjE3MjY3NTk3OTgsImp0aSI6IjkwNTAwMTljODM1YzQyZTRhMmVhYjFiN2UwMjBlNzRkIiwidXNlcl9pZCI6IjE5IiwiZmlyc3RfbmFtZSI6InN0cmluZyIsImxhc3RfbmFtZSI6InN0cmluZyJ9.gzsrrISHNKxASd5d21dFbXBtyScWg9V5osaBgXYWqog`;
-  //   return;
-  // } else {
-  //   const session: any = await getSession();
-  //   const userToken = session?.token;
-  //   if (userToken) {
-  //     axios.defaults.headers.common[
-  //       "Authorization"
-  //     ] = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI5MzUxNzk4LCJpYXQiOjE3MjY3NTk3OTgsImp0aSI6IjkwNTAwMTljODM1YzQyZTRhMmVhYjFiN2UwMjBlNzRkIiwidXNlcl9pZCI6IjE5IiwiZmlyc3RfbmFtZSI6InN0cmluZyIsImxhc3RfbmFtZSI6InN0cmluZyJ9.gzsrrISHNKxASd5d21dFbXBtyScWg9V5osaBgXYWqog`;
-  //   } else {
-  //     axios.defaults.headers.common["Authorization"] = null;
-  //   }
-  // }
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    return;
+  } else {
+    const session: any = await getSession();
+    const userToken = session?.token;
+    if (userToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+    } else {
+      axios.defaults.headers.common["Authorization"] = null;
+    }
+  }
 }
 
 export async function GetReq(path: string, config?: AxiosRequestConfig) {

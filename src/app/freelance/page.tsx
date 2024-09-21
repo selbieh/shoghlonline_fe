@@ -68,5 +68,4 @@ const Freelance = () => {
   );
 };
 
-// export default AuthGuard(Freelance);
-export default Freelance;
+export default AuthGuard(Freelance);
