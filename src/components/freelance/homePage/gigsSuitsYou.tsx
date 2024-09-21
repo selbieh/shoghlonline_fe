@@ -1,12 +1,35 @@
-import { Button, Dropdown, Input, MenuProps, Space } from "antd";
+import {
+  Button,
+  Divider,
+  Dropdown,
+  Input,
+  MenuProps,
+  Skeleton,
+  Space,
+  Spin,
+} from "antd";
 import { useTranslations } from "next-intl";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import GigOffer from "./gigOffer";
+import { Vacancy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
+import { getVacancies } from "@/store/reducers/freelanceSlice";
 
 export default function GigsSuitsYou() {
   const t = useTranslations();
+  const { vacancies, getVacanciesError, getVacanciesLoading } = useSelector(
+    (state: RootState) => state.freelance
+  );
+  const dispatch = useAppDispatch();
+
+  console.log(vacancies);
+
+  useEffect(() => {
+    dispatch(getVacancies({}));
+  }, []);
 
   const items: MenuProps["items"] = [
     {
@@ -54,22 +77,37 @@ export default function GigsSuitsYou() {
             </Space>
           </Dropdown>
         </div>
+
+        {getVacanciesLoading ? (
+          <>
+            <Skeleton active className="w-full h-[339px] my-5" />
+            <Divider className="bg-[#e7e8ec]" />
+          </>
+        ) : (
+          <>
+            {vacancies?.results?.map((vacancy: any) => {
+              return <GigOffer key={vacancy.id} data={vacancy} />;
+            })}
+          </>
+        )}
+        {/*
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
         <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
+        <GigOffer data={null} /> */}
         <div className="w-full flex items-center justify-center">
-          <Button
-            style={{ height: "34px" }}
-            className="w-[95px] h-[34px] rounded-[6px] py-[8px] px-[12]"
-            type="primary"
-          >
-            {t("more")}
-          </Button>
+          {vacancies.next && (
+            <Button
+              style={{ height: "34px" }}
+              className="w-[95px] h-[34px] rounded-[6px] py-[8px] px-[12]"
+              type="primary"
+            >
+              {t("more")}
+            </Button>
+          )}
         </div>
       </div>
     </Fragment>

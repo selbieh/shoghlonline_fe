@@ -17,12 +17,6 @@ import { useSelector } from "react-redux";
 const Freelance = () => {
   const t = useTranslations();
   const { profileReady } = useSelector((state: RootState) => state.profile);
-  const { vacancies, getVacanciesError, getVacanciesLoading } = useSelector(
-    (state: RootState) => state.freelance
-  );
-  const dispatch = useAppDispatch();
-
-  console.log(vacancies);
 
   const tabsItems: TabsProps["items"] = [
     {
@@ -50,9 +44,7 @@ const Freelance = () => {
       children: <BookmarkedGigs />,
     },
   ];
-  useEffect(() => {
-    dispatch(getVacancies({}));
-  }, []);
+
   return (
     <div className="flex flex-row">
       <div>
@@ -61,7 +53,7 @@ const Freelance = () => {
         <Advertise />
       </div>
 
-      <div>
+      <div className="w-full">
         <Tabs items={tabsItems} />
       </div>
     </div>

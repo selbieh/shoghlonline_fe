@@ -1,12 +1,18 @@
 import { AvailableSkill } from "./IFreelancerProfile";
 
 export interface freelanceInitialState {
-  vacancies: vacancy[];
+  vacancies: vacanciesResponse;
   getVacanciesError: any;
   getVacanciesLoading: boolean;
 }
 
-interface vacancy {
+interface vacanciesResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Vacancy[];
+}
+export interface Vacancy {
   id: number;
   title: string;
   description: string;
