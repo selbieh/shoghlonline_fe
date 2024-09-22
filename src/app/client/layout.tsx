@@ -2,10 +2,10 @@
 
 import HomePagesLayout from "@/components/layouts/homepageLayout";
 
-export default function RootLayout({
+export default function ClientLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <HomePagesLayout place="freelance">{children}</HomePagesLayout>;
+  return <HomePagesLayout place="client">{children}</HomePagesLayout>;
 }
