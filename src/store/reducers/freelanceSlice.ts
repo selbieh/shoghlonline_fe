@@ -8,6 +8,9 @@ const initialState: freelanceInitialState = {
   getVacanciesError: null,
   getVacanciesLoading: false,
   searchValue: null,
+  vacancy: null,
+  getVacancyLoading: false,
+  getVacancyError: null,
 };
 
 export const getVacancies = createAsyncThunk(
@@ -15,6 +18,21 @@ export const getVacancies = createAsyncThunk(
   async (config: AxiosRequestConfig, { rejectWithValue }) => {
     try {
       const res = await GetReq(`api/v1/vacancy/vacancies/`, config);
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
+
+export const getVacancyById = createAsyncThunk(
+  "freelance/vacancyById",
+  async (
+    [id, config]: [id: string, config: AxiosRequestConfig],
+    { rejectWithValue }
+  ) => {
+    try {
+      const res = await GetReq(`api/v1/vacancy/vacancies/${id}/`, config);
       return res;
     } catch (error: any) {
       return rejectWithValue(handelErrors(error));
@@ -43,6 +61,19 @@ const freelanceSlice = createSlice({
       builder.addCase(getVacancies.rejected, (state: any, action) => {
         state.getVacanciesLoading = false;
         state.getVacanciesError = action.payload;
+      });
+    builder.addCase(getVacancyById.pending, (state: any, action) => {
+      state.getVacancyLoading = true;
+      state.getVacancyError = null;
+    }),
+      builder.addCase(getVacancyById.fulfilled, (state: any, action: any) => {
+        state.getVacancyLoading = false;
+        state.getVacancyError = null;
+        state.vacancy = action.payload.data;
+      }),
+      builder.addCase(getVacancyById.rejected, (state: any, action) => {
+        state.getVacancyLoading = false;
+        state.getVacancyError = action.payload;
       });
   },
 });

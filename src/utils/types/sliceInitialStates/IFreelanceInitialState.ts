@@ -5,6 +5,9 @@ export interface freelanceInitialState {
   getVacanciesError: any;
   getVacanciesLoading: boolean;
   searchValue: string | null;
+  vacancy: Vacancy | null;
+  getVacancyLoading: boolean;
+  getVacancyError: any;
 }
 
 interface vacanciesResponse {
@@ -27,7 +30,7 @@ export interface Vacancy {
   modified_at: string;
 }
 
-interface PostedBy {
+export interface PostedBy {
   id: number;
   mobile: string;
   email: string;
