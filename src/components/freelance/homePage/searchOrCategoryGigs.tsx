@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import GigOffer from "./gigOffer";
 import Image from "next/image";
+import Search from "@/components/search/search";
 
 export default function SearchAndCategoryGigs() {
   const t = useTranslations();
@@ -22,13 +23,7 @@ export default function SearchAndCategoryGigs() {
   }
   return (
     <Fragment>
-      <div className="w-full m-5 ">
-        <Input
-          className="h-[56px]"
-          placeholder={t("search")}
-          prefix={<CiSearch size={20} />}
-        />
-      </div>
+      <Search />
 
       <div className="w-full rounded-[12px] py-[26px] border-[1px] border-[#e0e1e6] m-5 p-5">
         <div className=" flex flex-row justify-between border-b-[#e0e1e6] border-b-[1px]">
