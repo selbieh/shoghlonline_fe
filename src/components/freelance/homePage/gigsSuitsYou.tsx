@@ -4,12 +4,14 @@ import {
   Dropdown,
   Input,
   MenuProps,
+  message,
+  Select,
   Skeleton,
   Space,
   Spin,
 } from "antd";
 import { useTranslations } from "next-intl";
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 import GigOffer from "./gigOffer";
@@ -17,6 +19,7 @@ import { Vacancy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState
 import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
 import { getVacancies } from "@/store/reducers/freelanceSlice";
+import Search from "@/components/search/search";
 
 export default function GigsSuitsYou() {
   const t = useTranslations();
@@ -25,57 +28,51 @@ export default function GigsSuitsYou() {
   );
   const dispatch = useAppDispatch();
 
-  console.log(vacancies);
-
   useEffect(() => {
     dispatch(getVacancies({}));
   }, []);
 
-  const items: MenuProps["items"] = [
+  const items = [
     {
       label: t("newest"),
-      key: "1",
+      value: "newest",
     },
     {
       label: t("oldest"),
-      key: "2",
+      value: "oldest",
     },
     {
       label: t("priceUp"),
-      key: "3",
+      value: "price_up",
     },
     {
       label: t("priceDown"),
-      key: "4",
+      value: "price_down",
     },
   ];
 
   function sortBy(e: any) {
-    console.log("key", e);
+    dispatch(getVacancies({ params: { ordering: e } }));
   }
+
+  useEffect(() => {
+    getVacanciesError && message.error("Something went wrong");
+  }, [getVacanciesError]);
+
   return (
     <Fragment>
       <div>{t("gigsSuitsYouTab")}</div>
-      <div className="w-full m-5 ">
-        <Input
-          className="h-[56px]"
-          placeholder={t("search")}
-          prefix={<CiSearch size={20} />}
-        />
-      </div>
+      <Search />
 
       <div className="w-full rounded-[12px] py-[26px] border-[1px] border-[#e0e1e6] m-5 p-5">
         <div className="px-10 border-b-[1px] border-b-[#e0e1e6] pb-5 flex gap-2 items-center">
           <span>{t("sortBy")}</span>
-          <Dropdown
-            menu={{ items, onClick: (e) => sortBy(e) }}
-            // dropdownRender={}
-          >
-            <Space className=" w-[86px] h-[40px] border-[1px] border-[#e0e1e6] rounded-[12px] p-[10px]">
-              الاحدث
-              <IoIosArrowDown size={18} />
-            </Space>
-          </Dropdown>
+          <Select
+            options={items}
+            defaultValue={"newest"}
+            onSelect={sortBy}
+            className="min-w-[120px]"
+          />
         </div>
 
         {getVacanciesLoading ? (
@@ -91,13 +88,6 @@ export default function GigsSuitsYou() {
           </>
         )}
 
-        {/* <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} /> */}
         <div className="w-full flex items-center justify-center">
           {vacancies?.next && (
             <Button
