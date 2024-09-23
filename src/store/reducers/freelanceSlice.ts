@@ -7,6 +7,7 @@ const initialState: freelanceInitialState = {
   vacancies: { count: 0, next: null, previous: null, results: [] },
   getVacanciesError: null,
   getVacanciesLoading: false,
+  searchValue: null,
 };
 
 export const getVacancies = createAsyncThunk(
@@ -24,7 +25,11 @@ export const getVacancies = createAsyncThunk(
 const freelanceSlice = createSlice({
   name: "freelance",
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchValue(state, action) {
+      state.searchValue = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getVacancies.pending, (state: any, action) => {
       state.getVacanciesLoading = true;

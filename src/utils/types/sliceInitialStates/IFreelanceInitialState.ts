@@ -4,6 +4,7 @@ export interface freelanceInitialState {
   vacancies: vacanciesResponse;
   getVacanciesError: any;
   getVacanciesLoading: boolean;
+  searchValue: string | null;
 }
 
 interface vacanciesResponse {
