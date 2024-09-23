@@ -72,7 +72,7 @@ export default function GigDetailsPage({
             height={24}
           />
           <span>
-            {t("since")}{" "}
+            {t("since")}
             {new Date(vacancy?.created_at).toLocaleDateString("CA")}
           </span>
         </div>

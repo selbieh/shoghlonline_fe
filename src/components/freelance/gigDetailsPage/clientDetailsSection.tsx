@@ -3,7 +3,11 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { PostedBy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
 
-export default function ClientDetailsSection({ data }: { data: PostedBy }) {
+export default function ClientDetailsSection({
+  data,
+}: {
+  data: PostedBy | undefined;
+}) {
   const t = useTranslations();
 
   return (
@@ -17,7 +21,7 @@ export default function ClientDetailsSection({ data }: { data: PostedBy }) {
           height={18}
         />
         <span>
-          {data.first_name} {data.last_name}
+          {data?.first_name} {data?.last_name}
         </span>
       </div>
       <div className="flex flex-row items-center gap-2">
