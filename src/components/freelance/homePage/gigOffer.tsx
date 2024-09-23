@@ -10,12 +10,12 @@ export default function GigOffer({ data }: { data: Vacancy }) {
   const t = useTranslations();
   const router = useRouter();
   function goToGigDetailsPage() {
-    router.push("/freelance/gigDetails/5");
+    router.push(`/freelance/gigDetails/${data?.id}`);
   }
 
   return (
     <div
-      className=" hover:bg-[#f7f9ff] hover:cursor-pointer"
+      className=" hover:bg-[#f7f9ff] hover:cursor-pointer px-2"
       onClick={goToGigDetailsPage}
     >
       <div className=" flex flex-row justify-between w-full my-5">
@@ -94,7 +94,9 @@ export default function GigOffer({ data }: { data: Vacancy }) {
             width={24}
             height={24}
           />
-          <span>العروض 5 - 10</span>
+          <span>
+            {t("offers")} : {data?.applied_count}
+          </span>
         </div>
       </div>
       <Divider className="bg-[#e7e8ec]" />
