@@ -1,25 +1,12 @@
-import {
-  Button,
-  Divider,
-  Dropdown,
-  Input,
-  MenuProps,
-  message,
-  Select,
-  Skeleton,
-  Space,
-  Spin,
-} from "antd";
+import Search from "@/components/search/search";
+import { getVacancies } from "@/store/reducers/freelanceSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { Button, Divider, message, Select, Skeleton } from "antd";
 import { useTranslations } from "next-intl";
 import React, { Fragment, useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
-import { IoIosArrowDown } from "react-icons/io";
-import GigOffer from "./gigOffer";
-import { Vacancy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
-import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { useSelector } from "react-redux";
-import { getVacancies } from "@/store/reducers/freelanceSlice";
-import Search from "@/components/search/search";
+
+import GigOffer from "./gigOffer";
 
 export default function GigsSuitsYou() {
   const t = useTranslations();
@@ -43,11 +30,11 @@ export default function GigsSuitsYou() {
     },
     {
       label: t("priceUp"),
-      value: "price_up",
+      value: "price up",
     },
     {
       label: t("priceDown"),
-      value: "price_down",
+      value: "price down",
     },
   ];
 
