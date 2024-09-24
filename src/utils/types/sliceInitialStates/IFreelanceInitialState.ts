@@ -48,6 +48,9 @@ export interface Vacancy {
   created_at: string;
   modified_at: string;
   is_in_watchlist: boolean;
+  duration_unit: string;
+  estimated_duration: string;
+  salary_type: string;
 }
 
 export interface PostedBy {

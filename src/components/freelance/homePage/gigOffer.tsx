@@ -73,8 +73,8 @@ export default function GigOffer({ data }: { data: Vacancy }) {
             height={18}
             alt="priceIcon"
           />
-          <span>سعر ثابت</span>
-          <span>$50</span>
+          <span>{data.salary_type}</span>
+          <span>${data.salary}</span>
         </div>
         <div className="flex flex-row items-center gap-1 ">
           <Image
@@ -83,8 +83,9 @@ export default function GigOffer({ data }: { data: Vacancy }) {
             height={18}
             alt="priceIcon"
           />
-          <span>الوقت التقديري للمشروع</span>
-          <span>1:3 شهور</span>
+          <span>{t("estimatedTime")}</span>
+          <span>:{data?.estimated_duration} </span>
+          <span>{data?.duration_unit}</span>
         </div>
       </div>
       <div className=" m-10">{data?.description}</div>
