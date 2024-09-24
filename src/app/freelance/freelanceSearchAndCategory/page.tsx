@@ -7,16 +7,17 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function FreelanceSearchAndCategory() {
-  const { searchValue } = useSelector((state: RootState) => state.freelance);
+  const { queryParams } = useSelector((state: RootState) => state.freelance);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    dispatch(getVacancies({ params: { search: searchValue } }));
-  }, [searchValue, dispatch]);
+    dispatch(getVacancies({ params: queryParams }));
+  }, [queryParams, dispatch]);
 
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row w-full">
       <SearchAndFiltersSide />
-      <div>
+      <div className="w-full">
         <SearchAndCategoryGigs />
       </div>
     </div>
