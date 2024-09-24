@@ -4,10 +4,36 @@ export interface freelanceInitialState {
   vacancies: vacanciesResponse;
   getVacanciesError: any;
   getVacanciesLoading: boolean;
-  searchValue: string | null;
   vacancy: Vacancy | null;
   getVacancyLoading: boolean;
   getVacancyError: any;
+  searchValue: string | null;
+  services: number[] | null;
+  experience: string[] | null;
+  skills: number[] | null;
+  location: string | null;
+  jop_type: number | null;
+  min_fixed_price: number | null;
+  max_fixed_price: number | null;
+  min_hour_price: number | null;
+  max_hour_price: number | null;
+  payment_verified: boolean | null;
+  ordering: string | null;
+  test: any;
+  queryParams: {
+    searchValue?: string | null;
+    services?: number[] | null;
+    experience?: string[] | null;
+    skills?: number[] | null;
+    location?: string | null;
+    jop_type?: number | null;
+    min_fixed_price?: number | null;
+    max_fixed_price?: number | null;
+    min_hour_price?: number | null;
+    max_hour_price?: number | null;
+    payment_verified?: boolean | null;
+    ordering?: string | null;
+  };
 }
 
 interface vacanciesResponse {

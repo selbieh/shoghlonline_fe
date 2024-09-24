@@ -7,10 +7,36 @@ const initialState: freelanceInitialState = {
   vacancies: { count: 0, next: null, previous: null, results: [] },
   getVacanciesError: null,
   getVacanciesLoading: false,
-  searchValue: null,
   vacancy: null,
   getVacancyLoading: false,
   getVacancyError: null,
+  queryParams: {
+    searchValue: null,
+    services: null,
+    experience: null,
+    skills: null,
+    location: null,
+    jop_type: null,
+    min_fixed_price: null,
+    max_fixed_price: null,
+    min_hour_price: null,
+    max_hour_price: null,
+    payment_verified: null,
+    ordering: null,
+  },
+  test: null,
+  searchValue: null,
+  services: null,
+  experience: null,
+  skills: null,
+  location: null,
+  jop_type: null,
+  min_fixed_price: null,
+  max_fixed_price: null,
+  min_hour_price: null,
+  max_hour_price: null,
+  payment_verified: null,
+  ordering: null,
 };
 
 export const getVacancies = createAsyncThunk(
@@ -46,6 +72,9 @@ const freelanceSlice = createSlice({
   reducers: {
     setSearchValue(state, action) {
       state.searchValue = action.payload;
+    },
+    setQueryParams(state, action) {
+      state.queryParams = action.payload;
     },
   },
   extraReducers: (builder) => {
