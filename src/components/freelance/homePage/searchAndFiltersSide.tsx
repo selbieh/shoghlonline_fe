@@ -150,7 +150,7 @@ export default function SearchAndFiltersSide() {
                 className="text-[#1b3dbc] text-[14px] cursor-pointer"
                 onClick={() => {
                   filterForm.setFieldValue("experience", undefined);
-                  filterForm.resetFields();
+                  filterForm.submit();
                 }}
               >
                 {t("clear")}
@@ -328,7 +328,7 @@ export default function SearchAndFiltersSide() {
               <span
                 className="text-[#1b3dbc] text-[14px] cursor-pointer"
                 onClick={() => {
-                  filterForm.setFieldValue("client_info", undefined);
+                  filterForm.setFieldValue("payment_verified", undefined);
                   filterForm.submit();
                 }}
               >
