@@ -1,4 +1,4 @@
-import { GetReq, handelErrors } from "@/app/api/api";
+import { GetReq, handelErrors, postRequest } from "@/app/api/api";
 import { freelanceInitialState } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosRequestConfig } from "axios";
@@ -40,6 +40,9 @@ const initialState: freelanceInitialState = {
   getBookmarkedVacanciesLoading: false,
   getBookmarkedVacanciesError: null,
   bookmarkedVacancies: { count: 0, next: null, previous: null, results: [] },
+  bookmarkGigError: null,
+  bookmarkGigLoading: false,
+  bookmarkGig: null,
 };
 
 export const getVacancies = createAsyncThunk(
@@ -74,6 +77,18 @@ export const getBookmarkedVacancies = createAsyncThunk(
   async (config: AxiosRequestConfig, { rejectWithValue }) => {
     try {
       const res = await GetReq(`api/v1/vacancy/watchlist/`, config);
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
+
+export const bookmarkGig = createAsyncThunk(
+  "freelance/bookmarkGig",
+  async (body: { vacancy: number }, { rejectWithValue }) => {
+    try {
+      const res = await postRequest(`api/v1/vacancy/watchlist/`, body);
       return res;
     } catch (error: any) {
       return rejectWithValue(handelErrors(error));
@@ -134,6 +149,19 @@ const freelanceSlice = createSlice({
       builder.addCase(getBookmarkedVacancies.rejected, (state: any, action) => {
         state.getBookmarkedVacanciesLoading = false;
         state.getBookmarkedVacanciesError = action.payload;
+      });
+    builder.addCase(bookmarkGig.pending, (state: any, action) => {
+      state.bookmarkGigLoading = true;
+      state.bookmarkGigError = null;
+    }),
+      builder.addCase(bookmarkGig.fulfilled, (state: any, action: any) => {
+        state.bookmarkGigLoading = false;
+        state.bookmarkGigError = null;
+        state.bookMarkGigResponse = action.payload.data;
+      }),
+      builder.addCase(bookmarkGig.rejected, (state: any, action) => {
+        state.bookmarkGigLoading = false;
+        state.bookmarkGigError = action.payload;
       });
   },
 });

@@ -21,10 +21,12 @@ export interface freelanceInitialState {
   ordering: string | null;
   test: any;
   queryParams: QueryParams;
-
   getBookmarkedVacanciesLoading: boolean;
   getBookmarkedVacanciesError: any;
   bookmarkedVacancies: BookmarkedVacanciesResponse;
+  bookmarkGigError: any;
+  bookmarkGigLoading: boolean;
+  bookmarkGig: any;
 }
 
 interface vacanciesResponse {

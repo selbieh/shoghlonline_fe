@@ -5,28 +5,53 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "use-intl";
 import { Vacancy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
 import { AvailableSkill } from "@/utils/types/sliceInitialStates/IFreelancerProfile";
+import { IoBookmarkOutline } from "react-icons/io5";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { bookmarkGig } from "@/store/reducers/freelanceSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
 
 export default function GigOffer({ data }: { data: Vacancy }) {
+  const { vacancies, getVacanciesError, getVacanciesLoading } = useSelector(
+    (state: RootState) => state.freelance
+  );
+  const dispatch = useAppDispatch();
   const t = useTranslations();
   const router = useRouter();
   function goToGigDetailsPage() {
     router.push(`/freelance/gigDetails/${data?.id}`);
   }
 
+  function bookmarkGigFunction() {
+    console.log("first");
+    dispatch(bookmarkGig({ vacancy: data?.id }));
+    console.log("second");
+  }
+
   return (
-    <div
-      className=" hover:bg-[#f7f9ff] hover:cursor-pointer px-2"
-      onClick={goToGigDetailsPage}
-    >
+    <div className=" hover:bg-[#f7f9ff]  px-2">
       <div className=" flex flex-row justify-between w-full my-5">
         <div className="flex flex-row items-center">
-          <div className=" font-bold text-[16px] mx-5">{data?.title} </div>
-          <Image
-            src={"/icons/bookmark.svg"}
-            alt="bookmark"
-            width={24}
-            height={24}
-          />
+          <div
+            className=" font-bold text-[16px] mx-5 hover:cursor-pointer"
+            onClick={goToGigDetailsPage}
+          >
+            {data?.title}
+          </div>
+          {data?.is_in_watchlist ? (
+            <FaBookmark
+              fill="gold"
+              color="gold"
+              className="hover:cursor-pointer"
+              size={18}
+            />
+          ) : (
+            <FaRegBookmark
+              className="hover:cursor-pointer"
+              size={18}
+              onClick={bookmarkGigFunction}
+            />
+          )}
         </div>
         <div className="flex flex-row items-center">
           <Image
