@@ -10,7 +10,9 @@ import { CiSearch } from "react-icons/ci";
 import { useSelector } from "react-redux";
 
 export default function Search() {
-  const { searchValue } = useSelector((state: RootState) => state.freelance);
+  const { searchValue, queryParams } = useSelector(
+    (state: RootState) => state.freelance
+  );
   const dispatch = useAppDispatch();
   const t = useTranslations();
   const [searchForm] = Form.useForm();
@@ -21,8 +23,13 @@ export default function Search() {
   const params = new URLSearchParams(searchParams.toString());
 
   function search(values: any) {
-    dispatch(freelanceActions.setSearchValue(values?.search));
-    params.append("search", values?.search);
+    params.set("search", values?.search);
+    let qParams: any = {};
+    params.forEach((val, key) => {
+      qParams[key] = val;
+    });
+    dispatch(freelanceActions.setQueryParams(qParams));
+    dispatch(freelanceActions.setSearchValue(values.search));
     if (!pathname.split("/").includes("freelanceSearchAndCategory")) {
       router.push(
         `/freelance/freelanceSearchAndCategory?search=${values?.search}`
@@ -34,6 +41,7 @@ export default function Search() {
 
   function clearSearch() {
     dispatch(freelanceActions.setSearchValue(null));
+    dispatch(freelanceActions.setQueryParams({}));
     params.delete("search");
     replace(`${pathname}`);
   }
@@ -48,11 +56,6 @@ export default function Search() {
         <Form onFinish={search} form={searchForm}>
           <Form.Item name="search">
             <Input
-              allowClear
-              onClear={() => {
-                searchForm.setFieldValue("search", "");
-                clearSearch();
-              }}
               className="h-[56px]"
               placeholder={t("search")}
               prefix={<CiSearch size={20} />}
