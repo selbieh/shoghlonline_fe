@@ -37,6 +37,9 @@ const initialState: freelanceInitialState = {
   max_hour_price: null,
   payment_verified: null,
   ordering: null,
+  getBookmarkedVacanciesLoading: false,
+  getBookmarkedVacanciesError: null,
+  bookmarkedVacancies: { count: 0, next: null, previous: null, results: [] },
 };
 
 export const getVacancies = createAsyncThunk(
@@ -59,6 +62,18 @@ export const getVacancyById = createAsyncThunk(
   ) => {
     try {
       const res = await GetReq(`api/v1/vacancy/vacancies/${id}/`, config);
+      return res;
+    } catch (error: any) {
+      return rejectWithValue(handelErrors(error));
+    }
+  }
+);
+
+export const getBookmarkedVacancies = createAsyncThunk(
+  "freelance/bookmarkedVacancies",
+  async (config: AxiosRequestConfig, { rejectWithValue }) => {
+    try {
+      const res = await GetReq(`api/v1/vacancy/watchlist/`, config);
       return res;
     } catch (error: any) {
       return rejectWithValue(handelErrors(error));
@@ -103,6 +118,22 @@ const freelanceSlice = createSlice({
       builder.addCase(getVacancyById.rejected, (state: any, action) => {
         state.getVacancyLoading = false;
         state.getVacancyError = action.payload;
+      });
+    builder.addCase(getBookmarkedVacancies.pending, (state: any, action) => {
+      state.getBookmarkedVacanciesLoading = true;
+      state.getBookmarkedVacanciesError = null;
+    }),
+      builder.addCase(
+        getBookmarkedVacancies.fulfilled,
+        (state: any, action: any) => {
+          state.getBookmarkedVacanciesLoading = false;
+          state.getBookmarkedVacanciesError = null;
+          state.bookmarkedVacancies = action.payload.data;
+        }
+      ),
+      builder.addCase(getBookmarkedVacancies.rejected, (state: any, action) => {
+        state.getBookmarkedVacanciesLoading = false;
+        state.getBookmarkedVacanciesError = action.payload;
       });
   },
 });

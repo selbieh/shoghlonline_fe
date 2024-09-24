@@ -20,20 +20,11 @@ export interface freelanceInitialState {
   payment_verified: boolean | null;
   ordering: string | null;
   test: any;
-  queryParams: {
-    searchValue?: string | null;
-    services?: number[] | null;
-    experience?: string[] | null;
-    skills?: number[] | null;
-    location?: string | null;
-    jop_type?: number | null;
-    min_fixed_price?: number | null;
-    max_fixed_price?: number | null;
-    min_hour_price?: number | null;
-    max_hour_price?: number | null;
-    payment_verified?: boolean | null;
-    ordering?: string | null;
-  };
+  queryParams: QueryParams;
+
+  getBookmarkedVacanciesLoading: boolean;
+  getBookmarkedVacanciesError: any;
+  bookmarkedVacancies: BookmarkedVacanciesResponse;
 }
 
 interface vacanciesResponse {
@@ -54,6 +45,7 @@ export interface Vacancy {
   applied_count: string;
   created_at: string;
   modified_at: string;
+  is_in_watchlist: boolean;
 }
 
 export interface PostedBy {
@@ -65,4 +57,26 @@ export interface PostedBy {
   is_superuser: boolean;
   is_active: boolean;
   groups: number[];
+}
+
+interface QueryParams {
+  searchValue?: string | null;
+  services?: number[] | null;
+  experience?: string[] | null;
+  skills?: number[] | null;
+  location?: string | null;
+  jop_type?: number | null;
+  min_fixed_price?: number | null;
+  max_fixed_price?: number | null;
+  min_hour_price?: number | null;
+  max_hour_price?: number | null;
+  payment_verified?: boolean | null;
+  ordering?: string | null;
+}
+
+interface BookmarkedVacanciesResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: any[];
 }
