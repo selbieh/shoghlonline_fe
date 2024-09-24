@@ -6,17 +6,19 @@ import CompleteYourProfile from "@/components/freelance/homePage/completeYourPro
 import GigsSuitsYou from "@/components/freelance/homePage/gigsSuitsYou";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import SearchAndFiltersSide from "@/components/freelance/homePage/searchAndFiltersSide";
-import { getVacancies } from "@/store/reducers/freelanceSlice";
+import { freelanceActions } from "@/store/reducers/freelanceSlice";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { Tabs, TabsProps } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const Freelance = () => {
   const t = useTranslations();
   const { profileReady } = useSelector((state: RootState) => state.profile);
+  const dispatch = useAppDispatch();
+  dispatch(freelanceActions.setQueryParams({}));
 
   const tabsItems: TabsProps["items"] = [
     {
