@@ -28,9 +28,9 @@ export default function GigDetailsPage({
 
   console.log(vacancy);
 
-  useEffect(() => {
-    dispatch(getVacancyById(params?.gigDetailsPage[0]));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getVacancyById(params?.gigDetailsPage[0]));
+  // }, []);
 
   return (
     <div className="m-10">
