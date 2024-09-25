@@ -1,7 +1,7 @@
 "use client";
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
@@ -114,7 +114,9 @@ const DescriptionServiceForm = () => {
                 name="description"
                 // extra={t("serviceDescriptionDescription")}
               >
-                <ReactQuill theme="snow" value={""} className="h-[250px]" />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ReactQuill theme="snow" value={""} className="h-[250px]" />
+                </Suspense>
               </Form.Item>
             </div>
             <div>
