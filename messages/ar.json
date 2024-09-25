@@ -258,5 +258,19 @@
   "agree": "أوافق علي سياسات تعديل الخدمة علي شغل اون لاين",
   "editService": "تعديل الخدمة",
   "since": "منذ",
-  "apply1": "تطبيق"
+  "apply1": "تطبيق",
+  "addNewService": "إضافة خدمة جديدة",
+  "addNewServiceDescription": "اعرض مهاراتك وابدأ في كسب المال الآن!",
+  "serviceDescription": "وصف الخدمة",
+  "ServiceCompletionTime": "مدة إنجاز الخدمة",
+  "serviceTitle": "عنوان الخدمة",
+  "createService": "إنشاء خدمة جديدة",
+  "department": "القسم",
+  "subCategory": "الفئة الفرعيه",
+  "serviceDescriptionDescription": "يجب أن يكون الوصف موضحا لتفاصيل الخدمة لتحفز العملاء علي شراء الخدمة.",
+  "uploadImage": "تحميل الصورة",
+  "uploadImageDescription": "أو اسحب وافلت الصورة هنا",
+  "priceAndAddons": "السعر و الاضافات",
+  "portfolio": "معرض الاعمال",
+  "clientQuestions": "اسئلة العميل"
 }
