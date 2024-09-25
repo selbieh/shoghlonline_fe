@@ -41,7 +41,7 @@ export async function GetReq(path: string, config?: AxiosRequestConfig) {
 //     .patch(path, body, config)
 //     .catch(handelErrors);
 //   return res;
-// }
+// }fgfg
 
 export async function GetByIdReq(path: string) {
   await setAuthorizationToken();
