@@ -1,3 +1,4 @@
+"use client";
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -5,7 +6,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import type { UploadProps } from "antd";
 import { message, Upload } from "antd";
-
+import Image from "next/image";
 const { Dragger } = Upload;
 const DescriptionServiceForm = () => {
   const t = useTranslations();
@@ -116,7 +117,7 @@ const DescriptionServiceForm = () => {
               <Form.Item name="files" valuePropName="files">
                 <Dragger className="bg-[#F7F9FF]">
                   <p className="ant-upload-drag-icon flex justify-center pt-5">
-                    <img
+                    <Image
                       src="/images/fi_image.svg"
                       alt="upload"
                       width={42}
@@ -125,7 +126,7 @@ const DescriptionServiceForm = () => {
                   </p>
                   <p className="ant-upload-text">
                     <Button type="primary" className="h-[34px] rounded-lg">
-                      <img
+                      <Image
                         src="/icons/add-circle.svg"
                         alt="setting"
                         width={16}
