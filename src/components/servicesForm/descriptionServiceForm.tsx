@@ -114,9 +114,9 @@ const DescriptionServiceForm = () => {
                 name="description"
                 // extra={t("serviceDescriptionDescription")}
               >
-                <Suspense fallback={<div>Loading...</div>}>
+                {/* <Suspense fallback={<div>Loading...</div>}>
                   <ReactQuill theme="snow" value={""} className="h-[250px]" />
-                </Suspense>
+                </Suspense> */}
               </Form.Item>
             </div>
             <div>
