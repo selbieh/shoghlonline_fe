@@ -18,7 +18,7 @@ interface availableSkillsResponse {
   previous: string | null;
   results: AvailableSkill[];
 }
-interface AvailableSkill {
+export interface AvailableSkill {
   id: number;
   name: string;
   created_at: string;

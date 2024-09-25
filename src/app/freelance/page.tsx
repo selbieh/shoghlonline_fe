@@ -6,14 +6,20 @@ import CompleteYourProfile from "@/components/freelance/homePage/completeYourPro
 import GigsSuitsYou from "@/components/freelance/homePage/gigsSuitsYou";
 import InviteFriends from "@/components/freelance/homePage/inviteFriends";
 import SearchAndFiltersSide from "@/components/freelance/homePage/searchAndFiltersSide";
+import { freelanceActions } from "@/store/reducers/freelanceSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
 import { Tabs, TabsProps } from "antd";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const Freelance = () => {
   const t = useTranslations();
+  const { profileReady } = useSelector((state: RootState) => state.profile);
+  const dispatch = useAppDispatch();
+  dispatch(freelanceActions.setQueryParams({}));
+
   const tabsItems: TabsProps["items"] = [
     {
       key: "1",
@@ -44,12 +50,12 @@ const Freelance = () => {
   return (
     <div className="flex flex-row">
       <div>
-        <CompleteYourProfile />
+        {profileReady !== 4 && <CompleteYourProfile />}
         <InviteFriends />
         <Advertise />
       </div>
 
-      <div>
+      <div className="w-full">
         <Tabs items={tabsItems} />
       </div>
     </div>

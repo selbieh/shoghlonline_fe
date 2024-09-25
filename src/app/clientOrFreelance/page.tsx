@@ -147,4 +147,5 @@ function ClientOrFreeLance() {
   );
 }
 
-export default AuthGuard(ClientOrFreeLance);
+// export default AuthGuard(ClientOrFreeLance);
+export default ClientOrFreeLance;

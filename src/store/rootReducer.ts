@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { authReducer } from "./reducers/authentcationSlice";
 import { ProfileReducer } from "./reducers/freelanceProfile";
+import { FreelanceReducer } from "./reducers/freelanceSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     profile: ProfileReducer,
+    freelance: FreelanceReducer,
   },
 });
 

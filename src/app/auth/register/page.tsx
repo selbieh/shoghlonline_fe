@@ -174,21 +174,7 @@ export default function Register() {
               className="w-full"
               name="first_name"
               label={t("firstName")}
-              rules={
-                [
-                  // {
-                  //   validator(_, value) {
-                  //     const parsedPhoneNumber =
-                  //       phoneUtil.parseAndKeepRawInput(value);
-                  //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-                  //       return Promise.resolve();
-                  //     } else {
-                  //       return Promise.reject(new Error("Phone is not valid!"));
-                  //     }
-                  //   },
-                  // },
-                ]
-              }
+              rules={[{ required: true }]}
             >
               <Input
                 type="text"
@@ -201,21 +187,11 @@ export default function Register() {
               name="last_name"
               label={t("lastName")}
               className="w-full"
-              rules={
-                [
-                  // {
-                  //   validator(_, value) {
-                  //     const parsedPhoneNumber =
-                  //       phoneUtil.parseAndKeepRawInput(value);
-                  //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-                  //       return Promise.resolve();
-                  //     } else {
-                  //       return Promise.reject(new Error("Phone is not valid!"));
-                  //     }
-                  //   },
-                  // },
-                ]
-              }
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
               <Input
                 type="text"
