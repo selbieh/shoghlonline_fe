@@ -254,5 +254,19 @@
   "totalProfit": "Total Profit",
   "editServicesModalTitle": "Service Edit Policy On Shoghl Online",
   "agree": "Agree",
-  "editService": "Edit Service"
+  "editService": "Edit Service",
+  "addNewService": "Add New Service",
+  "addNewServiceDescription": "Showcase your skills and start earning money now!",
+  "serviceDescription": "Service Description",
+  "serviceTitle": "Service Title",
+  "ServiceCompletionTime": "Service completion time",
+  "createService": "Create New Service",
+  "department": "Department",
+  "subCategory": "Sub Category",
+  "serviceDescriptionDescription": "The description should be clear about the details of the service to motivate customers to purchase the service.",
+  "uploadImage": "Upload Image",
+  "uploadImageDescription": "Or drag and drop the image here.",
+  "priceAndAddons": "Price And Addons",
+  "portfolio": "Portfolio",
+  "clientQuestions": "Client Questions"
 }

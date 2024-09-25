@@ -153,7 +153,37 @@ export default function HomePagesLayout({
       label: "a danger item",
     },
   ];
-
+  const itemsServersMenu: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <div
+          className="flex gap-4 bg-[#F7F9FF] border-[0.5px] border-[solid] border-[#A4BFFB] rounded-[20px] p-4 cursor-pointer"
+          onClick={() => router.push("/freelance/serviceForm")}
+        >
+          <Image
+            src={"/icons/add-circle.svg"}
+            alt="setting"
+            width={38}
+            height={38}
+          />
+          <div className="flex flex-col gap-1 items-start">
+            <h3 className="text-[14px] font-bold leading-[24px] tracking-[0.5px] text-[#20102B]">
+              {t("addNewService")}
+            </h3>
+            <p className="text-[12px] font-normal leading-[24px] tracking-[0.5px] text-[#62636C]">
+              {t("addNewServiceDescription")}
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "4",
+      danger: true,
+      label: "a danger item",
+    },
+  ];
   return (
     <>
       <Layout>
@@ -173,7 +203,7 @@ export default function HomePagesLayout({
                       icon={<FaRegUserCircle />}
                       size={24}
                       className="cursor-pointer hover:scale-110 transition-all"
-                      onClick={() => router.push("/freelance/profile/1")}
+                      // onClick={() => router.push("/freelance/profile/1")}
                     />
                   </Space>
                 </a>
@@ -207,12 +237,14 @@ export default function HomePagesLayout({
           </div>
           <div className="logo">
             <Space size={"large"}>
-              <a
-                href="#"
-                className=" text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
-              >
-                {t("services")}
-              </a>
+              <Dropdown menu={{ items: itemsServersMenu }}>
+                <a
+                  onClick={(e) => e.preventDefault()}
+                  className=" text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
+                >
+                  {t("services")}
+                </a>
+              </Dropdown>
               <a
                 href="#"
                 className=" text-[15px] font-bold leading-[24px] tracking-[0.5px] text-[#1B2D5E]"
