@@ -2,7 +2,11 @@
 import { Button, Form, Input, InputNumber, Select, Space } from "antd";
 import { useTranslations } from "next-intl";
 import React from "react";
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+});
 import "react-quill/dist/quill.snow.css";
 import type { UploadProps } from "antd";
 import { message, Upload } from "antd";

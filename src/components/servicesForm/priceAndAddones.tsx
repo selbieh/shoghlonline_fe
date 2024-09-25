@@ -1,3 +1,4 @@
+"use client";
 import { Form, Input } from "antd";
 import { useTranslations } from "next-intl";
 import React from "react";
