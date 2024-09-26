@@ -125,25 +125,33 @@ export default function SearchAndFiltersSide() {
       </div>
       <Form layout="vertical" form={filterForm} onFinish={finishForm}>
         <div className="flex flex-col gap-3">
-          <div className="w-[286px] h-[fit] py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="w-[286px] h-[fit] py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <Form.Item label={t("categories")} name="services">
-              <Cascader
-                placeholder={t("choseServices")}
-                multiple
-                removeIcon={<CiCircleRemove size={25} />}
-                className="min-h-[56px]"
-                id="chooseService"
-                allowClear
-                options={availableServices}
-                expandTrigger="hover"
-                showCheckedStrategy={Cascader.SHOW_CHILD}
-                onChange={() => {
-                  filterForm.submit();
+              <ConfigProvider
+                theme={{
+                  token: {
+                    controlHeight: 40,
+                  },
                 }}
-              />
+              >
+                <Cascader
+                  placeholder={t("choseServices")}
+                  multiple
+                  removeIcon={<CiCircleRemove size={25} />}
+                  className=""
+                  id="chooseService"
+                  allowClear
+                  options={availableServices}
+                  expandTrigger="hover"
+                  showCheckedStrategy={Cascader.SHOW_CHILD}
+                  onChange={() => {
+                    filterForm.submit();
+                  }}
+                />
+              </ConfigProvider>
             </Form.Item>
           </div>
-          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <div className="w-full flex flex-row gap-[170px]  my-3">
               <span>{t("experienceLabel")}</span>
               <span
@@ -170,7 +178,7 @@ export default function SearchAndFiltersSide() {
               />
             </Form.Item>
           </div>
-          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <Form.Item label={t("skills")} name="skills">
               <Select
                 placeholder={t("search")}
@@ -202,7 +210,7 @@ export default function SearchAndFiltersSide() {
               />
             </Form.Item>
           </div>
-          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <Form.Item label={t("location")} name="location">
               <Select
                 onSelect={() => {
@@ -211,7 +219,7 @@ export default function SearchAndFiltersSide() {
               />
             </Form.Item>
           </div>
-          <div className="max-w-[286px] min-h-[144px] py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="max-w-[286px] min-h-[144px] py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <div className="w-full flex flex-row gap-[130px]  my-3">
               <span>{t("projectType")}</span>
               <span
@@ -238,7 +246,7 @@ export default function SearchAndFiltersSide() {
               />
             </Form.Item>
           </div>
-          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <div className="w-full flex flex-row gap-[106px]  my-3">
               <span>{t("fixedPrice")}</span>
               <div className="flex flex-row gap-1">
@@ -280,7 +288,7 @@ export default function SearchAndFiltersSide() {
               <span className="text-[9px]">{t("highest")}</span>
             </div>
           </div>
-          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <div className="w-full flex flex-row gap-[106px]  my-3">
               <span>{t("hourPrice")}</span>
               <div className="flex flex-row gap-1">
@@ -322,7 +330,7 @@ export default function SearchAndFiltersSide() {
               <span className="text-[9px]">{t("highest")}</span>
             </div>
           </div>
-          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
+          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
             <div className="w-full flex flex-row gap-[106px]  my-3">
               <span>{t("clientInfo")}</span>
               <span
