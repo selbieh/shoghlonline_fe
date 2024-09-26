@@ -41,6 +41,16 @@ export default async function RootLayout({
                   controlHeight: 56,
                   controlInteractiveSize: 16,
                 },
+                components: {
+                  Slider: {
+                    trackBg: "#7179ce",
+                    railBg: "#cedfff",
+                    handleSize: 11,
+                    handleColor: "#1b3dbc",
+                    handleSizeHover: 11,
+                    handleActiveColor: "#1b3dbc",
+                  },
+                },
               }}
             >
               <AntdRegistry>{children}</AntdRegistry>
