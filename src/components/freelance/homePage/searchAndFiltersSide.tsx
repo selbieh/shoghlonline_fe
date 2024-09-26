@@ -122,7 +122,18 @@ export default function SearchAndFiltersSide() {
       <ConfigProvider
         theme={{
           token: {
-            controlHeight: 40,
+            // controlHeight: 40,
+          },
+          components: {
+            Checkbox: {
+              colorText: "#80828d",
+              colorWhite: "#84a6f2",
+              colorPrimary: "#e6f3ff",
+            },
+            Select: {
+              borderRadius: 12,
+              controlHeight: 40,
+            },
           },
         }}
       >
@@ -178,6 +189,15 @@ export default function SearchAndFiltersSide() {
                 </span>
               </div>
               <Form.Item name="experience">
+                {/* <ConfigProvider
+                  theme={{
+                    token: {
+                      colorText: "#80828d",
+                      colorPrimary: "#7179ce",
+                      colorBorder: "#7179ce",
+                    },
+                  }}
+                > */}
                 <Checkbox.Group
                   style={{
                     display: "flex",
@@ -189,6 +209,7 @@ export default function SearchAndFiltersSide() {
                     filterForm.submit();
                   }}
                 />
+                {/* </ConfigProvider> */}
               </Form.Item>
             </div>
             <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
@@ -260,6 +281,15 @@ export default function SearchAndFiltersSide() {
                 </span>
               </div>
               <Form.Item name="jop_type">
+                {/* <ConfigProvider
+                  theme={{
+                    token: {
+                      colorText: "#80828d",
+                      colorPrimary: "#7179ce",
+                      colorBorder: "#7179ce",
+                    },
+                  }}
+                > */}
                 <Checkbox.Group
                   style={{
                     display: "flex",
@@ -271,6 +301,7 @@ export default function SearchAndFiltersSide() {
                     filterForm.submit();
                   }}
                 />
+                {/* </ConfigProvider> */}
               </Form.Item>
             </div>
             <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe] relative">
@@ -375,6 +406,15 @@ export default function SearchAndFiltersSide() {
                 </span>
               </div>
               <Form.Item name="payment_verified">
+                {/* <ConfigProvider
+                  theme={{
+                    token: {
+                      colorText: "#80828d",
+                      colorPrimary: "#7179ce",
+                      colorBorder: "#7179ce",
+                    },
+                  }}
+                > */}
                 <Checkbox.Group
                   style={{
                     display: "flex",
@@ -386,6 +426,7 @@ export default function SearchAndFiltersSide() {
                     filterForm.submit();
                   }}
                 />
+                {/* </ConfigProvider> */}
               </Form.Item>
             </div>
           </div>
