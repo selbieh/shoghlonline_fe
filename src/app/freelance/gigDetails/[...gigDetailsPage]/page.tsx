@@ -28,9 +28,9 @@ export default function GigDetailsPage({
 
   console.log(vacancy);
 
-  // useEffect(() => {
-  //   dispatch(getVacancyById(params?.gigDetailsPage[0]));
-  // }, []);
+  useEffect(() => {
+    dispatch(getVacancyById([params?.gigDetailsPage[0], {}]));
+  }, []);
 
   return (
     <div className="m-10">
@@ -73,7 +73,8 @@ export default function GigDetailsPage({
           />
           <span>
             {t("since")}
-            {/* {new Date(vacancy?.created_at).toLocaleDateString("CA")} */}
+            {vacancy?.created_at &&
+              new Date(vacancy?.created_at).toLocaleDateString("CA")}
           </span>
         </div>
       </div>
