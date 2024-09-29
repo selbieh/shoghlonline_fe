@@ -235,7 +235,7 @@ export default function SearchAndFiltersSide() {
                   onBlur={() => {
                     dispatch(getAvailableSkills({}));
                   }}
-                  defaultValue={[]}
+                  // defaultValue={[]}
                   onChange={() => {
                     filterForm.submit();
                   }}
