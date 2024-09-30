@@ -5,6 +5,7 @@ import {
 } from "@/store/reducers/freelanceProfile";
 import { freelanceActions } from "@/store/reducers/freelanceSlice";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { AvailableSkill } from "@/utils/types/sliceInitialStates/IFreelancerProfile";
 import {
   Cascader,
   Checkbox,
@@ -16,20 +17,22 @@ import {
 } from "antd";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CiCircleRemove } from "react-icons/ci";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 export default function SearchAndFiltersSide() {
   const {
     skillsList,
+    availableSkills,
     loadingGetAvailableSkills,
     loadingGetAvailableServices,
     availableServices,
     getAvailableServicesServerError,
   } = useSelector((state: RootState) => state.profile);
   const dispatch = useAppDispatch();
-
+  const [selectedSkills, setSelectedSkills] = useState<any[]>([]);
   const t = useTranslations();
   const options = [
     { label: t("beginner"), value: "beginner" },
@@ -41,7 +44,6 @@ export default function SearchAndFiltersSide() {
     { label: t("byHour"), value: "byHour" },
   ];
   const clientInfoOptions = [{ label: t("paymentVerified"), value: true }];
-
   const searchParams = useSearchParams();
   const queryParams = new URLSearchParams(searchParams);
   const pathname = usePathname();
@@ -62,8 +64,6 @@ export default function SearchAndFiltersSide() {
   }
 
   function finishForm(values: any) {
-    console.log(values);
-
     for (let key in values) {
       if (values[key] !== undefined) {
         if (values[key].length > 0) {
@@ -106,8 +106,8 @@ export default function SearchAndFiltersSide() {
     dispatch(freelanceActions.setQueryParams({}));
     replace(`${pathname}`);
     filterForm.resetFields();
-    `1`;
   }
+
   return (
     <div className="h-full w-fit my-[72px]  ">
       <div className="w-full flex flex-row justify-evenly my-3">
@@ -121,9 +121,6 @@ export default function SearchAndFiltersSide() {
       </div>
       <ConfigProvider
         theme={{
-          token: {
-            // controlHeight: 40,
-          },
           components: {
             Checkbox: {
               colorText: "#80828d",
@@ -189,15 +186,6 @@ export default function SearchAndFiltersSide() {
                 </span>
               </div>
               <Form.Item name="experience">
-                {/* <ConfigProvider
-                  theme={{
-                    token: {
-                      colorText: "#80828d",
-                      colorPrimary: "#7179ce",
-                      colorBorder: "#7179ce",
-                    },
-                  }}
-                > */}
                 <Checkbox.Group
                   style={{
                     display: "flex",
@@ -209,10 +197,9 @@ export default function SearchAndFiltersSide() {
                     filterForm.submit();
                   }}
                 />
-                {/* </ConfigProvider> */}
               </Form.Item>
             </div>
-            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe] relative">
               <Form.Item
                 label={
                   <span className=" font-bold text-[12px]">{t("skills")}</span>
@@ -236,8 +223,16 @@ export default function SearchAndFiltersSide() {
                     dispatch(getAvailableSkills({}));
                   }}
                   // defaultValue={[]}
-                  onChange={() => {
+                  onChange={(e) => {
                     filterForm.submit();
+                    setSelectedSkills(
+                      availableSkills?.filter((skill: AvailableSkill) => {
+                        return e.includes(skill.id);
+                      })
+                    );
+                  }}
+                  tagRender={() => {
+                    return <></>;
                   }}
                   notFoundContent={
                     loadingGetAvailableSkills ? (
@@ -248,6 +243,45 @@ export default function SearchAndFiltersSide() {
                   }
                 />
               </Form.Item>
+              <div className="px-[5px] py-4 absolute top-[85px] w-[235px] items-center ">
+                {selectedSkills.length > 0 &&
+                  selectedSkills.map((skill: any) => {
+                    return (
+                      <div
+                        key={skill.id}
+                        className=" flex flex-row justify-between "
+                      >
+                        <span className=" text-[14px] text-[#80828d]">
+                          {skill.name}
+                        </span>
+
+                        <IoCloseCircleOutline
+                          size={15}
+                          key={skill.id}
+                          id={skill.id}
+                          className="cursor-pointer"
+                          onClick={(e: any) => {
+                            let skillsInTheForm =
+                              filterForm.getFieldValue("skills");
+
+                            filterForm.setFieldValue(
+                              "skills",
+                              skillsInTheForm.filter((rec: any) => {
+                                return rec != e.target.id;
+                              })
+                            );
+
+                            setSelectedSkills(
+                              selectedSkills.filter((skill) => {
+                                return skill.id != e.target.id;
+                              })
+                            );
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
             <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
               <Form.Item
@@ -281,15 +315,6 @@ export default function SearchAndFiltersSide() {
                 </span>
               </div>
               <Form.Item name="jop_type">
-                {/* <ConfigProvider
-                  theme={{
-                    token: {
-                      colorText: "#80828d",
-                      colorPrimary: "#7179ce",
-                      colorBorder: "#7179ce",
-                    },
-                  }}
-                > */}
                 <Checkbox.Group
                   style={{
                     display: "flex",
@@ -301,7 +326,6 @@ export default function SearchAndFiltersSide() {
                     filterForm.submit();
                   }}
                 />
-                {/* </ConfigProvider> */}
               </Form.Item>
             </div>
             <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe] relative">

@@ -9,7 +9,7 @@ const initialState: FreelancerProfileInitialState = {
   freelancerProfileData: null,
   loadingGetAvailableSkills: false,
   getAvailableSkillsServerError: null,
-  availableSkills: null,
+  availableSkills: [],
   skillsList: [],
   loadingGetAvailableServices: false,
   getAvailableServicesServerError: null,
@@ -70,7 +70,7 @@ const profileSlice = createSlice({
     });
     builder.addCase(getAvailableSkills.fulfilled, (state, action) => {
       state.loadingGetAvailableSkills = false;
-      // state.availableSkills = action?.payload?.data;
+      state.availableSkills = action?.payload?.data?.results;
       state.skillsList = action.payload.data?.results?.map((skill: any) => {
         return {
           label: skill.name,
