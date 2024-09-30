@@ -4,7 +4,7 @@ export interface FreelancerProfileInitialState {
   freelancerProfileData: any | null;
   loadingGetAvailableSkills: boolean;
   getAvailableSkillsServerError: any | null;
-  availableSkills: AvailableSkill | [];
+  availableSkills: AvailableSkill[] | [];
   skillsList: any[];
   loadingGetAvailableServices: boolean;
   getAvailableServicesServerError: any | null;
