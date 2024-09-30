@@ -33,6 +33,7 @@ export default function SearchAndFiltersSide() {
   } = useSelector((state: RootState) => state.profile);
   const dispatch = useAppDispatch();
   const [selectedSkills, setSelectedSkills] = useState<any[]>([]);
+  const [selectedServices, setSelectedServices] = useState<any[]>([]);
   const t = useTranslations();
   const options = [
     { label: t("beginner"), value: "beginner" },
@@ -145,30 +146,69 @@ export default function SearchAndFiltersSide() {
                 }
                 name="services"
               >
-                <ConfigProvider
-                  theme={{
-                    token: {
-                      controlHeight: 40,
-                    },
+                <Select
+                  placeholder={t("choseServices")}
+                  mode="multiple"
+                  showSearch
+                  removeIcon={<CiCircleRemove size={25} />}
+                  className=""
+                  id="chooseService"
+                  allowClear
+                  tagRender={() => {
+                    return <></>;
                   }}
-                >
-                  <Cascader
-                    placeholder={t("choseServices")}
-                    multiple
-                    showSearch
-                    removeIcon={<CiCircleRemove size={25} />}
-                    className=""
-                    id="chooseService"
-                    allowClear
-                    options={availableServices}
-                    expandTrigger="hover"
-                    showCheckedStrategy={Cascader.SHOW_CHILD}
-                    onChange={() => {
-                      filterForm.submit();
-                    }}
-                  />
-                </ConfigProvider>
+                  options={availableServices}
+                  // expandTrigger="hover"
+                  // showCheckedStrategy={Cascader.SHOW_CHILD}
+                  onChange={(e) => {
+                    setSelectedServices(
+                      availableServices?.filter((service: any) => {
+                        return e.includes(service.value);
+                      })
+                    );
+                    filterForm.submit();
+                  }}
+                />
               </Form.Item>
+              <div className="px-[10px] w-[235px] items-center ">
+                {selectedServices.length > 0 &&
+                  selectedServices.map((service: any) => {
+                    return (
+                      <div
+                        key={service.id}
+                        className=" flex flex-row justify-between "
+                      >
+                        <span className=" text-[14px] text-[#80828d]">
+                          {service.label}
+                        </span>
+
+                        <IoCloseCircleOutline
+                          size={15}
+                          key={service.value}
+                          id={service.value}
+                          className="cursor-pointer"
+                          onClick={(e: any) => {
+                            let servicesInTheForm =
+                              filterForm.getFieldValue("services");
+                            filterForm.setFieldValue(
+                              "services",
+                              servicesInTheForm?.filter((rec: any) => {
+                                return rec != e.target.id;
+                              })
+                            );
+
+                            setSelectedServices(
+                              selectedServices.filter((service) => {
+                                return service.value != e.target.id;
+                              })
+                            );
+                            filterForm.submit();
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
             <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
               <div className="w-full flex flex-row gap-[170px]  my-3">
@@ -199,7 +239,7 @@ export default function SearchAndFiltersSide() {
                 />
               </Form.Item>
             </div>
-            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe] relative">
+            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
               <Form.Item
                 label={
                   <span className=" font-bold text-[12px]">{t("skills")}</span>
@@ -243,7 +283,7 @@ export default function SearchAndFiltersSide() {
                   }
                 />
               </Form.Item>
-              <div className="px-[5px] py-4 absolute top-[85px] w-[235px] items-center ">
+              <div className="px-[10px] w-[235px] items-center ">
                 {selectedSkills.length > 0 &&
                   selectedSkills.map((skill: any) => {
                     return (
