@@ -86,7 +86,7 @@ export const getBookmarkedVacancies = createAsyncThunk(
 
 export const bookmarkGig = createAsyncThunk(
   "freelance/bookmarkGig",
-  async (body: { vacancy: number }, { rejectWithValue }) => {
+  async (body: { vacancy_id: number | string }, { rejectWithValue }) => {
     try {
       const res = await postRequest(`api/v1/vacancy/watchlist/`, body);
       return res;

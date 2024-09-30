@@ -31,3 +31,12 @@
 .ant-steps-item-container {
     display: flex;
 }
+
+.ant-form-item.mb-0.css-dev-only-do-not-override-f450mg{
+    margin-bottom: 0;
+}
+
+.ant-form-item.css-dev-only-do-not-override-f450mg.ant-form-item-has-success{
+    margin-bottom: 0;
+  
+}

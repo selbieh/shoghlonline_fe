@@ -1,7 +1,14 @@
 import Search from "@/components/search/search";
 import { getVacancies } from "@/store/reducers/freelanceSlice";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
-import { Button, Divider, message, Select, Skeleton } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  Divider,
+  message,
+  Select,
+  Skeleton,
+} from "antd";
 import { useTranslations } from "next-intl";
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -54,12 +61,23 @@ export default function GigsSuitsYou() {
       <div className="w-full rounded-[12px] py-[26px] border-[1px] border-[#e0e1e6] m-5 p-5">
         <div className="px-10 border-b-[1px] border-b-[#e0e1e6] pb-5 flex gap-2 items-center">
           <span>{t("sortBy")}</span>
-          <Select
-            options={items}
-            defaultValue={"newest"}
-            onSelect={sortBy}
-            className="min-w-[120px]"
-          />
+          <ConfigProvider
+            theme={{
+              components: {
+                Select: {
+                  borderRadius: 12,
+                  controlHeight: 40,
+                },
+              },
+            }}
+          >
+            <Select
+              options={items}
+              defaultValue={"newest"}
+              onSelect={sortBy}
+              className="min-w-[120px]"
+            />
+          </ConfigProvider>
         </div>
 
         {getVacanciesLoading ? (

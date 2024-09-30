@@ -1,5 +1,5 @@
 "use client";
-import { Button, Divider, Select, Skeleton } from "antd";
+import { Button, ConfigProvider, Divider, Select, Skeleton } from "antd";
 import { useTranslations } from "next-intl";
 import React, { Fragment } from "react";
 import GigOffer from "./gigOffer";
@@ -60,12 +60,23 @@ export default function SearchAndCategoryGigs() {
           <div className="px-10   pb-5 flex gap-2 items-center">
             <span className="font-bold ">{t("bestResults")}</span>
             <span>{t("sortBy")}</span>
-            <Select
-              options={items}
-              defaultValue={"newest"}
-              onSelect={sortBy}
-              className="min-w-[120px]"
-            />
+            <ConfigProvider
+              theme={{
+                components: {
+                  Select: {
+                    borderRadius: 12,
+                    controlHeight: 40,
+                  },
+                },
+              }}
+            >
+              <Select
+                options={items}
+                defaultValue={"newest"}
+                onSelect={sortBy}
+                className="min-w-[120px]"
+              />
+            </ConfigProvider>
           </div>
           <Button
             style={{

@@ -23,9 +23,7 @@ export default function GigOffer({ data }: { data: Vacancy }) {
   }
 
   function bookmarkGigFunction() {
-    console.log("first");
-    dispatch(bookmarkGig({ vacancy: data?.id }));
-    console.log("second");
+    dispatch(bookmarkGig({ vacancy_id: data?.id }));
   }
 
   return (
@@ -44,6 +42,7 @@ export default function GigOffer({ data }: { data: Vacancy }) {
               color="gold"
               className="hover:cursor-pointer"
               size={18}
+              onClick={bookmarkGigFunction}
             />
           ) : (
             <FaRegBookmark

@@ -51,6 +51,7 @@ export interface Vacancy {
   duration_unit: string;
   estimated_duration: string;
   salary_type: string;
+  required_experience: string;
 }
 
 export interface PostedBy {
