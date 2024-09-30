@@ -276,6 +276,7 @@ export default function SearchAndFiltersSide() {
                                 return skill.id != e.target.id;
                               })
                             );
+                            filterForm.submit();
                           }}
                         />
                       </div>
