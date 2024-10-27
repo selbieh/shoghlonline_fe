@@ -1,46 +1,82 @@
 "use client";
-import { Button, Dropdown, Input, MenuProps, Space } from "antd";
+import { Button, ConfigProvider, Divider, Select, Skeleton } from "antd";
 import { useTranslations } from "next-intl";
 import React, { Fragment } from "react";
-import { CiSearch } from "react-icons/ci";
-import { IoIosArrowDown } from "react-icons/io";
 import GigOffer from "./gigOffer";
 import Image from "next/image";
+import Search from "@/components/search/search";
+import {
+  freelanceActions,
+  getVacancies,
+} from "@/store/reducers/freelanceSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
 
 export default function SearchAndCategoryGigs() {
   const t = useTranslations();
+  const { vacancies, getVacanciesError, getVacanciesLoading, queryParams } =
+    useSelector((state: RootState) => state.freelance);
 
-  const items: MenuProps["items"] = [
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const dispatch = useAppDispatch();
+
+  const items = [
     {
       label: t("newest"),
-      key: "1",
+      value: "newest",
+    },
+    {
+      label: t("oldest"),
+      value: "oldest",
+    },
+    {
+      label: t("priceUp"),
+      value: "price up",
+    },
+    {
+      label: t("priceDown"),
+      value: "price down",
     },
   ];
 
   function sortBy(e: any) {
-    console.log("key", e);
+    params.set("ordering", e);
+    let qParams: any = {};
+    params.forEach((val, key) => {
+      qParams[key] = val;
+    });
+
+    dispatch(freelanceActions.setQueryParams(qParams));
+    // dispatch(getVacancies({ params: { ...queryParams, ordering: e } }));
   }
   return (
     <Fragment>
-      <div className="w-full m-5 ">
-        <Input
-          className="h-[56px]"
-          placeholder={t("search")}
-          prefix={<CiSearch size={20} />}
-        />
-      </div>
+      <Search />
 
       <div className="w-full rounded-[12px] py-[26px] border-[1px] border-[#e0e1e6] m-5 p-5">
         <div className=" flex flex-row justify-between border-b-[#e0e1e6] border-b-[1px]">
           <div className="px-10   pb-5 flex gap-2 items-center">
             <span className="font-bold ">{t("bestResults")}</span>
             <span>{t("sortBy")}</span>
-            <Dropdown menu={{ items, onClick: (e) => sortBy(e) }}>
-              <Space className=" w-[86px] h-[40px] border-[1px] border-[#e0e1e6] rounded-[12px] p-[10px]">
-                الاحدث
-                <IoIosArrowDown size={18} />
-              </Space>
-            </Dropdown>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Select: {
+                    borderRadius: 12,
+                    controlHeight: 40,
+                  },
+                },
+              }}
+            >
+              <Select
+                options={items}
+                defaultValue={"newest"}
+                onSelect={sortBy}
+                className="min-w-[120px]"
+              />
+            </ConfigProvider>
           </div>
           <Button
             style={{
@@ -57,22 +93,28 @@ export default function SearchAndCategoryGigs() {
             {t("receiveNotifications")}
           </Button>
         </div>
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
-        <GigOffer data={null} />
+        {getVacanciesLoading ? (
+          <>
+            <Skeleton active className="w-full h-[339px] my-5" />
+            <Divider className="bg-[#e7e8ec]" />
+          </>
+        ) : (
+          <>
+            {vacancies?.results?.map((vacancy: any) => {
+              return <GigOffer key={vacancy.id} data={vacancy} />;
+            })}
+          </>
+        )}
         <div className="w-full flex items-center justify-center">
-          <Button
-            style={{ height: "34px" }}
-            className="w-[95px] h-[34px] rounded-[6px] py-[8px] px-[12]"
-            type="primary"
-          >
-            {t("more")}
-          </Button>
+          {vacancies?.next && (
+            <Button
+              style={{ height: "34px" }}
+              className="w-[95px] h-[34px] rounded-[6px] py-[8px] px-[12]"
+              type="primary"
+            >
+              {t("more")}
+            </Button>
+          )}
         </div>
       </div>
     </Fragment>

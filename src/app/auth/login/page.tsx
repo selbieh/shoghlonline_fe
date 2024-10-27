@@ -75,7 +75,7 @@ const Login = () => {
             {t("loginWithGoogle")}
           </span>
         </div>
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <div className="w-[60px] h-[55px] bg-[#F6F6F6] rounded-[10px] flex justify-center items-center cursor-pointer">
             <Image
               src="/images/facebook.svg"
@@ -84,12 +84,12 @@ const Login = () => {
               height={29}
             />
           </div>
-        </div>
-        <div className="flex justify-center">
+        </div> */}
+        {/* <div className="flex justify-center">
           <div className="w-[60px] h-[55px] bg-[#F6F6F6] rounded-[10px] flex justify-center items-center cursor-pointer">
             <Image src="/images/apple.svg" alt="apple" width={29} height={29} />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Divider>

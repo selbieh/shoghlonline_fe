@@ -69,7 +69,7 @@ export default function Register() {
             {t("loginWithGoogle")}
           </span>
         </div>
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <div className="w-[60px] h-[55px] bg-[#F6F6F6] rounded-[10px] flex justify-center items-center cursor-pointer">
             <Image
               src="/images/facebook.svg"
@@ -78,12 +78,12 @@ export default function Register() {
               height={29}
             />
           </div>
-        </div>
-        <div className="flex justify-center">
+        </div> */}
+        {/* <div className="flex justify-center">
           <div className="w-[60px] h-[55px] bg-[#F6F6F6] rounded-[10px] flex justify-center items-center cursor-pointer">
             <Image src="/images/apple.svg" alt="apple" width={29} height={29} />
           </div>
-        </div>
+        </div> */}
       </div>
 
       <Divider>
@@ -174,21 +174,7 @@ export default function Register() {
               className="w-full"
               name="first_name"
               label={t("firstName")}
-              rules={
-                [
-                  // {
-                  //   validator(_, value) {
-                  //     const parsedPhoneNumber =
-                  //       phoneUtil.parseAndKeepRawInput(value);
-                  //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-                  //       return Promise.resolve();
-                  //     } else {
-                  //       return Promise.reject(new Error("Phone is not valid!"));
-                  //     }
-                  //   },
-                  // },
-                ]
-              }
+              rules={[{ required: true }]}
             >
               <Input
                 type="text"
@@ -201,21 +187,11 @@ export default function Register() {
               name="last_name"
               label={t("lastName")}
               className="w-full"
-              rules={
-                [
-                  // {
-                  //   validator(_, value) {
-                  //     const parsedPhoneNumber =
-                  //       phoneUtil.parseAndKeepRawInput(value);
-                  //     if (phoneUtil.isValidNumber(parsedPhoneNumber)) {
-                  //       return Promise.resolve();
-                  //     } else {
-                  //       return Promise.reject(new Error("Phone is not valid!"));
-                  //     }
-                  //   },
-                  // },
-                ]
-              }
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
             >
               <Input
                 type="text"

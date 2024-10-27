@@ -2,28 +2,55 @@ import Image from "next/image";
 import GigTag from "./gigTag";
 import { Divider } from "antd";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "use-intl";
+import { Vacancy } from "@/utils/types/sliceInitialStates/IFreelanceInitialState";
+import { AvailableSkill } from "@/utils/types/sliceInitialStates/IFreelancerProfile";
+import { IoBookmarkOutline } from "react-icons/io5";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { bookmarkGig } from "@/store/reducers/freelanceSlice";
+import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { useSelector } from "react-redux";
 
-export default function GigOffer({ data }: { data: any }) {
+export default function GigOffer({ data }: { data: Vacancy }) {
+  const { vacancies, getVacanciesError, getVacanciesLoading } = useSelector(
+    (state: RootState) => state.freelance
+  );
+  const dispatch = useAppDispatch();
+  const t = useTranslations();
   const router = useRouter();
   function goToGigDetailsPage() {
-    router.push("/freelance/gigDetails/5");
+    router.push(`/freelance/gigDetails/${data?.id}`);
   }
+
+  function bookmarkGigFunction() {
+    dispatch(bookmarkGig({ vacancy_id: data?.id }));
+  }
+
   return (
-    <div
-      className=" hover:bg-[#f7f9ff] hover:cursor-pointer"
-      onClick={goToGigDetailsPage}
-    >
+    <div className=" hover:bg-[#f7f9ff]  px-2">
       <div className=" flex flex-row justify-between w-full my-5">
         <div className="flex flex-row items-center">
-          <div className=" font-bold text-[16px] mx-5">
-            مطلوب مصمم جرافيك لتصميم نماذج التطبيقات والمواقع الإلكترونية
+          <div
+            className=" font-bold text-[16px] mx-5 hover:cursor-pointer"
+            onClick={goToGigDetailsPage}
+          >
+            {data?.title}
           </div>
-          <Image
-            src={"/icons/bookmark.svg"}
-            alt="bookmark"
-            width={24}
-            height={24}
-          />
+          {data?.is_in_watchlist ? (
+            <FaBookmark
+              fill="gold"
+              color="gold"
+              className="hover:cursor-pointer"
+              size={18}
+              onClick={bookmarkGigFunction}
+            />
+          ) : (
+            <FaRegBookmark
+              className="hover:cursor-pointer"
+              size={18}
+              onClick={bookmarkGigFunction}
+            />
+          )}
         </div>
         <div className="flex flex-row items-center">
           <Image
@@ -32,7 +59,9 @@ export default function GigOffer({ data }: { data: any }) {
             width={24}
             height={24}
           />
-          <span>منذ 10 دقائق</span>
+          <span>
+            {t("since")} {new Date(data?.created_at).toLocaleDateString("CA")}
+          </span>
         </div>
       </div>
       <div className="flex flex-row gap-20 mx-10">
@@ -43,8 +72,8 @@ export default function GigOffer({ data }: { data: any }) {
             height={18}
             alt="priceIcon"
           />
-          <span>سعر ثابت</span>
-          <span>$50</span>
+          <span>{data.salary_type}</span>
+          <span>${data.salary}</span>
         </div>
         <div className="flex flex-row items-center gap-1 ">
           <Image
@@ -53,20 +82,16 @@ export default function GigOffer({ data }: { data: any }) {
             height={18}
             alt="priceIcon"
           />
-          <span>الوقت التقديري للمشروع</span>
-          <span>1:3 شهور</span>
+          <span>{t("estimatedTime")}</span>
+          <span>:{data?.estimated_duration} </span>
+          <span>{data?.duration_unit}</span>
         </div>
       </div>
-      <div className=" m-10">
-        نبحث عن مصمم جرافيك ماهر لإنشاء نماذج تطبيقات ومواقع إلكترونية جذابة
-        بصريًا لوكالتنا. يجب أن يكون المرشح المثالي لديه فهم قوي لمبادئ التصميم
-        والقدرة على العمل وفقًا لإرشادات علامتنا التجارية. تشمل المسؤوليات
-        الرئيسية إنشاء نماذج تمثل بدقة رؤية العميل وترجمتها إلى تصاميم جذابة.
-        يجب أن يكون لدى المصمم خبرة في إنشاء نماذج للمنصات المحمولة والويب على
-        حد سواء.
-      </div>
+      <div className=" m-10">{data?.description}</div>
       <div className="flex flex-row flex-wrap gap-5 mx-10">
-        <GigTag>فوتوشوب</GigTag>
+        {data?.skills?.map((skill: AvailableSkill) => {
+          return <GigTag key={Math.random()}>{skill.name}</GigTag>;
+        })}
       </div>
       <div className="flex flex-row flex-wrap gap-5 m-10">
         <div className="flex flex-row items-center gap-1">
@@ -76,7 +101,7 @@ export default function GigOffer({ data }: { data: any }) {
             width={24}
             height={24}
           />
-          <span>القاهرة - مصر</span>
+          <span>{data?.location}</span>
         </div>
         <div className="flex flex-row items-center gap-1">
           <Image
@@ -94,7 +119,9 @@ export default function GigOffer({ data }: { data: any }) {
             width={24}
             height={24}
           />
-          <span>العروض 5 - 10</span>
+          <span>
+            {t("offers")} : {data?.applied_count}
+          </span>
         </div>
       </div>
       <Divider className="bg-[#e7e8ec]" />

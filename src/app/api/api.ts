@@ -9,6 +9,7 @@ export async function setAuthorizationToken(token?: string) {
     const locale = await getUserLocale();
     axios.defaults.headers.common["Accept-Language"] = `${locale}`;
   }
+
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return;
@@ -40,7 +41,7 @@ export async function GetReq(path: string, config?: AxiosRequestConfig) {
 //     .patch(path, body, config)
 //     .catch(handelErrors);
 //   return res;
-// }
+// }fgfg
 
 export async function GetByIdReq(path: string) {
   await setAuthorizationToken();

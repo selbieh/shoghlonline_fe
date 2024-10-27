@@ -4,7 +4,7 @@ export interface FreelancerProfileInitialState {
   freelancerProfileData: any | null;
   loadingGetAvailableSkills: boolean;
   getAvailableSkillsServerError: any | null;
-  availableSkills: availableSkillsResponse | null;
+  availableSkills: AvailableSkill[] | [];
   skillsList: any[];
   loadingGetAvailableServices: boolean;
   getAvailableServicesServerError: any | null;
@@ -18,7 +18,7 @@ interface availableSkillsResponse {
   previous: string | null;
   results: AvailableSkill[];
 }
-interface AvailableSkill {
+export interface AvailableSkill {
   id: number;
   name: string;
   created_at: string;
