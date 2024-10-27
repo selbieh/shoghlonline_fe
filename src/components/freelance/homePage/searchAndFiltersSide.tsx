@@ -3,37 +3,37 @@ import {
   getAvailableServices,
   getAvailableSkills,
 } from "@/store/reducers/freelanceProfile";
-import {
-  freelanceActions,
-  getVacancies,
-} from "@/store/reducers/freelanceSlice";
+import { freelanceActions } from "@/store/reducers/freelanceSlice";
 import { RootState, useAppDispatch } from "@/store/rootReducer";
+import { AvailableSkill } from "@/utils/types/sliceInitialStates/IFreelancerProfile";
 import {
   Cascader,
   Checkbox,
   ConfigProvider,
   Form,
-  Input,
   Select,
   Slider,
   Spin,
 } from "antd";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CiCircleRemove } from "react-icons/ci";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 export default function SearchAndFiltersSide() {
   const {
     skillsList,
+    availableSkills,
     loadingGetAvailableSkills,
     loadingGetAvailableServices,
     availableServices,
     getAvailableServicesServerError,
   } = useSelector((state: RootState) => state.profile);
   const dispatch = useAppDispatch();
-
+  const [selectedSkills, setSelectedSkills] = useState<any[]>([]);
+  const [selectedServices, setSelectedServices] = useState<any[]>([]);
   const t = useTranslations();
   const options = [
     { label: t("beginner"), value: "beginner" },
@@ -45,7 +45,6 @@ export default function SearchAndFiltersSide() {
     { label: t("byHour"), value: "byHour" },
   ];
   const clientInfoOptions = [{ label: t("paymentVerified"), value: true }];
-
   const searchParams = useSearchParams();
   const queryParams = new URLSearchParams(searchParams);
   const pathname = usePathname();
@@ -66,8 +65,6 @@ export default function SearchAndFiltersSide() {
   }
 
   function finishForm(values: any) {
-    console.log(values);
-
     for (let key in values) {
       if (values[key] !== undefined) {
         if (values[key].length > 0) {
@@ -110,8 +107,8 @@ export default function SearchAndFiltersSide() {
     dispatch(freelanceActions.setQueryParams({}));
     replace(`${pathname}`);
     filterForm.resetFields();
-    `1`;
   }
+
   return (
     <div className="h-full w-fit my-[72px]  ">
       <div className="w-full flex flex-row justify-evenly my-3">
@@ -123,234 +120,383 @@ export default function SearchAndFiltersSide() {
           {t("clear")}
         </span>
       </div>
-      <Form layout="vertical" form={filterForm} onFinish={finishForm}>
-        <div className="flex flex-col gap-3">
-          <div className="w-[286px] h-[fit] py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <Form.Item label={t("categories")} name="services">
-              <Cascader
-                placeholder={t("choseServices")}
-                multiple
-                removeIcon={<CiCircleRemove size={25} />}
-                className="min-h-[56px]"
-                id="chooseService"
-                allowClear
-                options={availableServices}
-                expandTrigger="hover"
-                showCheckedStrategy={Cascader.SHOW_CHILD}
-                onChange={() => {
-                  filterForm.submit();
-                }}
-              />
-            </Form.Item>
-          </div>
-          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <div className="w-full flex flex-row gap-[170px]  my-3">
-              <span>{t("experienceLabel")}</span>
-              <span
-                className="text-[#1b3dbc] text-[14px] cursor-pointer"
-                onClick={() => {
-                  filterForm.setFieldValue("experience", undefined);
-                  filterForm.submit();
-                }}
-              >
-                {t("clear")}
-              </span>
-            </div>
-            <Form.Item name="experience">
-              <Checkbox.Group
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-                options={options}
-                onChange={(e) => {
-                  filterForm.submit();
-                }}
-              />
-            </Form.Item>
-          </div>
-          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <Form.Item label={t("skills")} name="skills">
-              <Select
-                placeholder={t("search")}
-                removeIcon={<CiCircleRemove size={25} />}
-                className="min-h-[56px]"
-                maxCount={15}
-                id="chooseSkill"
-                mode="multiple"
-                allowClear
-                filterOption={false}
-                style={{ width: "100%" }}
-                onSearch={searchForSkill}
-                loading={loadingGetAvailableSkills}
-                options={skillsList}
-                onBlur={() => {
-                  dispatch(getAvailableSkills({}));
-                }}
-                defaultValue={[]}
-                onChange={() => {
-                  filterForm.submit();
-                }}
-                notFoundContent={
-                  loadingGetAvailableSkills ? (
-                    <Spin size="small" />
-                  ) : (
-                    <div>{t("noMatchedSkills")}</div>
-                  )
+      <ConfigProvider
+        theme={{
+          components: {
+            Checkbox: {
+              colorText: "#80828d",
+              colorWhite: "#84a6f2",
+              colorPrimary: "#e6f3ff",
+            },
+            Select: {
+              borderRadius: 12,
+              controlHeight: 40,
+            },
+          },
+        }}
+      >
+        <Form layout="vertical" form={filterForm} onFinish={finishForm}>
+          <div className="flex flex-col gap-3">
+            <div className="w-[286px] h-[fit] py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+              <Form.Item
+                label={
+                  <span className=" font-bold text-[12px]">
+                    {t("categories")}
+                  </span>
                 }
-              />
-            </Form.Item>
-          </div>
-          <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <Form.Item label={t("location")} name="location">
-              <Select
-                onSelect={() => {
-                  filterForm.submit();
-                }}
-              />
-            </Form.Item>
-          </div>
-          <div className="max-w-[286px] min-h-[144px] py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <div className="w-full flex flex-row gap-[130px]  my-3">
-              <span>{t("projectType")}</span>
-              <span
-                className="text-[#1b3dbc] text-[14px] cursor-pointer"
-                onClick={() => {
-                  filterForm.setFieldValue("jop_type", undefined);
-                  filterForm.submit();
-                }}
+                name="services"
               >
-                {t("clear")}
-              </span>
-            </div>
-            <Form.Item name="jop_type">
-              <Checkbox.Group
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-                options={projectTypeOptions}
-                onChange={(e) => {
-                  filterForm.submit();
-                }}
-              />
-            </Form.Item>
-          </div>
-          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <div className="w-full flex flex-row gap-[106px]  my-3">
-              <span>{t("fixedPrice")}</span>
-              <div className="flex flex-row gap-1">
-                <span
-                  className="text-[#1b3dbc] text-[14px] cursor-pointer "
-                  onClick={() => {
+                <Select
+                  placeholder={t("choseServices")}
+                  mode="multiple"
+                  showSearch
+                  removeIcon={<CiCircleRemove size={25} />}
+                  className=""
+                  id="chooseService"
+                  allowClear
+                  tagRender={() => {
+                    return <></>;
+                  }}
+                  options={availableServices}
+                  // expandTrigger="hover"
+                  // showCheckedStrategy={Cascader.SHOW_CHILD}
+                  onChange={(e) => {
+                    setSelectedServices(
+                      availableServices?.filter((service: any) => {
+                        return e.includes(service.value);
+                      })
+                    );
                     filterForm.submit();
                   }}
-                >
-                  {t("apply1")}
-                </span>
+                />
+              </Form.Item>
+              <div className="px-[10px] w-[235px] items-center ">
+                {selectedServices.length > 0 &&
+                  selectedServices.map((service: any) => {
+                    return (
+                      <div
+                        key={service.id}
+                        className=" flex flex-row justify-between "
+                      >
+                        <span className=" text-[14px] text-[#80828d]">
+                          {service.label}
+                        </span>
 
+                        <IoCloseCircleOutline
+                          size={15}
+                          key={service.value}
+                          id={service.value}
+                          className="cursor-pointer"
+                          onClick={(e: any) => {
+                            let servicesInTheForm =
+                              filterForm.getFieldValue("services");
+                            filterForm.setFieldValue(
+                              "services",
+                              servicesInTheForm?.filter((rec: any) => {
+                                return rec != e.target.id;
+                              })
+                            );
+
+                            setSelectedServices(
+                              selectedServices.filter((service) => {
+                                return service.value != e.target.id;
+                              })
+                            );
+                            filterForm.submit();
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+              <div className="w-full flex flex-row gap-[170px]  my-3">
+                <span className=" font-bold text-[12px]">
+                  {t("experienceLabel")}
+                </span>
                 <span
-                  className="text-[#1b3dbc] text-[14px] cursor-pointer "
+                  className="text-[#1b3dbc] text-[14px] cursor-pointer"
                   onClick={() => {
-                    filterForm.setFieldValue("fixed_price", undefined);
+                    filterForm.setFieldValue("experience", undefined);
                     filterForm.submit();
                   }}
                 >
                   {t("clear")}
                 </span>
               </div>
-            </div>
-            <Form.Item name="fixed_price">
-              <Slider
-                reverse
-                max={1000}
-                min={0}
-                range
-                step={1}
-                defaultValue={[0, 0]}
-                // onChange={(e) => {
-                //   filterForm.submit();
-                // }}
-              />
-            </Form.Item>
-            <div className="flex flex-row justify-between">
-              <span className="text-[9px]">{t("least")}</span>
-              <span className="text-[9px]">{t("highest")}</span>
-            </div>
-          </div>
-          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <div className="w-full flex flex-row gap-[106px]  my-3">
-              <span>{t("hourPrice")}</span>
-              <div className="flex flex-row gap-1">
-                <span
-                  className="text-[#1b3dbc] text-[14px] cursor-pointer "
-                  onClick={() => {
+              <Form.Item name="experience">
+                <Checkbox.Group
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                  }}
+                  options={options}
+                  onChange={(e) => {
                     filterForm.submit();
                   }}
-                >
-                  {t("apply1")}
-                </span>
+                />
+              </Form.Item>
+            </div>
+            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+              <Form.Item
+                label={
+                  <span className=" font-bold text-[12px]">{t("skills")}</span>
+                }
+                name="skills"
+              >
+                <Select
+                  placeholder={t("search")}
+                  removeIcon={<CiCircleRemove size={25} />}
+                  className="min-h-[56px]"
+                  maxCount={15}
+                  id="chooseSkill"
+                  mode="multiple"
+                  allowClear
+                  filterOption={false}
+                  style={{ width: "100%" }}
+                  onSearch={searchForSkill}
+                  loading={loadingGetAvailableSkills}
+                  options={skillsList}
+                  onBlur={() => {
+                    dispatch(getAvailableSkills({}));
+                  }}
+                  // defaultValue={[]}
+                  onChange={(e) => {
+                    filterForm.submit();
+                    setSelectedSkills(
+                      availableSkills?.filter((skill: AvailableSkill) => {
+                        return e.includes(skill.id);
+                      })
+                    );
+                  }}
+                  tagRender={() => {
+                    return <></>;
+                  }}
+                  notFoundContent={
+                    loadingGetAvailableSkills ? (
+                      <Spin size="small" />
+                    ) : (
+                      <div>{t("noMatchedSkills")}</div>
+                    )
+                  }
+                />
+              </Form.Item>
+              <div className="px-[10px] w-[235px] items-center ">
+                {selectedSkills.length > 0 &&
+                  selectedSkills.map((skill: any) => {
+                    return (
+                      <div
+                        key={skill.id}
+                        className=" flex flex-row justify-between "
+                      >
+                        <span className=" text-[14px] text-[#80828d]">
+                          {skill.name}
+                        </span>
 
+                        <IoCloseCircleOutline
+                          size={15}
+                          key={skill.id}
+                          id={skill.id}
+                          className="cursor-pointer"
+                          onClick={(e: any) => {
+                            let skillsInTheForm =
+                              filterForm.getFieldValue("skills");
+
+                            filterForm.setFieldValue(
+                              "skills",
+                              skillsInTheForm.filter((rec: any) => {
+                                return rec != e.target.id;
+                              })
+                            );
+
+                            setSelectedSkills(
+                              selectedSkills.filter((skill) => {
+                                return skill.id != e.target.id;
+                              })
+                            );
+                            filterForm.submit();
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+            <div className="w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+              <Form.Item
+                label={
+                  <span className=" font-bold text-[12px]">
+                    {t("location")}
+                  </span>
+                }
+                name="location"
+              >
+                <Select
+                  onSelect={() => {
+                    filterForm.submit();
+                  }}
+                />
+              </Form.Item>
+            </div>
+            <div className="max-w-[286px] min-h-[144px] py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+              <div className="w-full flex flex-row gap-[130px]  my-3">
+                <span className=" font-bold text-[12px]">
+                  {t("projectType")}
+                </span>
                 <span
-                  className="text-[#1b3dbc] text-[14px] cursor-pointer "
+                  className="text-[#1b3dbc] text-[14px] cursor-pointer"
                   onClick={() => {
-                    filterForm.setFieldValue("hour_price", undefined);
+                    filterForm.setFieldValue("jop_type", undefined);
                     filterForm.submit();
                   }}
                 >
                   {t("clear")}
                 </span>
               </div>
+              <Form.Item name="jop_type">
+                <Checkbox.Group
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                  }}
+                  options={projectTypeOptions}
+                  onChange={(e) => {
+                    filterForm.submit();
+                  }}
+                />
+              </Form.Item>
             </div>
-            <Form.Item name="hour_price">
-              <Slider
-                reverse
-                max={1000}
-                min={0}
-                range
-                step={1}
-                defaultValue={[0, 0]}
-                // onChange={(e) => {
-                //   filterForm.submit();
-                // }}
-              />
-            </Form.Item>
-            <div className="flex flex-row justify-between">
-              <span className="text-[9px]">{t("least")}</span>
-              <span className="text-[9px]">{t("highest")}</span>
+            <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe] relative">
+              <div className="w-full flex flex-row gap-[106px]  my-3">
+                <span className=" font-bold text-[12px]">
+                  {t("fixedPrice")}
+                </span>
+                <div className="flex flex-row gap-1">
+                  <span
+                    className="text-[#1b3dbc] text-[14px] cursor-pointer "
+                    onClick={() => {
+                      filterForm.submit();
+                    }}
+                  >
+                    {t("apply1")}
+                  </span>
+
+                  <span
+                    className="text-[#1b3dbc] text-[14px] cursor-pointer "
+                    onClick={() => {
+                      filterForm.setFieldValue("fixed_price", undefined);
+                      filterForm.submit();
+                    }}
+                  >
+                    {t("clear")}
+                  </span>
+                </div>
+              </div>
+              <Form.Item name="fixed_price">
+                <Slider
+                  reverse
+                  max={1000}
+                  min={0}
+                  range
+                  step={1}
+                  defaultValue={[0, 0]}
+                  onChange={() => {
+                    filterForm.submit();
+                  }}
+                />
+              </Form.Item>
+              <div className="flex flex-row justify-between absolute right-[35px] top-[60px] w-[220px]">
+                <span className="text-[9px]">{t("least")}</span>
+                <span className="text-[9px]">{t("highest")}</span>
+              </div>
+            </div>
+            <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe] relative">
+              <div className="w-full flex flex-row gap-[106px]  my-3">
+                <span className=" font-bold text-[12px]">{t("hourPrice")}</span>
+                <div className="flex flex-row gap-1">
+                  <span
+                    className="text-[#1b3dbc] text-[14px] cursor-pointer "
+                    onClick={() => {
+                      filterForm.submit();
+                    }}
+                  >
+                    {t("apply1")}
+                  </span>
+
+                  <span
+                    className="text-[#1b3dbc] text-[14px] cursor-pointer "
+                    onClick={() => {
+                      filterForm.setFieldValue("hour_price", undefined);
+                      filterForm.submit();
+                    }}
+                  >
+                    {t("clear")}
+                  </span>
+                </div>
+              </div>
+              <Form.Item name="hour_price">
+                <Slider
+                  reverse
+                  max={1000}
+                  min={0}
+                  range
+                  step={1}
+                  defaultValue={[0, 0]}
+                  onChange={(e) => {
+                    filterForm.submit();
+                  }}
+                />
+              </Form.Item>
+              <div className="flex flex-row justify-between absolute w-[220px] right-[35px] top-[75px]">
+                <span className="text-[9px]">{t("least")}</span>
+                <span className="text-[9px]">{t("highest")}</span>
+              </div>
+            </div>
+            <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px] bg-[#fdfdfe]">
+              <div className="w-full flex flex-row gap-[106px]  my-3">
+                <span className=" font-bold text-[12px]">
+                  {t("clientInfo")}
+                </span>
+                <span
+                  className="text-[#1b3dbc] text-[14px] cursor-pointer"
+                  onClick={() => {
+                    filterForm.setFieldValue("payment_verified", undefined);
+                    filterForm.submit();
+                  }}
+                >
+                  {t("clear")}
+                </span>
+              </div>
+              <Form.Item name="payment_verified">
+                {/* <ConfigProvider
+                  theme={{
+                    token: {
+                      colorText: "#80828d",
+                      colorPrimary: "#7179ce",
+                      colorBorder: "#7179ce",
+                    },
+                  }}
+                > */}
+                <Checkbox.Group
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                  }}
+                  options={clientInfoOptions}
+                  onChange={(e) => {
+                    filterForm.submit();
+                  }}
+                />
+                {/* </ConfigProvider> */}
+              </Form.Item>
             </div>
           </div>
-          <div className="max-w-[286px] h-fit py-[16px] px-[24px] rounded-[12px] border-[1px]">
-            <div className="w-full flex flex-row gap-[106px]  my-3">
-              <span>{t("clientInfo")}</span>
-              <span
-                className="text-[#1b3dbc] text-[14px] cursor-pointer"
-                onClick={() => {
-                  filterForm.setFieldValue("payment_verified", undefined);
-                  filterForm.submit();
-                }}
-              >
-                {t("clear")}
-              </span>
-            </div>
-            <Form.Item name="payment_verified">
-              <Checkbox.Group
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-                options={clientInfoOptions}
-                onChange={(e) => {
-                  filterForm.submit();
-                }}
-              />
-            </Form.Item>
-          </div>
-        </div>
-      </Form>
+        </Form>
+      </ConfigProvider>
     </div>
   );
 }
